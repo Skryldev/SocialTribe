@@ -1,0 +1,17 @@
+{
+  "id": "counting_sort",
+  "name": "Counting-Sort",
+  "category": "sorting",
+  "difficulty": "easy",
+
+  "timeComplexity": "O(n + k)",
+  "spaceComplexity": "O(k)",
+  "bestCase": "O(n + k)",
+  "worstCase": "O(n + k)",
+  "averageCase": "O(n + k)",
+
+  "stable": true,
+  "inPlace": false,
+  "recursive": false,
+  "parallelizable": false
+}

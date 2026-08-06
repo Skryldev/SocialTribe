@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Initialize Data Structures",
+    "description": "Create a queue to manage node exploration order. Initialize visited set/dict to track discovered nodes. Set distance of source node to 0 and mark it as visited. Enqueue the source node."
+  },
+  {
+    "title": "Dequeue Current Node",
+    "description": "Remove the front node from the queue. This is the current node being processed. Its distance from the source is the minimum possible (shortest path property)."
+  },
+  {
+    "title": "Explore Neighbors",
+    "description": "For each neighbor of the current node: if it has NOT been visited, mark it as visited, set its distance = current_distance + 1, and enqueue it. If it IS already visited, skip it (already discovered via a shorter or equal path)."
+  },
+  {
+    "title": "Process Current Node",
+    "description": "Perform any desired operation on the current node (record it, check if it's the target, etc.). This is where application-specific logic typically goes."
+  },
+  {
+    "title": "Repeat Until Queue Empty",
+    "description": "Continue dequeuing and processing nodes until the queue is empty. When the queue is empty, all nodes reachable from the source have been discovered and their shortest distances are known."
+  }
+]

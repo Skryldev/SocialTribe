@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Find the Range of Input Values",
+    "description": "Determine the minimum and maximum values in the input array. Calculate the range: k = max_value - min_value + 1. This defines the size of the counting array needed."
+  },
+  {
+    "title": "Initialize Counting Array",
+    "description": "Create a counting array of size k (the range of values), initializing all elements to zero. Each index represents a shifted value from the input: index i corresponds to value (i + min_value)."
+  },
+  {
+    "title": "Count Frequencies",
+    "description": "Iterate through the input array. For each element, increment the count at the corresponding index (element - min_value). After this step, count[i] holds the frequency of value (i + min_value)."
+  },
+  {
+    "title": "Compute Cumulative Counts",
+    "description": "Transform the frequency array into a cumulative sum array where count[i] = count[i] + count[i-1]. Now count[i] represents the number of elements ≤ (i + min_value), which gives the correct position of each element in the sorted output."
+  },
+  {
+    "title": "Place Elements in Sorted Order",
+    "description": "Create an output array of size n. Iterate through the input array in reverse order (to maintain stability). For each element, use its cumulative count to determine its correct position in the output, decrementing the count afterward."
+  },
+  {
+    "title": "Copy Back to Original Array",
+    "description": "Copy the sorted elements from the output array back to the original array (if in-place sorting is desired). The array is now fully sorted."
+  }
+]

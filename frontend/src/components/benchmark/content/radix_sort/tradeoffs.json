@@ -1,0 +1,30 @@
+{
+  "pros": [
+    "Linear time O(d·(n+b)) — can be O(n) for fixed-width keys",
+    "No comparisons at all — bypasses Ω(n log n) lower bound",
+    "Excellent for sorting integers, IP addresses, strings, and fixed-width data",
+    "Stable sort — essential for multi-key sorting and database operations",
+    "Predictable performance — independent of input data distribution",
+    "Dominates GPU sorting — highly parallelizable on SIMD architectures",
+    "Can be faster than Quick Sort for large n with fixed-width keys",
+    "Naturally handles duplicate keys efficiently",
+    "Outer loop is simple and regular (good for hardware implementation)",
+    "MSD variant can terminate early for well-separated data",
+    "Optimal for sorting strings and variable-length keys (MSD version)",
+    "Cache-friendly when base is chosen appropriately (b ≈ cache line size)"
+  ],
+  "cons": [
+    "Requires O(n + b) auxiliary space (not in-place)",
+    "Performance depends heavily on choice of base b",
+    "Inefficient for small arrays (overhead of multiple passes)",
+    "Only works for discrete keys with positional representation",
+    "Requires keys to be decomposable into digits (not general objects)",
+    "Fixed overhead of b buckets even if many are empty",
+    "LSD version must process all digits even for small numbers",
+    "MSD version is complex to implement correctly (recursive, boundary cases)",
+    "Less cache-friendly than Quick Sort for certain access patterns",
+    "Floating-point numbers require special bit-level handling",
+    "Negative numbers need special treatment (biased representation)",
+    "Integer overhead in languages like Python can negate performance gains"
+  ]
+}

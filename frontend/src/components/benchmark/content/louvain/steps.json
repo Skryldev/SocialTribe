@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Initialize Communities",
+    "description": "Assign each node to its own singleton community. Compute the initial modularity Q and the total weight of edges in the graph (2m)."
+  },
+  {
+    "title": "Local Modularity Optimization (Phase 1)",
+    "description": "Iterate over all nodes in random order. For each node, compute the modularity gain ΔQ of moving it to each neighboring community. Move the node to the community yielding the maximum positive ΔQ. Repeat until no improvement is possible."
+  },
+  {
+    "title": "Compute Modularity Gain",
+    "description": "For moving node i to community C: ΔQ = [ (Σ_in + k_i_in) / 2m - ( (Σ_tot + k_i) / 2m )² ] - [ Σ_in / 2m - ( Σ_tot / 2m )² - ( k_i / 2m )² ] where k_i_in is the sum of edge weights from i to C, and Σ_tot is total degree of C."
+  },
+  {
+    "title": "Graph Aggregation (Phase 2)",
+    "description": "Compress the graph: each community becomes a super-node. Edges between communities are merged into weighted edges between super-nodes. Internal edges become self-loops on super-nodes."
+  },
+  {
+    "title": "Recursive Application",
+    "description": "Apply Phase 1 on the compressed graph. Repeat the compress-optimize cycle until modularity cannot be improved further, building a hierarchy of communities."
+  }
+]

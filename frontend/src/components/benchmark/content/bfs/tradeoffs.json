@@ -1,0 +1,30 @@
+{
+  "pros": [
+    "Finds shortest path in unweighted graphs (minimum number of edges)",
+    "Simple to implement with a queue (few lines of code)",
+    "Guaranteed to find target if it exists (complete for finite graphs)",
+    "Explores nodes in order of distance (natural for level-based analysis)",
+    "Can be used for cycle detection and bipartite graph testing",
+    "Foundation for more complex algorithms (Dijkstra, Prim, Edmonds-Karp)",
+    "Easily modified for bidirectional search (dramatic speedup)",
+    "Works on both directed and undirected graphs",
+    "Can compute distances for ALL reachable nodes from source",
+    "O(V+E) complexity is optimal for graph traversal",
+    "Iterative implementation avoids stack overflow",
+    "Multi-source BFS extends naturally for multiple starting points"
+  ],
+  "cons": [
+    "O(V) memory for queue (problematic for very large graphs)",
+    "Not suitable for weighted graphs (use Dijkstra instead)",
+    "Does not consider edge costs or weights",
+    "Single-source: must rerun for different sources",
+    "May explore entire connected component before finding target",
+    "Inefficient for deep graphs (exponential frontier growth)",
+    "No heuristic guidance (unlike A*)",
+    "Queue can grow large in wide graphs (e.g., social networks)",
+    "Cannot handle dynamic graphs during traversal",
+    "Sequential nature makes parallelization difficult",
+    "Recursive DFS may be simpler for some applications (e.g., topological sort)",
+    "Does not record multiple shortest paths without modification"
+  ]
+}

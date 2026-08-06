@@ -1,0 +1,370 @@
+/* ============================================
+   CommonFriendsModal.css
+   Staff-Level Design — Common Friends
+   ============================================ */
+
+/* ──────────────────────────────────────────────
+   1. Design Tokens
+   ────────────────────────────────────────────── */
+:root {
+  --cf-surface: hsl(222 45% 10% / 0.5);
+  --cf-surface-hover: hsl(222 43% 14% / 0.7);
+  --cf-border: hsl(222 25% 18%);
+  --cf-border-subtle: hsl(222 22% 15%);
+
+  --cf-text-primary: hsl(210 40% 96%);
+  --cf-text-secondary: hsl(215 20% 68%);
+  --cf-text-tertiary: hsl(215 16% 47%);
+  --cf-text-muted: hsl(215 12% 38%);
+
+  --cf-success: hsl(160 84% 45%);
+  --cf-success-subtle: hsl(160 84% 45% / 0.1);
+  --cf-success-border: hsl(160 84% 45% / 0.2);
+  --cf-success-text: hsl(160 84% 55%);
+
+  --cf-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --cf-font-mono: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace;
+  --cf-font-size-xs: 0.625rem;
+  --cf-font-size-sm: 0.75rem;
+  --cf-font-size-base: 0.8125rem;
+
+  --cf-radius-sm: 6px;
+  --cf-radius-md: 10px;
+
+  --cf-space-1: 4px;
+  --cf-space-2: 8px;
+  --cf-space-3: 12px;
+  --cf-space-4: 16px;
+
+  --cf-duration-fast: 120ms;
+  --cf-duration-normal: 200ms;
+  --cf-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ──────────────────────────────────────────────
+   2. Subtitle
+   ────────────────────────────────────────────── */
+.cf-subtitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cf-subtitle strong {
+  color: var(--cf-text-secondary);
+  font-weight: 600;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.cf-subtitle-sep {
+  color: var(--cf-text-muted);
+  font-weight: 400;
+  font-size: var(--cf-font-size-xs);
+}
+
+/* ──────────────────────────────────────────────
+   3. Body
+   ────────────────────────────────────────────── */
+.cf-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cf-space-3);
+  padding-bottom: var(--cf-space-2);
+  min-height: 80px;
+}
+
+/* ──────────────────────────────────────────────
+   4. Results Container
+   ────────────────────────────────────────────── */
+.cf-results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cf-space-3);
+}
+
+/* ──────────────────────────────────────────────
+   5. Count Badge
+   ────────────────────────────────────────────── */
+.cf-count-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cf-space-2);
+  align-self: flex-start;
+  padding: 5px 12px;
+  border-radius: var(--cf-radius-sm);
+  background: var(--cf-success-subtle);
+  border: 1px solid var(--cf-success-border);
+  color: var(--cf-success-text);
+  font-size: var(--cf-font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.cf-count-badge svg {
+  flex-shrink: 0;
+}
+
+/* ──────────────────────────────────────────────
+   6. List
+   ────────────────────────────────────────────── */
+.cf-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 260px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: hsl(160 84% 45% / 0.2) transparent;
+  padding-right: 2px;
+}
+
+.cf-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.cf-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cf-list::-webkit-scrollbar-thumb {
+  background: hsl(160 84% 45% / 0.2);
+  border-radius: 10px;
+}
+
+.cf-list::-webkit-scrollbar-thumb:hover {
+  background: hsl(160 84% 45% / 0.35);
+}
+
+/* ──────────────────────────────────────────────
+   7. List Item
+   ────────────────────────────────────────────── */
+.cf-item {
+  display: flex;
+  align-items: center;
+  gap: var(--cf-space-3);
+  padding: 10px var(--cf-space-3);
+  border-radius: var(--cf-radius-md);
+  background: var(--cf-surface);
+  border: 1px solid var(--cf-border-subtle);
+  min-width: 0;
+  transition:
+    background var(--cf-duration-fast) var(--cf-ease-out),
+    border-color var(--cf-duration-fast) var(--cf-ease-out);
+}
+
+.cf-item:hover {
+  background: var(--cf-surface-hover);
+  border-color: var(--cf-border);
+}
+
+/* ── Avatar ─────────────────────────────────── */
+.cf-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--cf-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--cf-font-size-sm);
+  font-weight: 700;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+}
+
+.cf-avatar--amber {
+  background: hsl(38 92% 52% / 0.12);
+  color: hsl(38 92% 60%);
+  border-color: hsl(38 92% 52% / 0.2);
+}
+
+.cf-avatar--blue {
+  background: hsl(217 91% 65% / 0.12);
+  color: hsl(217 91% 72%);
+  border-color: hsl(217 91% 65% / 0.2);
+}
+
+.cf-avatar--emerald {
+  background: hsl(160 84% 45% / 0.12);
+  color: hsl(160 84% 55%);
+  border-color: hsl(160 84% 45% / 0.2);
+}
+
+.cf-avatar--violet {
+  background: hsl(255 85% 65% / 0.12);
+  color: hsl(255 85% 75%);
+  border-color: hsl(255 85% 65% / 0.2);
+}
+
+.cf-avatar--rose {
+  background: hsl(350 89% 65% / 0.12);
+  color: hsl(350 89% 72%);
+  border-color: hsl(350 89% 65% / 0.2);
+}
+
+.cf-avatar--cyan {
+  background: hsl(187 85% 55% / 0.12);
+  color: hsl(187 85% 65%);
+  border-color: hsl(187 85% 55% / 0.2);
+}
+
+/* ── Info ───────────────────────────────────── */
+.cf-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  overflow: hidden;
+}
+
+.cf-name {
+  font-size: var(--cf-font-size-base);
+  font-weight: 600;
+  color: var(--cf-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.cf-id {
+  font-size: var(--cf-font-size-xs);
+  font-family: var(--cf-font-mono);
+  color: var(--cf-text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Connection Hint ────────────────────────── */
+.cf-hint {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cf-success-subtle);
+  color: var(--cf-success-text);
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity var(--cf-duration-fast) var(--cf-ease-out);
+}
+
+.cf-item:hover .cf-hint {
+  opacity: 1;
+}
+
+/* ──────────────────────────────────────────────
+   8. Responsive
+   ────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .cf-list {
+    max-height: 200px;
+  }
+
+  .cf-item {
+    padding: 8px var(--cf-space-2);
+    gap: var(--cf-space-2);
+  }
+
+  .cf-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 11px;
+  }
+
+  .cf-name {
+    font-size: var(--cf-font-size-sm);
+  }
+
+  .cf-id {
+    font-size: 10px;
+  }
+
+  .cf-hint {
+    display: none;
+  }
+}
+
+@media (min-width: 1600px) {
+  .cf-list {
+    max-height: 320px;
+  }
+
+  .cf-item {
+    padding: 12px var(--cf-space-4);
+  }
+
+  .cf-avatar {
+    width: 38px;
+    height: 38px;
+    font-size: var(--cf-font-size-base);
+  }
+}
+
+/* ──────────────────────────────────────────────
+   9. Reduced Motion
+   ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .cf-item,
+  .cf-hint {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+  }
+
+  .cf-item:hover {
+    transform: none !important;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   10. Forced Colors / High Contrast
+   ────────────────────────────────────────────── */
+@media (forced-colors: active) {
+  .cf-item {
+    border: 1px solid CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .cf-item:hover {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .cf-avatar {
+    border-color: CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .cf-count-badge {
+    border-color: CanvasText;
+  }
+
+  .cf-id {
+    color: GrayText;
+  }
+
+  .cf-hint {
+    background: Highlight;
+    color: HighlightText;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   11. Print
+   ────────────────────────────────────────────── */
+@media print {
+  .cf-hint {
+    display: none;
+  }
+}

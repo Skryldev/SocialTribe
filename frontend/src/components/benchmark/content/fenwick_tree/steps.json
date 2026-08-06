@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Initialize BIT Array",
+    "description": "Create an array tree[1..n] initialized to 0. Each index i will store the sum of elements in range [i - LSB(i) + 1, i]. Build the tree by processing each element: for index i, add arr[i] to tree[i] and propagate to all responsible ancestors using i += LSB(i)."
+  },
+  {
+    "title": "Compute LSB (Least Significant Bit)",
+    "description": "The key operation: LSB(i) = i & (-i). This isolates the lowest set bit of i. In two's complement: -i = ~i + 1. LSB(6) = 2 (binary 110 → 010), LSB(8) = 8 (1000)."
+  },
+  {
+    "title": "Point Update Operation",
+    "description": "To add delta to arr[i], start at index i. Add delta to tree[i], then move to i + LSB(i). Repeat until i exceeds n. This updates all intervals that include position i."
+  },
+  {
+    "title": "Prefix Sum Query",
+    "description": "To compute sum of arr[1..i], start with sum = 0 at index i. Add tree[i] to sum, then move to i - LSB(i). Repeat until i becomes 0. Each step covers a range ending at current i."
+  },
+  {
+    "title": "Range Sum Query",
+    "description": "To compute sum in range [l, r], use: range_sum(l, r) = prefix_sum(r) - prefix_sum(l-1). This is the standard prefix-suffix difference technique."
+  }
+]

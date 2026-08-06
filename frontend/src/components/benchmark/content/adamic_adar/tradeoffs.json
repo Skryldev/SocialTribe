@@ -1,0 +1,16 @@
+{
+  "pros": [
+    "More discriminative than Common Neighbors",
+    "Accounts for the importance of each neighbor",
+    "Works well on real-world networks",
+    "No parameters to tune or configure",
+    "Computationally efficient on sparse graphs"
+  ],
+  "cons": [
+    "Still relatively simple compared to advanced methods",
+    "Does not consider path length beyond 2 hops",
+    "Performance varies with graph density",
+    "Logarithm calculation can be computationally expensive",
+    "Not suitable for very large graphs with high-degree nodes"
+  ]
+}

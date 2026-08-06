@@ -1,0 +1,20 @@
+{
+  "pros": [
+    "Simple and intuitive resource distribution model",
+    "No parameters to tune or optimize",
+    "Computationally efficient on sparse graphs",
+    "More aggressive penalty for high-degree nodes than Adamic-Adar",
+    "Strong theoretical foundation in resource allocation dynamics",
+    "Effective on networks with power-law degree distributions",
+    "Easy to implement and interpret"
+  ],
+  "cons": [
+    "Cannot capture paths longer than 2 hops",
+    "Over-penalizes high-degree nodes in some network types",
+    "Less effective on dense graphs with many common neighbors",
+    "Does not consider edge weights or node attributes",
+    "Zero score for node pairs without common neighbors",
+    "Not suitable for bipartite networks without adaptation",
+    "Linear penalty may not reflect real-world resource dynamics"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "pros": [
+    "Extremely simple to understand and implement",
+    "Computationally efficient with O(V) time complexity",
+    "Intuitive interpretation: more connections = more importance",
+    "No parameters to tune or configure",
+    "Works as a solid baseline for comparing complex algorithms"
+  ],
+  "cons": [
+    "Only considers local structure, misses global network patterns",
+    "Treats all connections equally, ignores neighbor importance",
+    "Cannot distinguish between connections to important vs peripheral nodes",
+    "Highly sensitive to network size when not normalized",
+    "Fails to capture bridge nodes that connect different communities"
+  ]
+}

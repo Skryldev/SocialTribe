@@ -1,0 +1,447 @@
+syntax = "proto3";
+
+package storage;
+option go_package = "tribedb/proto";
+
+// ---- Service Definition ----
+service StorageService {
+    // Node Operations
+    rpc CreateNode (CreateNodeRequest) returns (CreateNodeResponse);
+    rpc GetNode (GetNodeRequest) returns (GetNodeResponse);
+    rpc GetNodeBulk (GetNodeBulkRequest) returns (GetNodeBulkResponse);
+    rpc UpdateNode (UpdateNodeRequest) returns (UpdateNodeResponse);
+    rpc DeleteNode (DeleteNodeRequest) returns (DeleteNodeResponse);
+    rpc DeleteNodeBulk (DeleteNodeBulkRequest) returns (DeleteNodeBulkResponse);
+    rpc ContainsNode (ContainsNodeRequest) returns (ContainsNodeResponse);
+    rpc PeekNode (PeekNodeRequest) returns (PeekNodeResponse);
+    
+    // Edge Operations
+    rpc CreateEdge (CreateEdgeRequest) returns (CreateEdgeResponse);
+    rpc GetEdge (GetEdgeRequest) returns (GetEdgeResponse);
+    rpc GetEdgeBulk (GetEdgeBulkRequest) returns (GetEdgeBulkResponse);
+    rpc UpdateEdge (UpdateEdgeRequest) returns (UpdateEdgeResponse);
+    rpc DeleteEdge (DeleteEdgeRequest) returns (DeleteEdgeResponse);
+    rpc DeleteEdgeBulk (DeleteEdgeBulkRequest) returns (DeleteEdgeBulkResponse);
+    rpc ContainsEdge (ContainsEdgeRequest) returns (ContainsEdgeResponse);
+    rpc PeekEdge (PeekEdgeRequest) returns (PeekEdgeResponse);
+    
+    // Graph Operations (New)
+    rpc GetDegree (GetDegreeRequest) returns (GetDegreeResponse);
+    rpc GetDegreeBatch (GetDegreeBatchRequest) returns (GetDegreeBatchResponse);
+    rpc HasEdge (HasEdgeRequest) returns (HasEdgeResponse);
+    rpc HasEdgeBatch (HasEdgeBatchRequest) returns (HasEdgeBatchResponse);
+    rpc GetEdgeWeight (GetEdgeWeightRequest) returns (GetEdgeWeightResponse);
+    rpc GetEdgeWeightsBatch (GetEdgeWeightsBatchRequest) returns (GetEdgeWeightsBatchResponse);
+    rpc GetCommonNeighbors (GetCommonNeighborsRequest) returns (GetCommonNeighborsResponse);
+    rpc CountCommonNeighbors (CountCommonNeighborsRequest) returns (CountCommonNeighborsResponse);
+    rpc GetNeighbors (GetNeighborsRequest) returns (GetNeighborsResponse);
+    rpc GetNeighborsBatch (GetNeighborsBatchRequest) returns (GetNeighborsBatchResponse);
+    rpc GetNeighborsWithWeights (GetNeighborsWithWeightsRequest) returns (GetNeighborsWithWeightsResponse);
+    rpc ShortestPath (ShortestPathRequest) returns (ShortestPathResponse);
+    rpc IsNeighbor (IsNeighborRequest) returns (IsNeighborResponse);
+    
+    // Admin Operations
+    rpc GetStats (GetStatsRequest) returns (GetStatsResponse);
+    rpc GetCacheStats (GetCacheStatsRequest) returns (GetCacheStatsResponse);
+    rpc ClearCache (ClearCacheRequest) returns (ClearCacheResponse);
+    rpc PrefetchViewport (PrefetchViewportRequest) returns (PrefetchViewportResponse);
+}
+
+// ---- Messages ----
+
+// Position
+message Position {
+    double x = 1;
+    double y = 2;
+}
+
+// NodeData
+message NodeData {
+    string id = 1;
+    string name = 2;
+    string node_type = 3;
+    string role = 4;
+    int32 friend_count = 5;
+    double avg_distance = 6;
+    double centrality = 7;
+}
+
+// Node
+message Node {
+    string id = 1;
+    string type = 2;
+    Position position = 3;
+    NodeData data = 4;
+}
+
+// EdgeData
+message EdgeData {
+    int32 weight = 1;
+    string created_at = 2;
+    string id = 3;
+    string target_id = 4;
+}
+
+// Edge
+message Edge {
+    string id = 1;
+    string source = 2;
+    string target = 3;
+    string type = 4;
+    EdgeData data = 5;
+}
+
+// ---- Node CRUD ----
+
+message CreateNodeRequest {
+    string key = 1;
+    Node node = 2;
+    uint64 index = 3; // optional
+}
+
+message CreateNodeResponse {
+    bool success = 1;
+    string error = 2;
+    uint64 assigned_index = 3;
+}
+
+message GetNodeRequest {
+    string key = 1;
+}
+
+message GetNodeResponse {
+    Node node = 1;
+    bool found = 2;
+    string error = 3;
+}
+
+message GetNodeBulkRequest {
+    repeated string keys = 1;
+}
+
+message GetNodeBulkResponse {
+    map<string, Node> nodes = 1;
+    repeated string not_found = 2;
+    string error = 3;
+}
+
+message UpdateNodeRequest {
+    string key = 1;
+    Node node = 2;
+}
+
+message UpdateNodeResponse {
+    bool success = 1;
+    string error = 2;
+}
+
+message DeleteNodeRequest {
+    string key = 1;
+}
+
+message DeleteNodeResponse {
+    bool success = 1;
+    string error = 2;
+}
+
+message DeleteNodeBulkRequest {
+    repeated string keys = 1;
+}
+
+message DeleteNodeBulkResponse {
+    int32 deleted_count = 1;
+    repeated string failed_keys = 2;
+    map<string, string> errors = 3;
+}
+
+message ContainsNodeRequest {
+    string key = 1;
+}
+
+message ContainsNodeResponse {
+    bool exists = 1;
+    bool in_cache = 2;
+    string error = 3;
+}
+
+message PeekNodeRequest {
+    string key = 1;
+}
+
+message PeekNodeResponse {
+    Node node = 1;
+    bool found = 2;
+    bool in_cache = 3;
+    string error = 4;
+}
+
+// ---- Edge CRUD ----
+
+message CreateEdgeRequest {
+    string key = 1;
+    Edge edge = 2;
+    uint64 index = 3; // optional
+}
+
+message CreateEdgeResponse {
+    bool success = 1;
+    string error = 2;
+    uint64 assigned_index = 3;
+}
+
+message GetEdgeRequest {
+    string key = 1;
+}
+
+message GetEdgeResponse {
+    Edge edge = 1;
+    bool found = 2;
+    string error = 3;
+}
+
+message GetEdgeBulkRequest {
+    repeated string keys = 1;
+}
+
+message GetEdgeBulkResponse {
+    map<string, Edge> edges = 1;
+    repeated string not_found = 2;
+    string error = 3;
+}
+
+message UpdateEdgeRequest {
+    string key = 1;
+    Edge edge = 2;
+}
+
+message UpdateEdgeResponse {
+    bool success = 1;
+    string error = 2;
+}
+
+message DeleteEdgeRequest {
+    string key = 1;
+}
+
+message DeleteEdgeResponse {
+    bool success = 1;
+    string error = 2;
+}
+
+message DeleteEdgeBulkRequest {
+    repeated string keys = 1;
+}
+
+message DeleteEdgeBulkResponse {
+    int32 deleted_count = 1;
+    repeated string failed_keys = 2;
+    map<string, string> errors = 3;
+}
+
+message ContainsEdgeRequest {
+    string key = 1;
+}
+
+message ContainsEdgeResponse {
+    bool exists = 1;
+    bool in_cache = 2;
+    string error = 3;
+}
+
+message PeekEdgeRequest {
+    string key = 1;
+}
+
+message PeekEdgeResponse {
+    Edge edge = 1;
+    bool found = 2;
+    bool in_cache = 3;
+    string error = 4;
+}
+
+// ---- Graph Operations (New) ----
+
+// 1. Degree Operations
+message GetDegreeRequest {
+    string key = 1;
+}
+
+message GetDegreeResponse {
+    uint64 degree = 1;
+    bool found = 2;
+    string error = 3;
+}
+
+message GetDegreeBatchRequest {
+    repeated string keys = 1;
+}
+
+message GetDegreeBatchResponse {
+    map<string, uint64> degrees = 1;
+    repeated string not_found = 2;
+    string error = 3;
+}
+
+// 2. Edge Existence Operations
+message HasEdgeRequest {
+    string source = 1;
+    string target = 2;
+}
+
+message HasEdgeResponse {
+    bool exists = 1;
+    string error = 2;
+}
+
+message HasEdgeBatchRequest {
+    string source = 1;
+    repeated string targets = 2;
+}
+
+message HasEdgeBatchResponse {
+    map<string, bool> results = 1;
+    string error = 2;
+}
+
+// 3. Edge Weight Operations
+message GetEdgeWeightRequest {
+    string source = 1;
+    string target = 2;
+}
+
+message GetEdgeWeightResponse {
+    int32 weight = 1;
+    bool found = 2;
+    string error = 3;
+}
+
+message GetEdgeWeightsBatchRequest {
+    repeated EdgePair edges = 1;
+}
+
+message EdgePair {
+    string source = 1;
+    string target = 2;
+}
+
+message GetEdgeWeightsBatchResponse {
+    map<string, int32> weights = 1; // key: "source->target"
+    repeated string not_found = 2;
+    string error = 3;
+}
+
+// 4. Common Neighbors Operations
+message GetCommonNeighborsRequest {
+    string source = 1;
+    string target = 2;
+}
+
+message GetCommonNeighborsResponse {
+    repeated string neighbors = 1;
+    bool found = 2;
+    string error = 3;
+}
+
+message CountCommonNeighborsRequest {
+    string source = 1;
+    string target = 2;
+}
+
+message CountCommonNeighborsResponse {
+    uint64 count = 1;
+    bool found = 2;
+    string error = 3;
+}
+
+// 5. Neighbor Operations
+message GetNeighborsRequest {
+    string key = 1;
+}
+
+message GetNeighborsResponse {
+    repeated string neighbors = 1;
+    bool found = 2;
+    string error = 3;
+}
+
+message GetNeighborsBatchRequest {
+    repeated string keys = 1;
+}
+
+message GetNeighborsBatchResponse {
+    map<string, NeighborList> neighbors = 1;
+    repeated string not_found = 2;
+    string error = 3;
+}
+
+message NeighborList {
+    repeated string neighbors = 1;
+}
+
+message GetNeighborsWithWeightsRequest {
+    string key = 1;
+}
+
+message GetNeighborsWithWeightsResponse {
+    map<string, int32> neighbors = 1; // neighbor -> weight
+    bool found = 2;
+    string error = 3;
+}
+
+// 6. Shortest Path Operations
+message ShortestPathRequest {
+    string source = 1;
+    string target = 2;
+}
+
+message ShortestPathResponse {
+    repeated string path = 1;
+    bool found = 2;
+    string error = 3;
+}
+
+// 7. Convenience Methods
+message IsNeighborRequest {
+    string source = 1;
+    string target = 2;
+}
+
+message IsNeighborResponse {
+    bool is_neighbor = 1;
+    string error = 2;
+}
+
+// ---- Admin ----
+
+message GetStatsRequest {}
+
+message GetStatsResponse {
+    map<string, string> stats = 1;
+}
+
+message GetCacheStatsRequest {}
+
+message GetCacheStatsResponse {
+    int64 hits = 1;
+    int64 misses = 2;
+    double hit_ratio = 3;
+    int32 live_entries = 4;
+    int32 cache_size = 5;
+    map<string, string> extra = 6;
+}
+
+message ClearCacheRequest {}
+
+message ClearCacheResponse {
+    bool success = 1;
+    string error = 2;
+}
+
+message PrefetchViewportRequest {
+    repeated string node_ids = 1;
+}
+
+message PrefetchViewportResponse {
+    int32 prefetched_count = 1;
+    string error = 2;
+}

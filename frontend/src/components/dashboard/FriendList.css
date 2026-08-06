@@ -1,0 +1,420 @@
+/* ==========================================================================
+   FriendList — TanStack Table + Framer Motion Styles
+   ========================================================================== */
+
+:root {
+  --fl-surface: #1e293b;
+  --fl-border: rgba(245, 158, 11, 0.1);
+  --fl-border-hover: rgba(245, 158, 11, 0.25);
+  --fl-accent: #f59e0b;
+  --fl-accent-light: #fbbf24;
+  --fl-text: #e2e8f0;
+  --fl-text-secondary: #94a3b8;
+  --fl-text-muted: #64748b;
+  --fl-radius: 12px;
+  --fl-radius-sm: 8px;
+  --fl-font-mono: 'JetBrains Mono', monospace;
+  --fl-font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Container */
+.friend-list-container {
+  background: var(--fl-surface);
+  border: 1px solid var(--fl-border);
+  border-radius: var(--fl-radius);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.friend-list-container:hover {
+  border-color: var(--fl-border-hover);
+  box-shadow: 0 4px 24px rgba(245, 158, 11, 0.06);
+}
+
+/* Header */
+.friend-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--fl-border);
+  gap: 12px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-icon {
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(234, 88, 12, 0.05));
+  border: 1px solid rgba(245, 158, 11, 0.12);
+  border-radius: var(--fl-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fl-accent);
+}
+
+.header-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--fl-text);
+}
+
+.header-subtitle {
+  margin: 1px 0 0;
+  font-size: 11px;
+  color: var(--fl-text-secondary);
+}
+
+.header-count-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--fl-accent-light);
+  font-family: var(--fl-font-mono);
+}
+
+/* User Selector Area */
+.user-selector-area {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--fl-border);
+}
+
+/* Stats Bar */
+.stats-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  background: rgba(245, 158, 11, 0.04);
+  border-bottom: 1px solid var(--fl-border);
+  flex-wrap: wrap;
+}
+
+.stats-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stats-avatar {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #f59e0b, #ea580c);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+}
+
+.stats-user-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fl-text);
+}
+
+.stats-user-label {
+  font-size: 9px;
+  color: var(--fl-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.stats-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(245, 158, 11, 0.12);
+}
+
+.stats-metrics {
+  display: flex;
+  gap: 20px;
+}
+
+.stats-metric {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--fl-accent);
+}
+
+.stats-metric-value {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--fl-font-mono);
+  color: var(--fl-text);
+  line-height: 1.1;
+  display: block;
+}
+
+.stats-metric-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--fl-text-secondary);
+  font-weight: 600;
+}
+
+/* Search Bar */
+.friend-search-bar {
+  position: relative;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--fl-border);
+}
+
+.search-icon-left {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--fl-text-muted);
+  pointer-events: none;
+}
+
+.friend-search-input {
+  width: 100%;
+  padding: 6px 32px 6px 30px;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid var(--fl-border);
+  border-radius: 6px;
+  color: var(--fl-text);
+  font-size: 12px;
+  font-family: var(--fl-font-ui);
+  box-sizing: border-box;
+}
+
+.friend-search-input:focus {
+  outline: none;
+  border-color: var(--fl-accent);
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.08);
+}
+
+.friend-search-input::placeholder {
+  color: var(--fl-text-muted);
+  opacity: 0.5;
+}
+
+.search-clear-btn {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--fl-text-muted);
+  cursor: pointer;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.search-clear-btn:hover {
+  color: var(--fl-accent);
+}
+
+/* Table */
+.friend-table-scroll {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.friend-table-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.friend-table-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.friend-table-scroll::-webkit-scrollbar-thumb {
+  background: rgba(245, 158, 11, 0.2);
+  border-radius: 10px;
+}
+
+.friend-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.friend-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.friend-table th {
+  text-align: left;
+  padding: 8px 14px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--fl-text-secondary);
+  background: var(--fl-surface);
+  border-bottom: 1px solid var(--fl-border);
+  position: sticky;
+  top: 0;
+}
+
+.friend-table td {
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--fl-text);
+  border-bottom: 1px solid rgba(245, 158, 11, 0.04);
+  vertical-align: middle;
+}
+
+/* Column Header Button */
+.col-header-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: color 0.15s ease;
+}
+
+.col-header-btn:hover {
+  color: var(--fl-accent);
+}
+
+.col-header-actions {
+  font-size: 10px;
+  color: var(--fl-text-muted);
+}
+
+/* Friend Name Cell */
+.friend-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.friend-avatar-sm {
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, #f59e0b, #ea580c);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.friend-name-text {
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--fl-text);
+}
+
+/* Connect Button */
+.connect-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  border-radius: 6px;
+  color: var(--fl-accent);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.connect-btn:hover {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: var(--fl-accent);
+}
+
+/* Footer */
+.friend-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-top: 1px solid var(--fl-border);
+  background: rgba(15, 23, 42, 0.2);
+  font-size: 11px;
+  color: var(--fl-text-muted);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 40px 24px;
+}
+
+.empty-icon-wrap {
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.empty-title {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fl-text);
+}
+
+.empty-description {
+  margin: 0;
+  font-size: 12px;
+  color: var(--fl-text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stats-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stats-divider {
+    display: none;
+  }
+
+  .friend-table th,
+  .friend-table td {
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .friend-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .friend-list-container,
+  .friend-table tbody tr {
+    transition: none;
+  }
+}

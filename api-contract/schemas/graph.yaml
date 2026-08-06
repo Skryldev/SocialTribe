@@ -1,0 +1,351 @@
+# Viewport Request
+ViewportRequest:
+  type: object
+  required:
+    - x
+    - y
+    - width
+    - height
+    - zoom
+  properties:
+    x:
+      type: number
+      format: float
+    y:
+      type: number
+      format: float
+    width:
+      type: number
+      format: float
+    height:
+      type: number
+      format: float
+    zoom:
+      type: number
+      format: float
+
+# Viewport Response
+ViewportResponse:
+  type: object
+  properties:
+    nodes:
+      type: array
+      items:
+        $ref: '#/GraphNode'
+    metadata:
+      type: object
+      additionalProperties: {}
+    edges:
+      type: array
+      items:
+        $ref: '#/GraphEdge'
+
+GraphNode:
+  type: object
+  properties:
+    id:
+      type: string
+    type:
+      type: string
+      example: "socialUser"
+    position:
+      $ref: '#/Position'
+    data:
+      $ref: '#/NodeData'
+
+Position:
+  type: object
+  properties:
+    x:
+      type: number
+      format: float
+    y:
+      type: number
+      format: float
+
+NodeData:
+  type: object
+  properties:
+    id:
+      type: string
+    name:
+      type: string
+    nodeType:
+      type: string
+      example: "socialUser"
+    role:
+      type: string
+      example: "normal"
+    friendCount:
+      type: integer
+    avgDistance:
+      type: number
+      format: float
+    centrality:
+      type: number
+      format: float
+
+GraphEdge:
+  type: object
+  properties:
+    id:
+      type: string
+    source:
+      type: string
+    target:
+      type: string
+    type:
+      type: string
+      example: "weightedEdge"
+    data:
+      $ref: '#/EdgeData'
+
+EdgeData:
+  type: object
+  properties:
+    Weight:
+      type: number
+      format: float
+      example: 50
+    createdAt:
+      type: string
+      format: date-time
+    id:
+      type: string
+    targetId:
+      type: string
+
+# Batch Viewport Request
+BatchViewportRequest:
+  type: array
+  items:
+    $ref: '#/ViewportRequest'
+  minItems: 1
+  description: Array of viewport parameters to process in batch
+
+# Batch Viewport Response
+BatchViewportResponse:
+  type: string
+  description: Response message or identifier for the batch operation
+  example: "Batch processing completed successfully"
+
+# Create Node Request
+CreateNodeRequest:
+  type: object
+  required:
+    - id
+    - type
+    - position
+    - data
+  properties:
+    id:
+      type: string
+    type:
+      type: string
+      example: "socialUser"
+    position:
+      $ref: '#/Position'
+    data:
+      $ref: '#/NodeData'
+
+# Create Node Response
+CreateNodeResponse:
+  type: string
+  description: Response message or node identifier
+  example: "Node created successfully"
+
+# Update Node Request
+UpdateNodeRequest:
+  type: object
+  properties:
+    id:
+      type: string
+    type:
+      type: string
+      example: "socialUser"
+    position:
+      $ref: '#/Position'
+    data:
+      $ref: '#/NodeData'
+  description: Fields to update on the node (partial update)
+
+# Update Node Response
+UpdateNodeResponse:
+  type: string
+  description: Response message or updated node identifier
+  example: "Node updated successfully"
+
+# Delete Node Response
+DeleteNodeResponse:
+  type: string
+  description: Response message confirming node deletion
+  example: "Node deleted successfully"
+
+# Create Edge Request
+CreateEdgeRequest:
+  type: object
+  required:
+    - id
+    - source
+    - target
+    - type
+    - data
+  properties:
+    id:
+      type: string
+    source:
+      type: string
+    target:
+      type: string
+    type:
+      type: string
+      example: "weightedEdge"
+    data:
+      $ref: '#/EdgeData'
+
+# Create Edge Response
+CreateEdgeResponse:
+  type: string
+  description: Response message or edge identifier
+  example: "Edge created successfully"
+
+# Delete Edge Response
+DeleteEdgeResponse:
+  type: string
+  description: Response message confirming edge deletion
+  example: "Edge deleted successfully"
+
+# Import Dataset Response
+ImportDatasetResponse:
+  type: object
+  required:
+    - dataset_id
+    - graph_id
+    - mode
+    - total_nodes
+    - total_edges
+    - file_name
+    - saved
+  properties:
+    dataset_id:
+      type: string
+    graph_id:
+      type: string
+    mode:
+      type: string
+      enum: [switch, merge]
+    total_nodes:
+      type: integer
+    total_edges:
+      type: integer
+    file_name:
+      type: string
+    saved:
+      type: boolean
+
+# Graphs List Response
+GraphsListResponse:
+  type: string
+  description: Response containing list of graphs (JSON stringified)
+  example: "[{\"id\":\"graph-1\",\"name\":\"Social Network\"}]"
+
+# Switch Graph Response
+SwitchGraphResponse:
+  type: string
+  description: Response message confirming graph switch
+  example: "Switched to graph successfully"
+
+# Graph Stats Response
+GraphStatsResponse:
+  type: string
+  description: Response containing graph statistics (JSON stringified)
+  example: "{\"total_nodes\":100,\"total_edges\":250,\"density\":0.05}"
+
+# Recommendation Response
+RecommendationResponse:
+  type: string
+  description: Response containing recommendations (JSON stringified)
+  example: "[{\"user_id\":\"user-1\",\"score\":0.95}]"
+
+# Recommendation Details Response
+RecommendationDetailsResponse:
+  type: string
+  description: Response containing detailed recommendations with explanations (JSON stringified)
+  example: "[{\"user_id\":\"user-1\",\"score\":0.95,\"details\":{\"common_friends\":5,\"interests\":[\"tech\"]}}]"
+
+# Ensemble Communities Configuration
+EnsembleConfig:
+  type: object
+  properties:
+    resolution:
+      type: number
+      format: float
+      default: 1
+      description: Resolution parameter for community detection
+      example: 1
+    ensembleRuns:
+      type: integer
+      default: 16
+      description: Number of ensemble runs
+      example: 16
+    consensusThreshold:
+      type: number
+      format: float
+      default: 0.5
+      description: Threshold for consensus clustering
+      example: 0.5
+
+# Ensemble Communities Request
+EnsembleCommunitiesRequest:
+  type: object
+  required:
+    - config
+  properties:
+    config:
+      $ref: '#/EnsembleConfig'
+
+# Ensemble Communities Response
+EnsembleCommunitiesResponse:
+  type: string
+  description: Response containing community detection results (JSON stringified)
+  example: "{\"communities\":[{\"id\":\"community-1\",\"nodes\":[\"node-1\",\"node-2\"],\"modularity\":0.75}]}"
+
+# Shortest Path Request
+ShortestPathRequest:
+  type: object
+  required:
+    - source_id
+    - target_id
+  properties:
+    source_id:
+      type: string
+      description: ID of the source node
+      example: "node-1"
+    target_id:
+      type: string
+      description: ID of the target node
+      example: "node-2"
+
+# Shortest Path Response
+ShortestPathResponse:
+  type: string
+  description: Response containing the shortest path between nodes (JSON stringified)
+  example: "{\"path\":[\"node-1\",\"node-3\",\"node-2\"],\"distance\":2.5,\"edges\":[\"edge-1\",\"edge-2\"]}"
+
+# Common Neighbors Response
+CommonNeighborsResponse:
+  type: string
+  description: Response containing common neighbors between two nodes (JSON stringified)
+  example: "{\"common_neighbors\":[\"node-3\",\"node-5\"],\"count\":2}"
+
+# Export Graph Response
+ExportGraphResponse:
+  type: string
+  description: Response containing the exported graph data (JSON stringified)
+  example: "{\"nodes\":[...],\"edges\":[...],\"metadata\":{}}"
+
+# Graph Metadata Response
+GraphMetadataResponse:
+  type: string
+  description: Response containing graph metadata (JSON stringified)
+  example: "{\"created_at\":\"2024-01-01T00:00:00Z\",\"updated_at\":\"2024-01-02T00:00:00Z\",\"node_count\":100,\"edge_count\":250}"

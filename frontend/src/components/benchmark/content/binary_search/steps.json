@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Initialize Search Boundaries",
+    "description": "Set left pointer to the start of the array (index 0) and right pointer to the end of the array (index n-1). These define the current search interval."
+  },
+  {
+    "title": "Calculate Middle Index",
+    "description": "Compute mid = left + (right - left) // 2. Using this formula instead of (left + right) // 2 prevents integer overflow in languages with fixed-size integers."
+  },
+  {
+    "title": "Compare with Target",
+    "description": "Compare the element at index mid with the target value. Three outcomes are possible: equal (element found), less than target (search right half), or greater than target (search left half)."
+  },
+  {
+    "title": "Update Search Interval",
+    "description": "If target is greater than mid element: left = mid + 1 (discard left half). If target is less than mid element: right = mid - 1 (discard right half). This halves the search space each iteration."
+  },
+  {
+    "title": "Repeat or Return",
+    "description": "Continue the process while left ≤ right. If left exceeds right, the target is not present in the array. Return the index of the found element, or -1 if not found."
+  }
+]

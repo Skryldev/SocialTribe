@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Extract Neighbor Sets",
+    "description": "Retrieve the set of neighbors for both the source and target nodes from the graph structure."
+  },
+  {
+    "title": "Compute Intersection",
+    "description": "Find the common elements between the two neighbor sets using set intersection operation."
+  },
+  {
+    "title": "Count Common Neighbors",
+    "description": "Calculate the cardinality of the intersection set, which represents the number of shared connections."
+  }
+]

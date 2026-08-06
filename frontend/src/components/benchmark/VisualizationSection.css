@@ -1,0 +1,160 @@
+/* VisualizationSection.css
+ * Scoped under .vs-* to avoid collision with global styles.
+ * Two-column chart grid; each panel is self-contained.
+ */
+
+/* ─── Root ───────────────────────────────────────────────────────────────── */
+.vs-root {
+  /* inherits padding / border from .section in the app stylesheet */
+}
+
+/* ─── Two-column chart grid ──────────────────────────────────────────────── */
+.vs-charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 4px;
+}
+
+/* ─── Individual panel ───────────────────────────────────────────────────── */
+.vs-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  background: var(--bg-tertiary, #16162a);
+  border: 1px solid var(--border-muted, #2d2d44);
+  border-radius: var(--radius-md, 10px);
+  min-width: 0; /* prevent grid blowout */
+}
+
+.vs-panel--empty {
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: var(--text-muted);
+  font-size: 13px;
+  text-align: center;
+  gap: 12px;
+}
+
+.vs-panel--empty p {
+  margin: 0;
+  max-width: 220px;
+  line-height: 1.5;
+}
+
+/* Panel header row */
+.vs-panel__header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted, #6b7280);
+}
+
+.vs-panel__sub {
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: var(--text-secondary, #9ca3af);
+  line-height: 1.4;
+}
+
+/* ─── Bar chart legend ───────────────────────────────────────────────────── */
+.vs-bar-legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-muted, #6b7280);
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.vs-bar-legend__dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.vs-bar-legend__dot--accent {
+  background: var(--accent-primary, #6366f1);
+}
+
+.vs-bar-legend__dot--muted {
+  background: var(--bar-muted, #3b3b5c);
+  opacity: 0.7;
+}
+
+/* ─── Shared tooltip ─────────────────────────────────────────────────────── */
+.vs-tooltip {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 14px;
+  background: var(--bg-card, #1e1e2e);
+  border: 1px solid var(--border-muted, #2d2d44);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.vs-tooltip__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary, #e2e8f0);
+  font-family: var(--font-mono, monospace);
+}
+
+.vs-tooltip__value {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* ─── Empty state (no data at all) ──────────────────────────────────────── */
+.vs-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 48px 24px;
+  color: var(--text-muted, #6b7280);
+  font-size: 13px;
+  text-align: center;
+}
+
+.vs-empty p {
+  margin: 0;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .vs-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Recharts SVG text inherits poorly across themes — force sensible defaults */
+.vs-root .recharts-cartesian-axis-tick-value {
+  fill: var(--text-muted, #6b7280);
+}
+
+.vs-root .recharts-legend-item-text {
+  color: var(--text-muted, #6b7280) !important;
+}
+
+.vs-root .recharts-polar-angle-axis-tick-value {
+  fill: var(--text-secondary, #9ca3af);
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .vs-panel {
+    transition: none;
+  }
+}

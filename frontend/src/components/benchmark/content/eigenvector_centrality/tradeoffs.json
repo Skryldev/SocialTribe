@@ -1,0 +1,27 @@
+{
+  "pros": [
+    "Captures both quantity and quality of connections",
+    "Recursive definition captures global network structure",
+    "Strong theoretical foundation in linear algebra",
+    "Naturally identifies influential nodes in social networks",
+    "Robust for undirected, connected graphs",
+    "Power iteration avoids expensive full eigendecomposition",
+    "Produces smooth distribution of scores for nuanced ranking",
+    "Related to PageRank which transformed web search",
+    "Identifies hub regions in network community structure",
+    "Well-suited for undirected collaboration and friendship networks"
+  ],
+  "cons": [
+    "Can produce zero scores for isolated or peripheral nodes",
+    "Convergence is slow when spectral gap is small",
+    "Oscillates on bipartite graphs without modification",
+    "Does not work well for directed graphs (use PageRank or HITS)",
+    "Requires normalization at each iteration step",
+    "Results depend on graph connectivity and component structure",
+    "Power iteration requires O(V²) operations per dense iteration",
+    "Less intuitive to interpret than simpler measures",
+    "Sensitive to changes in graph structure (eigenvector perturbation)",
+    "Cannot handle graphs with multiple connected components well",
+    "Initial vector choice can affect convergence for some graphs"
+  ]
+}

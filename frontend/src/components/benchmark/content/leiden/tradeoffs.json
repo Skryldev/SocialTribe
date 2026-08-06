@@ -1,0 +1,29 @@
+{
+  "pros": [
+    "Guarantees well-connected communities (no internal disconnection)",
+    "Proven O(V log V) worst-case complexity (unlike Louvain)",
+    "Empirically faster than Louvain despite extra refinement phase",
+    "Achieves higher or equal modularity scores than Louvain",
+    "More stable: reduced sensitivity to random node ordering",
+    "Better initialization for each level via refinement",
+    "Refinement phase can be customized with different quality functions",
+    "Maintains all advantages of Louvain (speed, scalability, hierarchy)",
+    "Fewer levels needed for convergence than Louvain",
+    "Theoretically sound with formal guarantees",
+    "Handles weighted graphs natively",
+    "Community structure is more interpretable and reliable"
+  ],
+  "cons": [
+    "More complex implementation than Louvain (three phases vs two)",
+    "Non-deterministic results (same as Louvain, though more stable)",
+    "Modularity resolution limit still applies (cannot detect tiny communities)",
+    "Cannot detect overlapping communities (hard partitions only)",
+    "Refinement phase adds implementation complexity",
+    "No theoretical guarantee of global optimality (still heuristic)",
+    "Requires careful implementation of connectivity checks",
+    "Less widely available in standard libraries than Louvain",
+    "May be overkill for very small graphs (< 1000 nodes)",
+    "Memory overhead for maintaining refined partition structure",
+    "Refinement can split communities into very small pieces in some cases"
+  ]
+}

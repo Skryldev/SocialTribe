@@ -1,0 +1,4 @@
+include zig_core/build.zig
+include zig_core/src/*.zig
+include zig_core/src/ffi/*.zig
+recursive-include src/tribecore/_libs *.dll *.so *.dylib

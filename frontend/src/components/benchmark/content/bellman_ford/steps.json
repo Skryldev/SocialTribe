@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Initialize Distances",
+    "description": "Set the distance to the source node as 0 and all other nodes as infinity. Initialize predecessor array to track shortest paths."
+  },
+  {
+    "title": "Relax All Edges V-1 Times",
+    "description": "For each edge (u,v) with weight w, check if distance[u] + w < distance[v]. If so, update distance[v] and set predecessor[v] = u. Repeat this process V-1 times where V is the number of vertices."
+  },
+  {
+    "title": "Check for Negative Cycles",
+    "description": "Perform one more iteration over all edges. If any distance can still be improved, a negative weight cycle exists in the graph, meaning shortest paths are undefined for affected nodes."
+  },
+  {
+    "title": "Reconstruct Shortest Paths",
+    "description": "Using the predecessor array, trace back from any target node to the source to reconstruct the actual shortest path."
+  }
+]

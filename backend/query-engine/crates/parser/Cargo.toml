@@ -1,0 +1,54 @@
+[package]
+name = "parser"
+version = "0.1.0"
+edition = "2021"
+description = "Parser for graph query language"
+
+[dependencies]
+lexer = { path = "../lexer" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+
+[dev-dependencies]
+pretty_assertions = "1.4"
+rstest = "0.18"
+test-case = "3.3"
+rand = "0.8"
+criterion = "0.5"
+
+[lib]
+name = "parser"
+path = "src/lib.rs"
+
+[[test]]
+name = "ast_tests"
+path = "tests/ast_tests.rs"
+
+[[test]]
+name = "parser_basic_tests"
+path = "tests/parser_basic_tests.rs"
+
+[[test]]
+name = "parser_clause_tests"
+path = "tests/parser_clause_tests.rs"
+
+[[test]]
+name = "parser_expression_tests"
+path = "tests/parser_expression_tests.rs"
+
+[[test]]
+name = "parser_error_tests"
+path = "tests/parser_error_tests.rs"
+
+[[test]]
+name = "parser_integration_tests"
+path = "tests/parser_integration_tests.rs"
+
+[[test]]
+name = "parser_property_tests"
+path = "tests/parser_property_tests.rs"
+
+[[bench]]
+name = "parser_benchmarks"
+harness = false

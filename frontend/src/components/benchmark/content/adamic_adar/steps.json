@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Find Common Neighbors",
+    "description": "Compute the intersection of neighbor sets for both nodes."
+  },
+  {
+    "title": "Calculate Weighted Sum",
+    "description": "For each common neighbor, compute 1/log(degree) as its weight. Rare neighbors get higher weight."
+  },
+  {
+    "title": "Sum Weights",
+    "description": "Add up all the weights to get the final Adamic-Adar similarity score."
+  }
+]

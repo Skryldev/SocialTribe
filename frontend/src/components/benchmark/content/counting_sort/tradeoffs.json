@@ -1,0 +1,29 @@
+{
+  "pros": [
+    "Linear time O(n + k) — faster than any comparison sort when k = O(n)",
+    "Stable sort: preserves relative order of equal elements",
+    "Simple and elegant algorithm, easy to implement correctly",
+    "No comparisons: bypasses Ω(n log n) lower bound entirely",
+    "Predictable performance: always takes exactly the same time for given n, k",
+    "Excellent for sorting characters, small integers, grades, ages",
+    "Core subroutine for Radix Sort, enabling efficient multi-key sorting",
+    "Can be adapted for negative numbers with min-value shifting",
+    "Deterministic: no randomness or pivot dependency",
+    "Optimal when k is small (no sorting algorithm can be faster for same input)",
+    "Natural fit for histogram computation and frequency analysis"
+  ],
+  "cons": [
+    "Requires O(k) auxiliary space (impractical for large k)",
+    "Only works with discrete, integer-mappable keys (not arbitrary floats or objects)",
+    "Degrades to O(n²) time and O(n²) space when k = O(n²)",
+    "Not in-place: requires output array of size n",
+    "Cannot sort general comparable objects without value mapping",
+    "Inefficient for sparse data (k >> n wastes most of counting array)",
+    "Does not benefit from partially sorted input",
+    "Fixed overhead of processing k buckets even if many are empty",
+    "Requires knowing the value range in advance (or finding min/max first)",
+    "Cache performance degrades when k is large (random access to count array)",
+    "Not suitable for very large or unbounded integer ranges",
+    "Stability requires reverse iteration, slightly complicating implementation"
+  ]
+}

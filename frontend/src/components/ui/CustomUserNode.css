@@ -1,0 +1,635 @@
+@font-face {
+  font-family: 'Fudge';
+  src: url('../../assets/Scream-Real.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.sun-node[data-role="influencer"] {
+  --role-bg-from:       rgba(42, 10, 14, 0.92);
+  --role-bg-to:         rgba(28,  6,  9, 0.88);
+  --role-accent:        #e63946;
+  --role-accent-soft:   rgba(230, 57, 70, 0.22);
+  --role-accent-border: rgba(230, 57, 70, 0.42);
+  --role-accent-glow:   rgba(230, 57, 70, 0.55);
+  --role-text-primary:  #ffe4e6;
+  --role-text-secondary:#f9a8b0;
+  --role-text-badge:    #ffc9ce;
+  --role-bar-from:      #e63946;
+  --role-bar-to:        #ff6b75;
+  --role-dot:           #ff6b75;
+  --role-hover-border:  rgba(230, 57, 70, 0.22);
+  --role-selected-glow: rgba(230, 57, 70, 0.25);
+}
+
+/* ── Bridge  #FF8C42 family (warm amber-orange) ── */
+.sun-node[data-role="bridge"] {
+  --role-bg-from:       rgba(40, 18,  4, 0.92);
+  --role-bg-to:         rgba(26, 11,  2, 0.88);
+  --role-accent:        #ff8c42;
+  --role-accent-soft:   rgba(255, 140, 66, 0.20);
+  --role-accent-border: rgba(255, 140, 66, 0.40);
+  --role-accent-glow:   rgba(255, 140, 66, 0.50);
+  --role-text-primary:  #fff0e6;
+  --role-text-secondary:#ffc99a;
+  --role-text-badge:    #ffd9b5;
+  --role-bar-from:      #ff8c42;
+  --role-bar-to:        #ffb380;
+  --role-dot:           #ffb070;
+  --role-hover-border:  rgba(255, 140, 66, 0.20);
+  --role-selected-glow: rgba(255, 140, 66, 0.22);
+}
+
+/* ── Community Leader  #7B2CBF family (deep purple) ── */
+.sun-node[data-role="community_leader"] {
+  --role-bg-from:       rgba(20,  8, 36, 0.94);
+  --role-bg-to:         rgba(12,  4, 22, 0.90);
+  --role-accent:        #9d4edd;
+  --role-accent-soft:   rgba(157, 78, 221, 0.22);
+  --role-accent-border: rgba(157, 78, 221, 0.42);
+  --role-accent-glow:   rgba(157, 78, 221, 0.55);
+  --role-text-primary:  #f0e6ff;
+  --role-text-secondary:#d4adfc;
+  --role-text-badge:    #e2caff;
+  --role-bar-from:      #7b2cbf;
+  --role-bar-to:        #c77dff;
+  --role-dot:           #c77dff;
+  --role-hover-border:  rgba(157, 78, 221, 0.22);
+  --role-selected-glow: rgba(157, 78, 221, 0.28);
+}
+
+/* ── Recommended  #2ECC71 family (emerald green) ── */
+.sun-node[data-role="recommended"] {
+  --role-bg-from:       rgba( 4, 30, 15, 0.93);
+  --role-bg-to:         rgba( 2, 18,  9, 0.89);
+  --role-accent:        #2ecc71;
+  --role-accent-soft:   rgba(46, 204, 113, 0.18);
+  --role-accent-border: rgba(46, 204, 113, 0.38);
+  --role-accent-glow:   rgba(46, 204, 113, 0.48);
+  --role-text-primary:  #e0fff0;
+  --role-text-secondary:#86efb8;
+  --role-text-badge:    #a7f3cc;
+  --role-bar-from:      #27ae60;
+  --role-bar-to:        #56e89b;
+  --role-dot:           #52d68a;
+  --role-hover-border:  rgba(46, 204, 113, 0.18);
+  --role-selected-glow: rgba(46, 204, 113, 0.22);
+}
+
+/* ── Normal  #4D96FF family (cool blue) ── */
+.sun-node[data-role="normal"] {
+  --role-bg-from:       rgba( 6, 16, 36, 0.92);
+  --role-bg-to:         rgba( 4, 10, 24, 0.88);
+  --role-accent:        #4d96ff;
+  --role-accent-soft:   rgba(77, 150, 255, 0.20);
+  --role-accent-border: rgba(77, 150, 255, 0.40);
+  --role-accent-glow:   rgba(77, 150, 255, 0.50);
+  --role-text-primary:  #e8f1ff;
+  --role-text-secondary:#93c0ff;
+  --role-text-badge:    #b8d5ff;
+  --role-bar-from:      #1a72ff;
+  --role-bar-to:        #80b8ff;
+  --role-dot:           #74b9ff;
+  --role-hover-border:  rgba(77, 150, 255, 0.20);
+  --role-selected-glow: rgba(77, 150, 255, 0.24);
+}
+
+/* ── Isolated  #6C757D family (slate grey) ── */
+.sun-node[data-role="isolated"] {
+  --role-bg-from:       rgba(16, 17, 18, 0.94);
+  --role-bg-to:         rgba( 9, 10, 11, 0.90);
+  --role-accent:        #868e96;
+  --role-accent-soft:   rgba(134, 142, 150, 0.16);
+  --role-accent-border: rgba(134, 142, 150, 0.30);
+  --role-accent-glow:   rgba(134, 142, 150, 0.35);
+  --role-text-primary:  #dee2e6;
+  --role-text-secondary:#adb5bd;
+  --role-text-badge:    #ced4da;
+  --role-bar-from:      #6c757d;
+  --role-bar-to:        #adb5bd;
+  --role-dot:           #adb5bd;
+  --role-hover-border:  rgba(134, 142, 150, 0.14);
+  --role-selected-glow: rgba(134, 142, 150, 0.18);
+}
+
+/* ══════════════════════════════════════════════
+   Node shell
+   ══════════════════════════════════════════════ */
+.sun-node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px 4px 4px;
+  background: linear-gradient(160deg, var(--role-bg-from, rgba(12,11,24,0.92)), var(--role-bg-to, rgba(8,7,18,0.88)));
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border-radius: 8px;
+  border: 1px solid var(--role-accent-border, rgba(255,255,255,0.09));
+  box-shadow:
+    0 1px 0 0 rgba(255,255,255,0.04) inset,
+    0 3px 8px rgba(0,0,0,0.60),
+    0 1px 2px rgba(0,0,0,0.4);
+  transition:
+    transform        0.22s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+    box-shadow       0.22s ease,
+    border-color     0.22s ease,
+    background       0.22s ease;
+  min-width: 80px;
+  font-family: 'DM Mono', monospace;
+  cursor: default;
+  user-select: none;
+}
+
+.sun-node.hovered {
+  transform: scale(1.028) translateY(-1px);
+  background: linear-gradient(160deg, var(--role-bg-from, rgba(22,20,44,0.96)), var(--role-bg-to, rgba(14,12,30,0.93)));
+  box-shadow:
+    0 1px 0 0 rgba(255,255,255,0.06) inset,
+    0 6px 14px rgba(0,0,0,0.65),
+    0 0 0 1px var(--role-hover-border, rgba(255,255,255,0.10));
+}
+
+.sun-node.selected {
+  border: 1.5px solid var(--role-accent, #8b5cf6);
+  box-shadow:
+    0 0 0 2px var(--role-selected-glow, rgba(139,92,246,0.18)),
+    0 6px 14px rgba(0,0,0,0.65),
+    0 0 10px var(--role-selected-glow, rgba(139,92,246,0.12)) inset;
+}
+
+
+/* ══════════════════════════════════════════════
+   Avatar
+   ══════════════════════════════════════════════ */
+.sun-avatar {
+  position: relative;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease;
+}
+
+.sun-node.hovered .sun-avatar {
+  transform: scale(1.06);
+}
+
+.sun-avatar-letter {
+  font-family: 'Fudge', sans-serif;
+  font-size: 10px;
+  color: rgba(255,255,255,0.95);
+  letter-spacing: -0.5px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  text-transform: uppercase;
+}
+
+/* Online dot */
+.sun-online-dot {
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--role-dot, #34d399);
+  border: 1px solid rgba(0,0,0,0.6);
+  box-shadow: 0 0 4px var(--role-dot, #34d39980);
+}
+
+
+/* ══════════════════════════════════════════════
+   Info column
+   ══════════════════════════════════════════════ */
+.sun-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Name row */
+.sun-name-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.sun-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 8px;
+  color: var(--role-text-primary, #ede9fe);
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: text;
+}
+
+.sun-name-input {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 8px;
+  background: rgba(0,0,0,0.50);
+  border: 1px solid var(--role-accent, #7c3aed);
+  color: var(--role-text-primary, #ede9fe);
+  border-radius: 3px;
+  padding: 1px 4px;
+  width: 58px;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--role-accent-soft, rgba(124,58,237,0.18));
+  transition: box-shadow 0.15s;
+}
+
+.sun-name-input:focus {
+  box-shadow: 0 0 0 2px var(--role-accent-border, rgba(124,58,237,0.35));
+}
+
+/* Edit pencil hint */
+.sun-edit-hint {
+  opacity: 0;
+  font-size: 6px;
+  color: var(--role-accent, #7c3aed);
+  transition: opacity 0.15s;
+  cursor: pointer;
+}
+.sun-node.hovered .sun-edit-hint { opacity: 1; }
+
+/* ID */
+.sun-id {
+  font-size: 6px;
+  color: var(--role-text-secondary, #9d9ab8);
+  letter-spacing: 0.3px;
+  font-family: 'DM Mono', monospace;
+}
+
+
+/* ══════════════════════════════════════════════
+   Badges row
+   ══════════════════════════════════════════════ */
+.sun-badges {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+  margin-top: 1px;
+}
+
+.sun-friends-badge {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--role-accent-soft, rgba(124,58,237,0.18));
+  border: 1px solid var(--role-accent-border, rgba(124,58,237,0.3));
+  padding: 0px 4px 0px 3px;
+  border-radius: 40px;
+  font-size: 6px;
+  color: var(--role-text-badge, #c4b5fd);
+  white-space: nowrap;
+}
+
+.sun-friends-badge svg {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+}
+
+/* ══════════════════════════════════════════════
+   Metric Chip
+   ══════════════════════════════════════════════ */
+
+.sun-metric-chip {
+  --chip-font-size: 7px;
+  --chip-padding-x: 3px;
+  --chip-padding-y: 0px;
+  --chip-gap: 1.5px;
+  --chip-border-radius: 3px;
+  --chip-icon-size: 6px;
+  --chip-min-height: 12px;
+  --chip-letter-spacing: -0.01em;
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--chip-gap);
+  min-height: var(--chip-min-height);
+  padding: var(--chip-padding-y) var(--chip-padding-x);
+  
+  font-size: var(--chip-font-size);
+  font-weight: 450;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--role-accent-soft, rgba(255, 255, 255, 0.07));
+  border-radius: var(--chip-border-radius);
+  color: var(--role-text-secondary, #7c7a9e);
+  white-space: nowrap;
+  letter-spacing: var(--chip-letter-spacing);
+  line-height: 1.1;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+/* مقدار عددی داخل چیپ */
+.sun-metric-chip .metric-value {
+  color: var(--role-text-badge, #a78bfa);
+  font-weight: 550;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* آیکون‌های داخل چیپ */
+.sun-metric-chip svg,
+.sun-metric-chip .chip-icon {
+  flex-shrink: 0;
+  width: var(--chip-icon-size);
+  height: var(--chip-icon-size);
+  display: inline-block;
+}
+
+.sun-metric-chip.xs {
+  --chip-font-size: 6px;
+  --chip-padding-x: 2px;
+  --chip-padding-y: 0px;
+  --chip-gap: 1px;
+  --chip-border-radius: 2px;
+  --chip-icon-size: 5px;
+  --chip-min-height: 10px;
+}
+
+.sun-metric-chip.sm {
+  --chip-font-size: 6.5px;
+  --chip-padding-x: 2.5px;
+  --chip-padding-y: 0px;
+  --chip-gap: 1.5px;
+  --chip-border-radius: 2.5px;
+  --chip-icon-size: 5.5px;
+  --chip-min-height: 11px;
+}
+
+.sun-metric-chip.md {
+  --chip-font-size: 7px;
+  --chip-padding-x: 3px;
+  --chip-padding-y: 0px;
+  --chip-gap: 1.5px;
+  --chip-border-radius: 3px;
+  --chip-icon-size: 6px;
+  --chip-min-height: 12px;
+}
+
+.sun-metric-chip.lg {
+  --chip-font-size: 8px;
+  --chip-padding-x: 4px;
+  --chip-padding-y: 0px;
+  --chip-gap: 2px;
+  --chip-border-radius: 4px;
+  --chip-icon-size: 7px;
+  --chip-min-height: 14px;
+}
+
+.sun-metric-chip.tiny {
+  --chip-font-size: 5.5px;
+  --chip-padding-x: 1.5px;
+  --chip-padding-y: 0px;
+  --chip-gap: 0.5px;
+  --chip-border-radius: 2px;
+  --chip-icon-size: 4.5px;
+  --chip-min-height: 9px;
+  opacity: 0.85;
+}
+
+.compact .sun-metric-chip {
+  --chip-font-size: 6px;
+  --chip-padding-x: 2px;
+  --chip-padding-y: 0px;
+  --chip-gap: 1px;
+  --chip-border-radius: 2px;
+  --chip-icon-size: 5px;
+  --chip-min-height: 10px;
+}
+
+@media (max-width: 768px) {
+  .sun-metric-chip:not(.xs):not(.sm):not(.md):not(.lg):not(.tiny) {
+    --chip-font-size: 8px;
+    --chip-padding-x: 4px;
+    --chip-padding-y: 0px;
+    --chip-gap: 2px;
+    --chip-border-radius: 4px;
+    --chip-icon-size: 7px;
+    --chip-min-height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sun-metric-chip:not(.xs):not(.sm):not(.md):not(.lg):not(.tiny) {
+    --chip-font-size: 9px;
+    --chip-padding-x: 5px;
+    --chip-padding-y: 0px;
+    --chip-gap: 2.5px;
+    --chip-border-radius: 5px;
+    --chip-icon-size: 8px;
+    --chip-min-height: 16px;
+  }
+}
+
+.sun-metric-chip:hover {
+  background: rgba(0, 0, 0, 0.45);
+  border-color: var(--role-accent-soft, rgba(255, 255, 255, 0.12));
+}
+
+
+
+
+/* ══════════════════════════════════════════════
+   Centrality progress bar
+   ══════════════════════════════════════════════ */
+.sun-centrality-bar-wrap {
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.sun-centrality-label {
+  font-size: 5px;
+  color: var(--role-text-secondary, rgba(255,255,255,0.5));
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+}
+
+.sun-centrality-track {
+  flex: 1;
+  height: 2px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.sun-centrality-fill {
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--role-bar-from, #7c3aed), var(--role-bar-to, #c084fc));
+  transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: 0 0 4px var(--role-accent-glow, rgba(168,85,247,0.5));
+}
+
+
+/* ══════════════════════════════════════════════
+   Handles
+   Handles live inside .sun-node (position: relative), so all
+   coordinates are relative to the card's own bounding box.
+   Scoped to .sun-node > .react-flow__handle to avoid touching
+   any other node type in the same graph.
+   ══════════════════════════════════════════════ */
+
+/* Each position has a src+tgt pair stacked at the same coordinates.
+   React Flow reads their getBoundingClientRect() at drop time and
+   picks the nearest handle — this only works when they're inside
+   the node's rendered DOM with correct absolute positions. */
+
+.sun-node .react-flow__handle-top {
+  top: -4px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+.sun-node .react-flow__handle-bottom {
+  bottom: -4px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+.sun-node .react-flow__handle-left {
+  left: -4px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+.sun-node .react-flow__handle-right {
+  right: -4px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Shared appearance */
+.sun-node .react-flow__handle {
+  width: 6px !important;
+  height: 6px !important;
+  background: var(--role-accent, #7c3aed) !important;
+  border: 1.5px solid rgba(0,0,0,0.7) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 4px var(--role-accent-glow, rgba(124,58,237,0.55)) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  min-width: unset !important;
+  min-height: unset !important;
+}
+
+.sun-node .react-flow__handle:hover {
+  transform: scale(1.75) !important;
+  box-shadow: 0 0 8px var(--role-accent-glow, rgba(168,85,247,0.8)) !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   Tooltip
+   ══════════════════════════════════════════════ */
+.sun-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 9, 20, 0.97);
+  border: 1px solid var(--role-accent-border, rgba(139,92,246,0.4));
+  border-radius: 7px;
+  padding: 5px 8px;
+  font-size: 8px;
+  color: var(--role-text-secondary, #a1a1c2);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow:
+    0 4px 16px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(255,255,255,0.03);
+  backdrop-filter: blur(12px);
+  line-height: 1.7;
+  animation: sun-tooltip-in 0.15s ease forwards;
+}
+
+@keyframes sun-tooltip-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(4px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.sun-tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sun-tooltip-key { color: var(--role-text-secondary, #4b4770); }
+.sun-tooltip-val { color: var(--role-text-badge, #c4b5fd); font-weight: 500; }
+
+
+/* ══════════════════════════════════════════════
+   Context Menu
+   ══════════════════════════════════════════════ */
+.sun-ctx-menu {
+  position: fixed;
+  background: rgba(10, 9, 20, 0.97);
+  border: 1px solid rgba(139,92,246,0.30);
+  border-radius: 14px;
+  padding: 6px 0;
+  min-width: 180px;
+  z-index: 99999;
+  box-shadow:
+    0 16px 48px rgba(0,0,0,0.75),
+    0 0 0 1px rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+  animation: sun-ctx-in 0.14s cubic-bezier(0.2,0.9,0.4,1.1) forwards;
+}
+
+@keyframes sun-ctx-in {
+  from { opacity: 0; transform: scale(0.94) translateY(-4px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+.sun-ctx-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px;
+  font-size: 12.5px;
+  font-family: 'DM Mono', monospace;
+  color: #c4b5fd;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+
+.sun-ctx-item:hover {
+  background: rgba(139,92,246,0.16);
+  color: #ede9fe;
+}
+
+.sun-ctx-item.danger { color: #f87171; }
+.sun-ctx-item.danger:hover { background: rgba(248,113,113,0.12); }
+
+.sun-ctx-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  margin: 5px 12px;
+}
+
+
+/* ══════════════════════════════════════════════
+   Sparkle
+   ══════════════════════════════════════════════ */
+@keyframes sun-sparkle {
+  0%,100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50%      { transform: scale(1.3) rotate(12deg); opacity: 0.7; }
+}
+
+.sun-sparkle {
+  animation: sun-sparkle 1.8s ease-in-out infinite;
+  display: inline-block;
+}

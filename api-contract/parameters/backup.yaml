@@ -1,0 +1,9 @@
+# Backup ID Parameter
+backup_id:
+  name: backup_id
+  in: path
+  required: true
+  description: Unique identifier of the backup
+  schema:
+    type: string
+  example: "backup-123"

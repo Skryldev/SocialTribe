@@ -1,0 +1,17 @@
+{
+  "id": "dfs",
+  "name": "Depth-First Search",
+  "category": "graph_search",
+  "difficulty": "easy",
+
+  "timeComplexity": "O(V + E)",
+  "spaceComplexity": "O(V)",
+  "bestCase": "O(1)",
+  "worstCase": "O(V + E)",
+  "averageCase": "O(V + E)",
+
+  "stable": true,
+  "inPlace": false,
+  "recursive": true,
+  "parallelizable": false
+}

@@ -1,0 +1,17 @@
+{
+  "id": "segment_tree",
+  "name": "Segment-Tree",
+  "category": "range_query",
+  "difficulty": "hard",
+
+  "timeComplexity": "O(log n)",
+  "spaceComplexity": "O(n)",
+  "bestCase": "O(log n)",
+  "worstCase": "O(log n)",
+  "averageCase": "O(log n)",
+
+  "stable": null,
+  "inPlace": false,
+  "recursive": true,
+  "parallelizable": false
+}

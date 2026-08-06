@@ -1,0 +1,440 @@
+/* ============================================
+   InterCommunityRelations — Brand Refactor v2.0
+   Design System: Dark Amber Dashboard
+   ============================================ */
+
+/* ══════════════════════════════════════════════
+   Design Tokens — Amber brand system
+   ══════════════════════════════════════════════ */
+:root {
+  --cir-surface: #1e293b;
+  --cir-surface-secondary: rgba(30, 41, 59, 0.5);
+  --cir-surface-deep: #0f172a;
+  --cir-border: rgba(245, 158, 11, 0.15);
+  --cir-border-subtle: rgba(245, 158, 11, 0.07);
+  --cir-border-strong: rgba(245, 158, 11, 0.25);
+  --cir-text-primary: #e2e8f0;
+  --cir-text-secondary: #94a3b8;
+  --cir-text-tertiary: #64748b;
+  --cir-accent: #f59e0b;
+  --cir-accent-light: #fbbf24;
+  --cir-accent-strong: #ea580c;
+  --cir-accent-soft: rgba(245, 158, 11, 0.08);
+  --cir-accent-glow: rgba(245, 158, 11, 0.15);
+  --cir-radius-sm: 8px;
+  --cir-radius-md: 12px;
+  --cir-radius-lg: 20px;
+  --cir-transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --cir-font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+}
+
+/* ══════════════════════════════════════════════
+   Root Container
+   ══════════════════════════════════════════════ */
+.cir-root {
+  width: 100%;
+}
+
+/* ══════════════════════════════════════════════
+   Empty State
+   ══════════════════════════════════════════════ */
+.cir-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  background: linear-gradient(
+    160deg,
+    rgba(30, 41, 59, 0.6) 0%,
+    rgba(30, 41, 59, 0.35) 100%
+  );
+  border-radius: var(--cir-radius-md);
+  border: 1px dashed rgba(245, 158, 11, 0.15);
+  backdrop-filter: blur(8px);
+}
+
+.cir-empty-icon {
+  color: var(--cir-text-tertiary);
+  margin-bottom: 0.85rem;
+  opacity: 0.5;
+}
+
+.cir-empty-text {
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: var(--cir-text-secondary);
+  margin: 0 0 0.35rem;
+}
+
+.cir-empty-hint {
+  font-size: 0.825rem;
+  color: var(--cir-text-tertiary);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════
+   Main Layout
+   ══════════════════════════════════════════════ */
+.cir-main {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+/* ══════════════════════════════════════════════
+   Canvas Wrapper
+   ══════════════════════════════════════════════ */
+.cir-canvas-wrapper {
+  flex: 1;
+  position: relative;
+  border-radius: var(--cir-radius-lg);
+  border: 1px solid rgba(245, 158, 11, 0.12);
+  background: linear-gradient(
+    175deg,
+    var(--cir-surface) 0%,
+    rgba(30, 41, 59, 0.9) 50%,
+    rgba(245, 158, 11, 0.03) 100%
+  );
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+/* Accent notch — brand system signature */
+.cir-canvas-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--cir-accent) 25%,
+    var(--cir-accent-strong) 50%,
+    var(--cir-accent) 75%,
+    transparent 100%
+  );
+  opacity: 0.45;
+  border-radius: 0 0 2px 2px;
+  z-index: 10;
+}
+
+.cir-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 780 / 420;
+}
+
+/* ══════════════════════════════════════════════
+   Tooltip (Canvas Hover)
+   ══════════════════════════════════════════════ */
+.cir-tooltip {
+  position: absolute;
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(
+    160deg,
+    var(--cir-surface) 0%,
+    rgba(30, 41, 59, 0.95) 100%
+  );
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: var(--cir-radius-sm);
+  padding: 0.45rem 0.8rem;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(245, 158, 11, 0.06);
+  pointer-events: none;
+  z-index: 5;
+  backdrop-filter: blur(12px);
+}
+
+/* Tooltip accent notch */
+.cir-tooltip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10px;
+  right: 10px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--cir-accent) 40%,
+    var(--cir-accent-strong) 60%,
+    transparent 100%
+  );
+  opacity: 0.5;
+  border-radius: 0 0 2px 2px;
+}
+
+.cir-tooltip-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--cir-text-primary);
+}
+
+.cir-tooltip-value {
+  font-size: 0.78rem;
+  color: var(--cir-accent-light);
+  font-weight: 500;
+  font-family: var(--cir-font-mono);
+}
+
+/* ══════════════════════════════════════════════
+   Edge Panel (Sidebar)
+   ══════════════════════════════════════════════ */
+.cir-edge-panel {
+  width: 230px;
+  flex-shrink: 0;
+  border: 1px solid rgba(245, 158, 11, 0.12);
+  border-radius: var(--cir-radius-md);
+  background: linear-gradient(
+    175deg,
+    var(--cir-surface) 0%,
+    rgba(30, 41, 59, 0.9) 50%,
+    rgba(245, 158, 11, 0.03) 100%
+  );
+  overflow: hidden;
+}
+
+.cir-edge-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid rgba(245, 158, 11, 0.08);
+  background: rgba(15, 23, 42, 0.4);
+}
+
+.cir-edge-panel-icon {
+  color: var(--cir-accent);
+  flex-shrink: 0;
+}
+
+.cir-edge-panel-title {
+  flex: 1;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--cir-text-primary);
+  letter-spacing: -0.01em;
+}
+
+/* ── Panel Toggle Button ─────────────────────── */
+.cir-edge-panel-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--cir-radius-sm);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  background: rgba(30, 41, 59, 0.5);
+  color: var(--cir-text-tertiary);
+  cursor: pointer;
+  transition: all var(--cir-transition);
+}
+
+.cir-edge-panel-toggle:hover {
+  border-color: var(--cir-accent);
+  color: var(--cir-accent-light);
+  background: rgba(245, 158, 11, 0.1);
+}
+
+/* ══════════════════════════════════════════════
+   Edge List
+   ══════════════════════════════════════════════ */
+.cir-edge-list {
+  max-height: 340px;
+  overflow-y: auto;
+  padding: 0.5rem 0.65rem;
+}
+
+/* Scrollbar — brand-styled */
+.cir-edge-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.cir-edge-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cir-edge-list::-webkit-scrollbar-thumb {
+  background: rgba(245, 158, 11, 0.2);
+  border-radius: 2px;
+}
+
+.cir-edge-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 158, 11, 0.4);
+}
+
+/* ── Empty List Message ──────────────────────── */
+.cir-edge-list-empty {
+  font-size: 0.78rem;
+  color: var(--cir-text-tertiary);
+  text-align: center;
+  padding: 1rem 0.5rem;
+  margin: 0;
+}
+
+/* ── Edge Item ───────────────────────────────── */
+.cir-edge-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.35rem;
+  border-radius: var(--cir-radius-sm);
+  transition:
+    background var(--cir-transition),
+    transform var(--cir-transition);
+}
+
+.cir-edge-item:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(245, 158, 11, 0.06) 0%,
+    rgba(245, 158, 11, 0.02) 60%,
+    transparent 100%
+  );
+  transform: translateX(2px);
+}
+
+.cir-edge-item-indicator {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.cir-edge-item-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px currentColor;
+}
+
+.cir-edge-item-connector {
+  width: 10px;
+  height: 1.5px;
+  background: rgba(245, 158, 11, 0.2);
+}
+
+.cir-edge-item-label {
+  flex: 1;
+  font-size: 0.73rem;
+  color: var(--cir-text-secondary);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cir-edge-item-weight {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--cir-accent-light);
+  font-variant-numeric: tabular-nums;
+  font-family: var(--cir-font-mono);
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════
+   Legend
+   ══════════════════════════════════════════════ */
+.cir-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.cir-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.75rem;
+  color: var(--cir-text-tertiary);
+  font-weight: 500;
+}
+
+/* Legend node circle */
+.cir-legend-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--cir-accent);
+  opacity: 0.8;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+/* Legend edge line */
+.cir-legend-line {
+  width: 18px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--cir-accent);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════
+   Responsive
+   ══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .cir-main {
+    flex-direction: column;
+  }
+
+  .cir-edge-panel {
+    width: 100%;
+  }
+
+  .cir-edge-list {
+    max-height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cir-tooltip {
+    top: 0.5rem;
+    padding: 0.35rem 0.6rem;
+    gap: 0.4rem;
+  }
+
+  .cir-tooltip-label {
+    font-size: 0.75rem;
+  }
+
+  .cir-tooltip-value {
+    font-size: 0.7rem;
+  }
+
+  .cir-edge-item {
+    padding: 0.35rem 0.3rem;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   Motion: Respect user preferences
+   ══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .cir-edge-item,
+  .cir-edge-panel-toggle {
+    transition: none;
+  }
+
+  .cir-edge-item:hover {
+    transform: none;
+  }
+}

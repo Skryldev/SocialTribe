@@ -1,0 +1,17 @@
+{
+  "id": "k_core_decomposition",
+  "name": "K-Core-Decomposition",
+  "category": "community",
+  "difficulty": "medium",
+
+  "timeComplexity": "O(V + E)",
+  "spaceComplexity": "O(V)",
+  "bestCase": "O(V + E)",
+  "worstCase": "O(V + E)",
+  "averageCase": "O(V + E)",
+
+  "stable": true,
+  "inPlace": false,
+  "recursive": false,
+  "parallelizable": false
+}

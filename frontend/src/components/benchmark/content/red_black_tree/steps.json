@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Standard BST Insertion with Red Color",
+    "description": "Insert the new node as in a regular BST. Color the new node RED. Inserting as red preserves black-height (property 5) but may violate the no-red-red rule (property 4)."
+  },
+  {
+    "title": "Check for Red-Red Violation",
+    "description": "If the parent of the new node is BLACK, no violation occurs and insertion is complete. If parent is RED, a red-red conflict exists and must be resolved."
+  },
+  {
+    "title": "Identify Uncle's Color",
+    "description": "Examine the color of the uncle (sibling of parent). Case A: Uncle is RED. Case B: Uncle is BLACK (or null). The uncle's color determines which fix-up strategy to apply."
+  },
+  {
+    "title": "Fix-Up: Recoloring (Uncle RED)",
+    "description": "If uncle is RED: recolor parent and uncle to BLACK, and grandparent to RED. This pushes the red-red problem up to the grandparent. Recursively fix from grandparent."
+  },
+  {
+    "title": "Fix-Up: Rotation + Recoloring (Uncle BLACK)",
+    "description": "If uncle is BLACK and the node forms a triangle (LR or RL): rotate parent to make a line. Then for line configuration (LL or RR): rotate grandparent and recolor. This resolves the violation locally."
+  },
+  {
+    "title": "Ensure Root is Black",
+    "description": "After all fix-ups, color the root BLACK. This guarantees property 2 and may resolve the last remaining red-red violation at the root."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Initialize Scores",
+    "description": "Assign equal probability (1/N) to all nodes as starting PageRank values."
+  },
+  {
+    "title": "Build Transition Matrix",
+    "description": "Construct the probability distribution of moving from each node to its neighbors, handling dangling nodes (nodes with no outgoing edges)."
+  },
+  {
+    "title": "Iterative Update",
+    "description": "Repeatedly update each node's score by summing contributions from incoming neighbors: rank(u) = (1-d)/N + d * sum(rank(v)/out_degree(v))."
+  },
+  {
+    "title": "Apply Damping Factor",
+    "description": "Use damping factor d (typically 0.85) to model random surfing behavior and prevent rank sinks."
+  },
+  {
+    "title": "Check Convergence",
+    "description": "Monitor the change in scores between iterations until it falls below a threshold (e.g., 1e-6) or maximum iterations reached."
+  }
+]

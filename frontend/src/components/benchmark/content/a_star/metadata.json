@@ -1,0 +1,17 @@
+{
+  "id": "a_star",
+  "name": "A-Star",
+  "category": "shortest_path",
+  "difficulty": "medium",
+
+  "timeComplexity": "O((V + E) log V)",
+  "spaceComplexity": "O(V)",
+  "bestCase": "O(d)",
+  "worstCase": "O(b^d)",
+  "averageCase": "O((V + E) log V)",
+
+  "stable": null,
+  "inPlace": false,
+  "recursive": false,
+  "parallelizable": false
+}

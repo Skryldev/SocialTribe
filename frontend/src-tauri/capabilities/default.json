@@ -1,0 +1,48 @@
+{
+  "identifier": "default",
+  "description": "Capability for the main window",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "core:window:allow-start-dragging",
+    "core:window:default",
+    "core:window:allow-close",
+    "core:window:allow-minimize",
+    "core:window:allow-toggle-maximize",
+    "core:window:allow-start-dragging",
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        {
+          "name": "bin/benchmark-server",
+          "sidecar": true
+        },
+        {
+          "name": "bin/tribe-database",
+          "sidecar": true
+        },
+        {
+          "name": "bin/tribe-backend-server",
+          "sidecar": true
+        }
+      ]
+    },
+    {
+      "identifier": "shell:allow-spawn",
+      "allow": [
+        {
+          "name": "bin/benchmark-server",
+          "sidecar": true
+        },
+        {
+          "name": "bin/tribe-database",
+          "sidecar": true
+        },
+        {
+          "name": "bin/tribe-backend-server",
+          "sidecar": true
+        }
+      ]
+    }
+  ]
+}

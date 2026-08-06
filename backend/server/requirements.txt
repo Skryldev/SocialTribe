@@ -1,0 +1,19 @@
+﻿# Web Framework
+fastapi==0.136.3
+uvicorn==0.49.0
+tribecore==4.7.0
+
+# Data Processing
+numpy==2.4.6
+networkx==3.6.1
+pypdf==6.13.2
+prometheus_client==0.26.0
+
+# gRPC
+grpcio==1.81.1
+google-api-core==2.24.2
+
+# Validation
+pydantic==2.13.4
+pydantic-settings==2.14.1
+python-multipart==0.0.20

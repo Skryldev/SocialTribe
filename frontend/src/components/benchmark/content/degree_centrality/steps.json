@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Count Node Degrees",
+    "description": "Calculate the degree (number of direct connections) for each node in the graph."
+  },
+  {
+    "title": "Normalize Scores (Optional)",
+    "description": "Divide each node's degree by (n-1) where n is total number of nodes, to get a value between 0 and 1."
+  },
+  {
+    "title": "Rank Nodes",
+    "description": "Sort nodes by their centrality scores to identify the most central/influential nodes in the network."
+  }
+]

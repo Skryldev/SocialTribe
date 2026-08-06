@@ -1,0 +1,27 @@
+{
+  "pros": [
+    "Near-constant time per operation: amortized O(α(V))",
+    "Extremely memory-efficient: only two arrays (parent and rank)",
+    "Simple to implement with clear logic",
+    "Provably optimal for pointer-based disjoint set representations",
+    "Path compression makes repeated finds essentially free",
+    "Union by rank guarantees logarithmic tree height",
+    "Widely applicable across graph algorithms and beyond",
+    "Supports incremental construction (cannot remove edges)",
+    "Both optimizations together achieve the α(V) bound",
+    "Deterministic and easy to debug",
+    "Can be extended to track additional per-set information"
+  ],
+  "cons": [
+    "Does not support edge deletion (decremental operations)",
+    "Path compression uses recursion (stack overflow risk in naive impl)",
+    "Iterative path compression is slightly more complex",
+    "Cannot efficiently enumerate elements of a set",
+    "Not thread-safe without external synchronization",
+    "α(V) bound only holds for amortized analysis, not per-operation",
+    "Initial construction is O(V) (must initialize all elements)",
+    "Requires integer element indices (0 to V-1) for optimal performance",
+    "Union by size uses different logic than union by rank",
+    "Not suitable for graphs with frequent splits"
+  ]
+}

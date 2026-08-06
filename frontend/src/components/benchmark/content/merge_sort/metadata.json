@@ -1,0 +1,17 @@
+{
+  "id": "merge_sort",
+  "name": "Merge-Sort",
+  "category": "sorting",
+  "difficulty": "medium",
+
+  "timeComplexity": "O(n log n)",
+  "spaceComplexity": "O(n)",
+  "bestCase": "O(n log n)",
+  "worstCase": "O(n log n)",
+  "averageCase": "O(n log n)",
+
+  "stable": true,
+  "inPlace": false,
+  "recursive": true,
+  "parallelizable": true
+}

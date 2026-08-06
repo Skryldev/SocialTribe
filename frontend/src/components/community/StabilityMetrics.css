@@ -1,0 +1,463 @@
+/* ============================================
+   StabilityMetrics — Brand Refactor v2.0
+   Design System: Dark Amber Dashboard
+   ============================================ */
+
+/* ══════════════════════════════════════════════
+   Design Tokens — Amber brand system
+   ══════════════════════════════════════════════ */
+:root {
+  --csm-surface: #1e293b;
+  --csm-surface-secondary: rgba(30, 41, 59, 0.5);
+  --csm-surface-deep: #0f172a;
+  --csm-border: rgba(245, 158, 11, 0.15);
+  --csm-border-subtle: rgba(245, 158, 11, 0.07);
+  --csm-border-strong: rgba(245, 158, 11, 0.25);
+  --csm-text-primary: #e2e8f0;
+  --csm-text-secondary: #94a3b8;
+  --csm-text-tertiary: #64748b;
+  --csm-accent: #f59e0b;
+  --csm-accent-light: #fbbf24;
+  --csm-accent-strong: #ea580c;
+  --csm-accent-soft: rgba(245, 158, 11, 0.08);
+  --csm-accent-glow: rgba(245, 158, 11, 0.15);
+
+  /* Stability levels — amber spectrum */
+  --csm-high: #fbbf24;
+  --csm-high-soft: rgba(251, 191, 36, 0.08);
+  --csm-high-border: rgba(251, 191, 36, 0.25);
+  --csm-high-glow: rgba(251, 191, 36, 0.15);
+
+  --csm-medium: #d97706;
+  --csm-medium-soft: rgba(217, 119, 6, 0.08);
+  --csm-medium-border: rgba(217, 119, 6, 0.25);
+  --csm-medium-glow: rgba(217, 119, 6, 0.15);
+
+  --csm-low: #b45309;
+  --csm-low-soft: rgba(180, 83, 9, 0.08);
+  --csm-low-border: rgba(180, 83, 9, 0.25);
+  --csm-low-glow: rgba(180, 83, 9, 0.15);
+
+  --csm-track: rgba(15, 23, 42, 0.6);
+  --csm-radius-sm: 8px;
+  --csm-radius-md: 14px;
+  --csm-radius-lg: 20px;
+  --csm-transition: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  --csm-font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+}
+
+/* ══════════════════════════════════════════════
+   Root Container
+   ══════════════════════════════════════════════ */
+.csm-root {
+  width: 100%;
+}
+
+/* ══════════════════════════════════════════════
+   Grid Layout
+   ══════════════════════════════════════════════ */
+.csm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.15rem;
+}
+
+/* ══════════════════════════════════════════════
+   Empty State
+   ══════════════════════════════════════════════ */
+.csm-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  background: linear-gradient(
+    160deg,
+    rgba(30, 41, 59, 0.6) 0%,
+    rgba(30, 41, 59, 0.35) 100%
+  );
+  border-radius: var(--csm-radius-md);
+  border: 1px dashed rgba(245, 158, 11, 0.15);
+  backdrop-filter: blur(8px);
+}
+
+.csm-empty-icon {
+  color: var(--csm-text-tertiary);
+  margin-bottom: 0.85rem;
+  opacity: 0.5;
+}
+
+.csm-empty-text {
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: var(--csm-text-secondary);
+  margin: 0 0 0.35rem;
+}
+
+.csm-empty-hint {
+  font-size: 0.825rem;
+  color: var(--csm-text-tertiary);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════
+   Card
+   ══════════════════════════════════════════════ */
+.csm-card {
+  background: linear-gradient(
+    165deg,
+    var(--csm-surface) 0%,
+    rgba(30, 41, 59, 0.85) 55%,
+    rgba(245, 158, 11, 0.03) 100%
+  );
+  border: 1px solid rgba(245, 158, 11, 0.1);
+  border-radius: var(--csm-radius-lg);
+  padding: 1.25rem 1.35rem 1.1rem;
+  transition:
+    box-shadow var(--csm-transition),
+    border-color var(--csm-transition),
+    transform var(--csm-transition);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+/* Accent notch — brand system signature */
+.csm-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1.25rem;
+  right: 1.25rem;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--csm-accent) 25%,
+    var(--csm-accent-strong) 50%,
+    var(--csm-accent) 75%,
+    transparent 100%
+  );
+  opacity: 0.35;
+  border-radius: 0 0 2px 2px;
+  z-index: 1;
+}
+
+.csm-card:hover {
+  box-shadow:
+    0 6px 28px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(245, 158, 11, 0.06);
+  transform: translateY(-1px);
+}
+
+/* ══════════════════════════════════════════════
+   Card Level Variants — Amber spectrum
+   ══════════════════════════════════════════════ */
+
+/* High Stability — bright amber */
+.csm-card--high {
+  border-color: var(--csm-high-border);
+  background: linear-gradient(
+    165deg,
+    rgba(251, 191, 36, 0.06) 0%,
+    rgba(30, 41, 59, 0.85) 45%,
+    rgba(245, 158, 11, 0.04) 100%
+  );
+}
+
+.csm-card--high::before {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #fbbf24 25%,
+    #f59e0b 50%,
+    #fbbf24 75%,
+    transparent 100%
+  );
+  opacity: 0.6;
+}
+
+/* Medium Stability — mid amber */
+.csm-card--medium {
+  border-color: var(--csm-medium-border);
+  background: linear-gradient(
+    165deg,
+    rgba(217, 119, 6, 0.06) 0%,
+    rgba(30, 41, 59, 0.85) 45%,
+    rgba(245, 158, 11, 0.04) 100%
+  );
+}
+
+.csm-card--medium::before {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #d97706 25%,
+    #f59e0b 50%,
+    #d97706 75%,
+    transparent 100%
+  );
+  opacity: 0.55;
+}
+
+/* Low Stability — deep amber */
+.csm-card--low {
+  border-color: var(--csm-low-border);
+  background: linear-gradient(
+    165deg,
+    rgba(180, 83, 9, 0.06) 0%,
+    rgba(30, 41, 59, 0.85) 45%,
+    rgba(245, 158, 11, 0.04) 100%
+  );
+}
+
+.csm-card--low::before {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #b45309 25%,
+    #92400e 50%,
+    #b45309 75%,
+    transparent 100%
+  );
+  opacity: 0.5;
+}
+
+/* ══════════════════════════════════════════════
+   Card Header
+   ══════════════════════════════════════════════ */
+.csm-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+/* ── Icon Wrapper ────────────────────────────── */
+.csm-card-icon-wrapper {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--csm-radius-sm);
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.15),
+    rgba(234, 88, 12, 0.05)
+  );
+  border: 1px solid rgba(245, 158, 11, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.csm-card-icon {
+  color: var(--csm-accent);
+}
+
+/* ── Badge ───────────────────────────────────── */
+.csm-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  border: 1px solid transparent;
+}
+
+.csm-card--high .csm-card-badge {
+  background: rgba(251, 191, 36, 0.1);
+  color: var(--csm-high);
+  border-color: rgba(251, 191, 36, 0.2);
+}
+
+.csm-card--medium .csm-card-badge {
+  background: rgba(217, 119, 6, 0.1);
+  color: var(--csm-medium);
+  border-color: rgba(217, 119, 6, 0.2);
+}
+
+.csm-card--low .csm-card-badge {
+  background: rgba(180, 83, 9, 0.1);
+  color: var(--csm-low);
+  border-color: rgba(180, 83, 9, 0.2);
+}
+
+/* ══════════════════════════════════════════════
+   Card Body
+   ══════════════════════════════════════════════ */
+.csm-card-body {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 1;
+}
+
+/* ══════════════════════════════════════════════
+   Gauge
+   ══════════════════════════════════════════════ */
+.csm-gauge {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.csm-gauge-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.csm-gauge-arc {
+  color: var(--csm-accent);
+}
+
+.csm-card--high .csm-gauge-arc {
+  color: var(--csm-high);
+}
+
+.csm-card--medium .csm-gauge-arc {
+  color: var(--csm-medium);
+}
+
+.csm-card--low .csm-gauge-arc {
+  color: var(--csm-low);
+}
+
+.csm-gauge-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.csm-gauge-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--csm-text-primary);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--csm-font-mono);
+}
+
+.csm-gauge-unit {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--csm-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ══════════════════════════════════════════════
+   Card Info
+   ══════════════════════════════════════════════ */
+.csm-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.csm-card-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--csm-text-primary);
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.01em;
+}
+
+.csm-card-desc {
+  font-size: 0.75rem;
+  color: var(--csm-text-tertiary);
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* ══════════════════════════════════════════════
+   Card Footer
+   ══════════════════════════════════════════════ */
+.csm-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(245, 158, 11, 0.07);
+  z-index: 1;
+}
+
+.csm-card-footer-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--csm-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.csm-card-footer-value {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--csm-text-primary);
+  font-variant-numeric: tabular-nums;
+  font-family: var(--csm-font-mono);
+}
+
+/* ══════════════════════════════════════════════
+   Responsive
+   ══════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .csm-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .csm-card {
+    padding: 1rem 1.1rem 0.9rem;
+    border-radius: var(--csm-radius-md);
+  }
+
+  .csm-card::before {
+    left: 1rem;
+    right: 1rem;
+  }
+
+  .csm-card-body {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .csm-gauge {
+    width: 64px;
+    height: 64px;
+  }
+
+  .csm-gauge-value {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .csm-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   Motion: Respect user preferences
+   ══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .csm-card {
+    transition: none;
+  }
+
+  .csm-card:hover {
+    transform: none;
+  }
+}

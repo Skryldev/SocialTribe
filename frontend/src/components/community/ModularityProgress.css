@@ -1,0 +1,379 @@
+/* ============================================
+   ModularityProgress — Brand Refactor v2.0
+   Design System: Dark Amber Dashboard
+   ============================================ */
+
+/* ══════════════════════════════════════════════
+   Design Tokens — Amber brand system
+   ══════════════════════════════════════════════ */
+:root {
+  --cmp-surface: #1e293b;
+  --cmp-surface-secondary: rgba(30, 41, 59, 0.5);
+  --cmp-surface-deep: #0f172a;
+  --cmp-border: rgba(245, 158, 11, 0.15);
+  --cmp-border-subtle: rgba(245, 158, 11, 0.07);
+  --cmp-border-strong: rgba(245, 158, 11, 0.25);
+  --cmp-text-primary: #e2e8f0;
+  --cmp-text-secondary: #94a3b8;
+  --cmp-text-tertiary: #64748b;
+  --cmp-accent: #f59e0b;
+  --cmp-accent-light: #fbbf24;
+  --cmp-accent-strong: #ea580c;
+  --cmp-accent-soft: rgba(245, 158, 11, 0.08);
+  --cmp-accent-glow: rgba(245, 158, 11, 0.15);
+  --cmp-success: #fbbf24;
+  --cmp-warning: #d97706;
+  --cmp-error: #b45309;
+  --cmp-radius-sm: 8px;
+  --cmp-radius-md: 12px;
+  --cmp-radius-lg: 20px;
+  --cmp-transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --cmp-font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+}
+
+/* ══════════════════════════════════════════════
+   Root Container
+   ══════════════════════════════════════════════ */
+.cmp-root {
+  width: 100%;
+}
+
+/* ══════════════════════════════════════════════
+   Empty State
+   ══════════════════════════════════════════════ */
+.cmp-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  background: linear-gradient(
+    160deg,
+    rgba(30, 41, 59, 0.6) 0%,
+    rgba(30, 41, 59, 0.35) 100%
+  );
+  border-radius: var(--cmp-radius-md);
+  border: 1px dashed rgba(245, 158, 11, 0.15);
+  backdrop-filter: blur(8px);
+}
+
+.cmp-empty-icon {
+  color: var(--cmp-text-tertiary);
+  margin-bottom: 0.85rem;
+  opacity: 0.5;
+}
+
+.cmp-empty-text {
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: var(--cmp-text-secondary);
+  margin: 0 0 0.35rem;
+}
+
+.cmp-empty-hint {
+  font-size: 0.825rem;
+  color: var(--cmp-text-tertiary);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════
+   Chart Wrapper
+   ══════════════════════════════════════════════ */
+.cmp-chart-wrapper {
+  background: linear-gradient(
+    175deg,
+    var(--cmp-surface) 0%,
+    rgba(30, 41, 59, 0.9) 50%,
+    rgba(245, 158, 11, 0.03) 100%
+  );
+  border-radius: var(--cmp-radius-lg);
+  border: 1px solid rgba(245, 158, 11, 0.1);
+  padding: 0.75rem 0.5rem 0.5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Accent notch — brand system signature */
+.cmp-chart-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--cmp-accent) 25%,
+    var(--cmp-accent-strong) 50%,
+    var(--cmp-accent) 75%,
+    transparent 100%
+  );
+  opacity: 0.4;
+  border-radius: 0 0 2px 2px;
+  z-index: 10;
+}
+
+/* ══════════════════════════════════════════════
+   Custom Tooltip
+   ══════════════════════════════════════════════ */
+.cmp-tooltip {
+  background: linear-gradient(
+    160deg,
+    var(--cmp-surface) 0%,
+    rgba(30, 41, 59, 0.95) 100%
+  );
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: var(--cmp-radius-sm);
+  padding: 0.65rem 0.85rem;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(245, 158, 11, 0.06);
+  min-width: 140px;
+  backdrop-filter: blur(12px);
+  position: relative;
+}
+
+/* Tooltip accent notch */
+.cmp-tooltip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10px;
+  right: 10px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--cmp-accent) 40%,
+    var(--cmp-accent-strong) 60%,
+    transparent 100%
+  );
+  opacity: 0.5;
+  border-radius: 0 0 2px 2px;
+}
+
+.cmp-tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--cmp-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.45rem;
+}
+
+.cmp-tooltip-header-icon {
+  color: var(--cmp-accent);
+}
+
+.cmp-tooltip-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.cmp-tooltip-label {
+  font-size: 0.78rem;
+  color: var(--cmp-text-secondary);
+  font-weight: 500;
+}
+
+.cmp-tooltip-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--cmp-accent-light);
+  font-variant-numeric: tabular-nums;
+  font-family: var(--cmp-font-mono);
+}
+
+/* ── Tooltip Progress Bar ────────────────────── */
+.cmp-tooltip-bar {
+  height: 4px;
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.cmp-tooltip-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cmp-accent), var(--cmp-accent-light));
+  border-radius: 2px;
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+}
+
+/* Shimmer overlay */
+.cmp-tooltip-bar-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 40%,
+    transparent 100%
+  );
+  border-radius: inherit;
+}
+
+/* ══════════════════════════════════════════════
+   Stats Row
+   ══════════════════════════════════════════════ */
+.cmp-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  flex-wrap: wrap;
+}
+
+/* ── Stat Badge ──────────────────────────────── */
+.cmp-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(245, 158, 11, 0.1);
+  border-radius: var(--cmp-radius-sm);
+  font-size: 0.75rem;
+  transition:
+    border-color var(--cmp-transition),
+    background var(--cmp-transition);
+}
+
+.cmp-stat-icon {
+  color: var(--cmp-accent);
+  flex-shrink: 0;
+}
+
+.cmp-stat-label {
+  color: var(--cmp-text-tertiary);
+  font-weight: 500;
+}
+
+.cmp-stat-value {
+  color: var(--cmp-text-primary);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--cmp-font-mono);
+}
+
+/* ══════════════════════════════════════════════
+   Trend Variants — Amber spectrum only
+   ══════════════════════════════════════════════ */
+.cmp-stat-trend {
+  transition: border-color var(--cmp-transition);
+}
+
+/* Trend Up — bright amber (positive) */
+.cmp-stat-trend--up {
+  border-color: rgba(251, 191, 36, 0.3);
+  background: rgba(251, 191, 36, 0.06);
+}
+
+.cmp-stat-trend--up .cmp-stat-value {
+  color: var(--cmp-success);
+}
+
+.cmp-stat-trend--up .cmp-stat-icon {
+  color: var(--cmp-success);
+}
+
+/* Trend Down — deep amber (negative) */
+.cmp-stat-trend--down {
+  border-color: rgba(180, 83, 9, 0.3);
+  background: rgba(180, 83, 9, 0.06);
+}
+
+.cmp-stat-trend--down .cmp-stat-value {
+  color: var(--cmp-error);
+}
+
+.cmp-stat-trend--down .cmp-stat-icon {
+  color: var(--cmp-error);
+}
+
+/* Trend Stable — mid amber (neutral) */
+.cmp-stat-trend--stable {
+  border-color: rgba(217, 119, 6, 0.3);
+  background: rgba(217, 119, 6, 0.06);
+}
+
+.cmp-stat-trend--stable .cmp-stat-value {
+  color: var(--cmp-warning);
+}
+
+.cmp-stat-trend--stable .cmp-stat-icon {
+  color: var(--cmp-warning);
+}
+
+.cmp-stat-trend-icon {
+  display: flex;
+  align-items: center;
+  color: inherit;
+}
+
+/* ══════════════════════════════════════════════
+   Recharts Overrides (scoped)
+   ══════════════════════════════════════════════ */
+.cmp-chart-wrapper .recharts-cartesian-grid-horizontal line {
+  stroke: rgba(245, 158, 11, 0.08);
+}
+
+.cmp-chart-wrapper .recharts-cartesian-grid-vertical line {
+  stroke: none;
+}
+
+.cmp-chart-wrapper .recharts-text {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  fill: var(--cmp-text-tertiary);
+}
+
+/* ══════════════════════════════════════════════
+   Responsive
+   ══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .cmp-stats {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cmp-stat {
+    justify-content: center;
+  }
+
+  .cmp-tooltip {
+    min-width: 120px;
+    padding: 0.5rem 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cmp-chart-wrapper {
+    padding: 0.5rem 0.25rem 0.25rem 0;
+    border-radius: var(--cmp-radius-md);
+  }
+
+  .cmp-tooltip-value {
+    font-size: 0.8rem;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   Motion: Respect user preferences
+   ══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .cmp-tooltip-bar-fill,
+  .cmp-stat-trend {
+    transition: none;
+  }
+}

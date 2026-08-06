@@ -1,0 +1,26 @@
+{
+  "pros": [
+    "Handles negative edge weights correctly",
+    "Detects negative weight cycles in the graph",
+    "Simpler implementation than Dijkstra for dense graphs",
+    "No priority queue overhead required",
+    "Works on both directed and undirected graphs",
+    "Can be distributed easily (local information only)",
+    "Dynamic programming foundation is theoretically elegant",
+    "Can be optimized with early termination",
+    "Provides foundation for distance-vector routing protocols",
+    "Allows negative costs in optimization problems"
+  ],
+  "cons": [
+    "Slower than Dijkstra: O(V·E) vs O((V+E) log V)",
+    "Must process all edges in each iteration (V-1 times)",
+    "Inefficient for sparse graphs with non-negative weights",
+    "High constant factor in time complexity",
+    "Memory access patterns can be cache-unfriendly",
+    "Not suitable for very large graphs (V·E may be huge)",
+    "Cannot compute all-pairs shortest paths efficiently",
+    "Struggles with graphs where V is large and dense",
+    "Queue-based variants (SPFA) can degrade exponentially",
+    "Requires V-1 iterations even for simple graphs without optimization"
+  ]
+}

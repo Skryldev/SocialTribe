@@ -1,0 +1,420 @@
+@import './Tokens.css';
+
+/* ============================================================
+   Export Panel — Professional Dark Theme
+   ============================================================ */
+
+/* ── Container ── */
+.ep-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ── Header ── */
+.ep-header {
+  margin-bottom: 20px;
+}
+
+.ep-header-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.ep-header-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--iem-r-sm);
+  background: var(--iem-amber-dim);
+  border: 1px solid var(--iem-amber-border);
+  color: var(--iem-amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ep-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--iem-text-0);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.ep-subtitle {
+  font-size: 11.5px;
+  color: var(--iem-text-2);
+  margin: 1px 0 0 0;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.ep-selected-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--iem-amber-dim);
+  color: var(--iem-amber);
+  border: 1px solid var(--iem-amber-border);
+}
+
+/* ── Stats Cards ── */
+.ep-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.ep-stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border-radius: var(--iem-r-md);
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  transition: all 0.15s var(--iem-ease-out);
+}
+
+.ep-stat-card--blue {
+  border-top: 2px solid var(--iem-blue);
+}
+
+.ep-stat-card--violet {
+  border-top: 2px solid var(--iem-violet);
+}
+
+.ep-stat-card--amber {
+  border-top: 2px solid var(--iem-amber);
+}
+
+.ep-stat-card:hover {
+  border-color: var(--iem-border-strong);
+  transform: translateY(-1px);
+}
+
+.ep-stat-value {
+  font-family: var(--iem-font-mono);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--iem-text-0);
+  line-height: 1;
+}
+
+.ep-stat-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--iem-text-3);
+}
+
+/* ── Section ── */
+.ep-section {
+  margin-bottom: 16px;
+}
+
+.ep-section-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--iem-text-3);
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* ── Format Selector ── */
+.ep-format-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+.ep-format-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-sm);
+  color: var(--iem-text-2);
+  font: 500 11px/1 var(--iem-font-ui);
+  cursor: pointer;
+  transition: all 0.15s var(--iem-ease-out);
+  text-align: left;
+}
+
+.ep-format-option:hover {
+  border-color: var(--iem-border-strong);
+  color: var(--iem-text-1);
+  background: var(--iem-bg-3);
+}
+
+.ep-format-option--active {
+  background: var(--iem-amber-dim);
+  border-color: var(--iem-amber-border);
+  color: var(--iem-amber);
+}
+
+.ep-format-option:focus-visible {
+  outline: 2px solid var(--iem-amber);
+  outline-offset: 1px;
+}
+
+.ep-format-icon {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.ep-format-option--active .ep-format-icon {
+  opacity: 1;
+}
+
+.ep-format-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.ep-format-name {
+  font-weight: 600;
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ep-format-ext {
+  font-size: 9px;
+  opacity: 0.6;
+  font-family: var(--iem-font-mono);
+}
+
+/* ── Code Preview ── */
+.ep-preview {
+  background: var(--iem-bg-0);
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-md);
+  overflow: hidden;
+}
+
+.ep-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--iem-bg-2);
+  border-bottom: 1px solid var(--iem-border);
+}
+
+.ep-preview-format {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--iem-text-1);
+}
+
+.ep-preview-size {
+  font-size: 10px;
+  color: var(--iem-text-3);
+  font-family: var(--iem-font-mono);
+}
+
+.ep-preview-code {
+  margin: 0;
+  padding: 12px 14px;
+  font-family: var(--iem-font-mono);
+  font-size: 10.5px;
+  line-height: 1.65;
+  color: var(--iem-text-1);
+  overflow-x: auto;
+  max-height: 200px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.ep-preview-code::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.ep-preview-code::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ep-preview-code::-webkit-scrollbar-thumb {
+  background: var(--iem-border-strong);
+  border-radius: 100px;
+}
+
+.ep-preview-truncated {
+  padding: 6px 14px;
+  font-size: 9.5px;
+  color: var(--iem-text-3);
+  font-family: var(--iem-font-mono);
+  border-top: 1px solid var(--iem-border);
+  background: var(--iem-bg-2);
+}
+
+/* Syntax Highlighting */
+.ep-code-key { color: #7dd3fc; }
+.ep-code-str { color: #86efac; }
+.ep-code-num { color: #fbbf24; }
+.ep-code-punc { color: var(--iem-text-3); }
+.ep-code-bool { color: #c084fc; }
+.ep-code-null { color: var(--iem-text-3); }
+
+/* ── Filename Input ── */
+.ep-filename-row {
+  display: flex;
+  gap: 8px;
+}
+
+.ep-filename-input {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 12px;
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-sm);
+  color: var(--iem-text-0);
+  font: 400 12px/1.5 var(--iem-font-mono);
+  transition: border-color 0.15s var(--iem-ease-out);
+}
+
+.ep-filename-input:focus {
+  outline: none;
+  border-color: var(--iem-amber-border);
+  box-shadow: 0 0 0 3px var(--iem-amber-dim);
+}
+
+.ep-filename-input::placeholder {
+  color: var(--iem-text-3);
+  font-family: var(--iem-font-mono);
+}
+
+.ep-filename-ext {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-sm);
+  font-family: var(--iem-font-mono);
+  font-size: 11px;
+  color: var(--iem-amber);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ── Toggle Section ── */
+.ep-toggle-section {
+  margin-bottom: 16px;
+}
+
+/* ── Warning ── */
+.ep-warning {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--iem-amber-dim);
+  border-left: 2px solid var(--iem-amber);
+  border-radius: var(--iem-r-sm);
+  font-size: 11px;
+  color: #e0b667;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+.ep-warning svg {
+  flex-shrink: 0;
+  color: var(--iem-amber);
+  margin-top: 1px;
+}
+
+/* ── Actions ── */
+.ep-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--iem-border);
+}
+
+/* ── Empty State ── */
+.ep-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 48px 20px;
+  text-align: center;
+  flex: 1;
+}
+
+.ep-empty-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--iem-r-lg);
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--iem-text-3);
+}
+
+.ep-empty-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--iem-text-1);
+  margin: 0;
+}
+
+.ep-empty-desc {
+  font-size: 11px;
+  color: var(--iem-text-3);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .ep-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .ep-format-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ep-filename-row {
+    flex-direction: column;
+  }
+
+  .ep-filename-ext {
+    justify-content: center;
+    padding: 8px;
+  }
+}

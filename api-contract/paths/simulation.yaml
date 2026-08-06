@@ -1,0 +1,45 @@
+/simulation/run:
+  post:
+    tags:
+      - Simulation
+    summary: Run Simulation
+    description: Run a simulation with specified parameters
+    operationId: runSimulation
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/simulation.yaml#/RunSimulationRequest'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/simulation.yaml#/RunSimulationResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/simulation/influence-maximization:
+  post:
+    tags:
+      - Simulation
+    summary: Influence Maximization
+    description: Find the most influential nodes in the graph using specified method
+    operationId: influenceMaximization
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/simulation.yaml#/InfluenceMaximizationRequest'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/simulation.yaml#/InfluenceMaximizationResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'

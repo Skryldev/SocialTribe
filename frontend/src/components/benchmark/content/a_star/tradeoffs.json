@@ -1,0 +1,26 @@
+{
+  "pros": [
+    "Guarantees optimal path with admissible heuristic",
+    "Dramatically faster than Dijkstra with good heuristic",
+    "Explores fewer nodes by focusing search toward goal",
+    "Flexible heuristic design for domain-specific optimization",
+    "Complete: always finds a path if one exists",
+    "Optimal efficiency among informed search algorithms",
+    "Easily adaptable to weighted and anytime variants",
+    "Well-understood properties with formal proofs",
+    "Widely implemented with extensive optimization techniques",
+    "Foundation for modern replanning algorithms (D*, LPA*)"
+  ],
+  "cons": [
+    "Performance heavily depends on heuristic quality",
+    "Poor heuristic can degrade to Dijkstra performance",
+    "Memory intensive: stores all explored nodes in open/closed sets",
+    "Exponential worst-case complexity with weak heuristic",
+    "Requires admissible heuristic — can't always guarantee optimality",
+    "Not suitable for dynamically changing graphs without adaptation",
+    "Overhead of heuristic computation must be justified",
+    "Struggles with very large state spaces (memory-bound)",
+    "Bidirectional implementation more complex than unidirectional",
+    "Cannot handle negative edge weights without modification"
+  ]
+}

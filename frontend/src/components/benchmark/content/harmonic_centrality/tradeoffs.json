@@ -1,0 +1,30 @@
+{
+  "pros": [
+    "Handles disconnected graphs naturally (1/∞ = 0, not undefined)",
+    "More robust to distant outliers than closeness centrality",
+    "Simple to compute: BFS + sum of reciprocals",
+    "No special handling needed for disconnected components",
+    "Monotonically increases with added edges (always beneficial)",
+    "Normalized version ranges from 0 to 1 for all graphs",
+    "Interpretable as average reciprocal distance",
+    "Less sensitive to small graph changes than betweenness",
+    "Can compare nodes across different components",
+    "Identifies nodes that can efficiently reach all others",
+    "Computationally same order as closeness (O(V·(V+E)))",
+    "Works with both directed and undirected graphs"
+  ],
+  "cons": [
+    "Same O(V·(V+E)) time as closeness — impractical for very large graphs",
+    "Requires all-pairs shortest paths computation",
+    "Memory overhead for storing distances during BFS",
+    "May not distinguish nodes in well-connected dense graphs",
+    "Reciprocal transformation compresses large distance differences",
+    "Less established in literature than closeness or betweenness",
+    "Weighted version requires Dijkstra, increasing time by log V factor",
+    "Not suitable for real-time dynamic graph analysis",
+    "Approximation algorithms less developed than for betweenness",
+    "Score interpretation varies with graph size and density",
+    "Cannot capture betweenness-like bridge roles",
+    "O(V²) for sparse graphs still expensive for n > 10⁵"
+  ]
+}

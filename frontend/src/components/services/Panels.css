@@ -1,0 +1,930 @@
+@import './Tokens.css';
+
+/* ──────────────────────────────────────────────
+   Panel Layout
+   ────────────────────────────────────────────── */
+.iem-panel-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
+}
+
+.iem-panel-head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 18px;
+}
+
+.iem-panel-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--iem-text-0);
+  margin: 0;
+}
+
+.iem-panel-sub {
+  font-size: 12px;
+  color: var(--iem-text-2);
+  margin: 0;
+}
+
+.iem-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.iem-section--highlight {
+  background: var(--iem-blue-dim);
+  border: 1px solid var(--iem-blue-border);
+  border-radius: var(--iem-r-md);
+  padding: 14px;
+}
+
+.iem-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--iem-text-3);
+}
+
+.iem-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--iem-text-2);
+  margin: 0;
+}
+
+.iem-hint--success {
+  color: var(--iem-green);
+}
+
+/* ──────────────────────────────────────────────
+   Stats
+   ────────────────────────────────────────────── */
+.iem-stats {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.iem-stat-pill {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 8px;
+  border-radius: var(--iem-r-md);
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  border-top: 2px solid var(--iem-border-strong);
+}
+
+.iem-stat-cyan {
+  border-top-color: var(--iem-blue);
+}
+
+.iem-stat-violet {
+  border-top-color: var(--iem-violet);
+}
+
+.iem-stat-amber {
+  border-top-color: var(--iem-amber);
+}
+
+.iem-stat-val {
+  font-family: var(--iem-font-mono);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--iem-text-0);
+  line-height: 1;
+}
+
+.iem-stat-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--iem-text-3);
+}
+
+/* ──────────────────────────────────────────────
+   Inputs
+   ────────────────────────────────────────────── */
+.iem-input,
+.iem-textarea {
+  width: 100%;
+  padding: 9px 12px;
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-sm);
+  color: var(--iem-text-0);
+  font: 400 12.5px/1.5 var(--iem-font-ui);
+  transition: border-color 0.15s var(--iem-ease-out);
+}
+
+.iem-textarea {
+  font-family: var(--iem-font-mono);
+  font-size: 12px;
+  resize: vertical;
+  min-height: 140px;
+}
+
+.iem-input:focus,
+.iem-textarea:focus {
+  outline: none;
+  border-color: var(--iem-amber-border);
+  box-shadow: 0 0 0 3px var(--iem-amber-dim);
+}
+
+.iem-textarea--error {
+  border-color: var(--iem-red-border);
+}
+
+.iem-textarea--error:focus {
+  box-shadow: 0 0 0 3px var(--iem-red-dim);
+}
+
+.iem-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.iem-input-row .iem-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.iem-file-ext {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-sm);
+  font-family: var(--iem-font-mono);
+  font-size: 11px;
+  color: var(--iem-amber);
+  white-space: nowrap;
+}
+
+/* ──────────────────────────────────────────────
+   Select
+   ────────────────────────────────────────────── */
+.iem-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 9px 12px;
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-sm);
+  color: var(--iem-text-0);
+  font: 500 12.5px/1 var(--iem-font-ui);
+  cursor: pointer;
+}
+
+.iem-select-trigger:hover {
+  border-color: var(--iem-border-strong);
+}
+
+.iem-select-trigger:focus-visible {
+  outline: 2px solid var(--iem-amber);
+  outline-offset: 1px;
+}
+
+.iem-select-trigger[data-placeholder] {
+  color: var(--iem-text-3);
+}
+
+.iem-select-content {
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border-strong);
+  border-radius: var(--iem-r-md);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  z-index: 200;
+}
+
+.iem-select-item {
+  padding: 8px 12px;
+  font: 500 12.5px/1 var(--iem-font-ui);
+  color: var(--iem-text-1);
+  cursor: pointer;
+  outline: none;
+}
+
+.iem-select-item[data-highlighted] {
+  background: var(--iem-bg-3);
+  color: var(--iem-text-0);
+}
+
+.iem-select-item[data-state='checked'] {
+  color: var(--iem-amber);
+}
+
+/* ──────────────────────────────────────────────
+   Buttons
+   ────────────────────────────────────────────── */
+.iem-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.iem-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: var(--iem-r-sm);
+  font: 600 12px/1 var(--iem-font-ui);
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s var(--iem-ease-out);
+  white-space: nowrap;
+}
+
+.iem-btn:focus-visible {
+  outline: 2px solid var(--iem-amber);
+  outline-offset: 1px;
+}
+
+.iem-btn--disabled,
+.iem-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.iem-btn--primary {
+  background: var(--iem-amber);
+  color: #1a1206;
+}
+
+.iem-btn--primary:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.iem-btn--secondary {
+  background: var(--iem-bg-3);
+  border-color: var(--iem-border-strong);
+  color: var(--iem-text-0);
+}
+
+.iem-btn--secondary:hover:not(:disabled) {
+  background: var(--iem-bg-2);
+}
+
+.iem-btn--ghost {
+  background: transparent;
+  color: var(--iem-text-2);
+  border-color: var(--iem-border);
+}
+
+.iem-btn--ghost:hover:not(:disabled) {
+  color: var(--iem-text-0);
+  border-color: var(--iem-border-strong);
+}
+
+.iem-btn--danger {
+  background: var(--iem-red-dim);
+  color: var(--iem-red);
+  border-color: var(--iem-red-border);
+}
+
+.iem-btn--danger:hover:not(:disabled) {
+  background: rgba(245, 101, 101, 0.2);
+}
+
+/* ──────────────────────────────────────────────
+   Toggle
+   ────────────────────────────────────────────── */
+.iem-toggle-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.iem-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.iem-toggle-track {
+  position: relative;
+  width: 34px;
+  height: 20px;
+  background: var(--iem-bg-3);
+  border: 1px solid var(--iem-border-strong);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s var(--iem-ease-out);
+  flex-shrink: 0;
+}
+
+.iem-toggle-track--on {
+  background: var(--iem-amber-dim);
+  border-color: var(--iem-amber-border);
+}
+
+.iem-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  background: var(--iem-text-2);
+  border-radius: 50%;
+  transition: transform 0.18s var(--iem-ease),
+              background 0.15s var(--iem-ease-out);
+}
+
+.iem-toggle-track--on .iem-toggle-thumb {
+  transform: translateX(14px);
+  background: var(--iem-amber);
+}
+
+.iem-toggle-label {
+  font-size: 12.5px;
+  color: var(--iem-text-1);
+  font-weight: 500;
+}
+
+.iem-warning {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--iem-amber-dim);
+  border-left: 2px solid var(--iem-amber);
+  border-radius: var(--iem-r-sm);
+  font-size: 11px;
+  color: #e0b667;
+  line-height: 1.5;
+}
+
+.iem-warning svg {
+  flex-shrink: 0;
+  color: var(--iem-amber);
+  margin-top: 1px;
+}
+
+/* ──────────────────────────────────────────────
+   Dropzone
+   ────────────────────────────────────────────── */
+.iem-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 28px 16px;
+  background: var(--iem-bg-2);
+  border: 1.5px dashed var(--iem-border-strong);
+  border-radius: var(--iem-r-lg);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.18s var(--iem-ease-out);
+}
+
+.iem-dropzone:hover {
+  border-color: var(--iem-amber-border);
+  background: var(--iem-amber-dim);
+}
+
+.iem-dropzone--active {
+  border-color: var(--iem-amber);
+  background: var(--iem-amber-dim);
+  transform: scale(1.01);
+}
+
+.iem-dropzone--has-file {
+  padding: 14px 16px;
+  cursor: default;
+}
+
+.iem-dropzone:focus-visible {
+  outline: 2px solid var(--iem-amber);
+  outline-offset: 2px;
+}
+
+.iem-dropzone-icon {
+  color: var(--iem-text-2);
+}
+
+.iem-dropzone-text {
+  font-size: 12.5px;
+  color: var(--iem-text-1);
+  margin: 0;
+}
+
+.iem-dropzone-text strong {
+  color: var(--iem-text-0);
+}
+
+.iem-dropzone-hint {
+  font-size: 10.5px;
+  color: var(--iem-text-3);
+  margin: 0;
+}
+
+.iem-file-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.iem-file-info-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--iem-r-sm);
+  background: var(--iem-blue-dim);
+  color: var(--iem-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.iem-file-info-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+  text-align: left;
+}
+
+.iem-file-info-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--iem-text-0);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.iem-file-info-size {
+  font-size: 10.5px;
+  color: var(--iem-text-3);
+}
+
+.iem-file-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: transparent;
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-sm);
+  color: var(--iem-text-2);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.iem-file-remove:hover {
+  color: var(--iem-red);
+  border-color: var(--iem-red-border);
+  background: var(--iem-red-dim);
+}
+
+/* ──────────────────────────────────────────────
+   Progress
+   ────────────────────────────────────────────── */
+.iem-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.iem-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--iem-bg-3);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.iem-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--iem-amber), #ffcf6b);
+  border-radius: 999px;
+  transition: width 0.25s var(--iem-ease-out);
+}
+
+.iem-progress-text {
+  font-family: var(--iem-font-mono);
+  font-size: 11px;
+  color: var(--iem-text-2);
+  min-width: 32px;
+  text-align: right;
+}
+
+/* ──────────────────────────────────────────────
+   Method Tabs
+   ────────────────────────────────────────────── */
+.iem-method-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.iem-method-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  border-radius: 999px;
+  color: var(--iem-text-2);
+  font: 600 11.5px/1 var(--iem-font-ui);
+  cursor: pointer;
+  transition: all 0.15s var(--iem-ease-out);
+}
+
+.iem-method-tab:hover {
+  color: var(--iem-text-0);
+  border-color: var(--iem-border-strong);
+}
+
+.iem-method-tab--active {
+  background: var(--iem-amber-dim);
+  border-color: var(--iem-amber-border);
+  color: var(--iem-amber);
+}
+
+.iem-method-tab:focus-visible {
+  outline: 2px solid var(--iem-amber);
+  outline-offset: 1px;
+}
+
+/* ──────────────────────────────────────────────
+   Mode Selector
+   ────────────────────────────────────────────── */
+.iem-mode-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.iem-mode-option {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 12px;
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-md);
+  cursor: pointer;
+  transition: all 0.15s var(--iem-ease-out);
+}
+
+.iem-mode-option:hover {
+  border-color: var(--iem-border-strong);
+}
+
+.iem-mode-option--active {
+  background: var(--iem-amber-dim);
+  border-color: var(--iem-amber-border);
+}
+
+.iem-mode-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.iem-mode-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--iem-text-0);
+}
+
+.iem-mode-option--active .iem-mode-label {
+  color: var(--iem-amber);
+}
+
+.iem-mode-desc {
+  font-size: 10.5px;
+  color: var(--iem-text-3);
+  line-height: 1.35;
+}
+
+/* ──────────────────────────────────────────────
+   Validation & Preview
+   ────────────────────────────────────────────── */
+.iem-validation-errors {
+  background: var(--iem-red-dim);
+  border: 1px solid var(--iem-red-border);
+  border-radius: var(--iem-r-md);
+  padding: 10px 12px;
+  margin-bottom: 16px;
+}
+
+.iem-validation-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--iem-red);
+  margin-bottom: 6px;
+}
+
+.iem-validation-error {
+  display: flex;
+  gap: 8px;
+  font-size: 11.5px;
+  color: #f0a3a3;
+  padding: 2px 0;
+}
+
+.iem-error-line {
+  font-family: var(--iem-font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--iem-red);
+  flex-shrink: 0;
+}
+
+.iem-preview {
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-md);
+  padding: 12px 14px;
+  margin-bottom: 16px;
+}
+
+.iem-preview-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--iem-text-1);
+  margin-bottom: 8px;
+}
+
+.iem-preview-section-label {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--iem-text-3);
+  margin-bottom: 4px;
+}
+
+.iem-preview-row {
+  display: flex;
+  gap: 10px;
+  font-family: var(--iem-font-mono);
+  font-size: 11px;
+  padding: 3px 0;
+  border-top: 1px solid var(--iem-border);
+}
+
+.iem-preview-row:first-child {
+  border-top: none;
+}
+
+.iem-preview-id {
+  color: var(--iem-amber);
+  flex-shrink: 0;
+}
+
+.iem-preview-label {
+  color: var(--iem-text-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ──────────────────────────────────────────────
+   Code Preview
+   ────────────────────────────────────────────── */
+.iem-code-preview {
+  background: var(--iem-bg-0);
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-md);
+  overflow: hidden;
+}
+
+.iem-code-preview-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 12px;
+  background: var(--iem-bg-2);
+  border-bottom: 1px solid var(--iem-border);
+  font-size: 10px;
+  color: var(--iem-text-3);
+  font-family: var(--iem-font-mono);
+}
+
+.iem-code-preview pre {
+  margin: 0;
+  padding: 12px 14px;
+  font-family: var(--iem-font-mono);
+  font-size: 10.5px;
+  line-height: 1.6;
+  color: var(--iem-text-1);
+  overflow-x: auto;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.iem-code-key {
+  color: #7dd3fc;
+}
+
+.iem-code-str {
+  color: #86efac;
+}
+
+.iem-code-num {
+  color: #fbbf24;
+}
+
+.iem-code-punc {
+  color: var(--iem-text-3);
+}
+
+/* ──────────────────────────────────────────────
+   Empty / Loading States
+   ────────────────────────────────────────────── */
+.iem-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--iem-text-2);
+}
+
+.iem-empty-icon {
+  color: var(--iem-text-3);
+  opacity: 0.7;
+}
+
+.iem-empty-text {
+  font-size: 13px;
+  color: var(--iem-text-1);
+  margin: 0;
+  font-weight: 500;
+}
+
+.iem-empty-sub {
+  font-size: 11px;
+  color: var(--iem-text-3);
+}
+
+.iem-loading-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  font-size: 12px;
+  color: var(--iem-text-2);
+}
+
+/* ──────────────────────────────────────────────
+   Backup Items
+   ────────────────────────────────────────────── */
+.iem-backup-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-md);
+  transition: border-color 0.15s var(--iem-ease-out);
+}
+
+.iem-backup-item:hover {
+  border-color: var(--iem-violet-border);
+}
+
+.iem-backup-item-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--iem-r-sm);
+  background: var(--iem-violet-dim);
+  color: var(--iem-violet);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.iem-backup-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.iem-backup-item-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--iem-text-0);
+  margin-bottom: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.iem-backup-item-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.iem-backup-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--iem-text-3);
+}
+
+.iem-backup-item-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.iem-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid transparent;
+  border-radius: var(--iem-r-sm);
+  cursor: pointer;
+  transition: all 0.15s var(--iem-ease-out);
+}
+
+.iem-icon-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.iem-icon-btn:focus-visible {
+  outline: 2px solid var(--iem-amber);
+  outline-offset: 1px;
+}
+
+.iem-icon-btn--restore {
+  background: var(--iem-blue-dim);
+  border-color: var(--iem-blue-border);
+  color: var(--iem-blue);
+}
+
+.iem-icon-btn--restore:hover:not(:disabled) {
+  background: rgba(76, 141, 255, 0.22);
+}
+
+.iem-icon-btn--delete {
+  background: var(--iem-red-dim);
+  border-color: var(--iem-red-border);
+  color: var(--iem-red);
+}
+
+.iem-icon-btn--delete:hover:not(:disabled) {
+  background: rgba(245, 101, 101, 0.2);
+}
+
+/* ──────────────────────────────────────────────
+   Responsive
+   ────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .iem-mode-selector {
+    grid-template-columns: 1fr;
+  }
+
+  .iem-stats {
+    flex-wrap: wrap;
+  }
+
+  .iem-stat-pill {
+    min-width: calc(33% - 7px);
+  }
+}

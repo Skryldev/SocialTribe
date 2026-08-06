@@ -1,0 +1,71 @@
+openapi: "3.0.0"
+info:
+  title: Graph Management API
+  version: "1.0.0"
+  description: API for managing graph operations
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /graph/viewport:
+    $ref: './paths/graph.yaml#/~1graph~1viewport'
+  /graph/viewport/batch:
+    $ref: './paths/graph.yaml#/~1graph~1viewport~1batch'
+  /graph/nodes:
+    $ref: './paths/graph.yaml#/~1graph~1nodes'
+  /graph/nodes/{node_id}:
+    $ref: './paths/graph.yaml#/~1graph~1nodes~1{node_id}'
+  /graph/edges:
+    $ref: './paths/graph.yaml#/~1graph~1edges'
+  /graph/edges/{edge_id}:
+    $ref: './paths/graph.yaml#/~1graph~1edges~1{edge_id}'
+  /graph/import-dataset:
+    $ref: './paths/graph.yaml#/~1graph~1import-dataset'
+  /graph/stats:
+    $ref: './paths/graph.yaml#/~1graph~1stats'
+  /graph/recommend/{user_id}:
+    $ref: './paths/graph.yaml#/~1graph~1recommend~1{user_id}'
+  /graph/recommend/{user_id}/details:
+    $ref: './paths/graph.yaml#/~1graph~1recommend~1{user_id}~1details'
+  /graph/ensemble-communities:
+    $ref: './paths/graph.yaml#/~1graph~1ensemble-communities'
+  /graph/shortest-path:
+    $ref: './paths/graph.yaml#/~1graph~1shortest-path'
+  /graph/common-neighbors:
+    $ref: './paths/graph.yaml#/~1graph~1common-neighbors'
+  /graph/network:
+    $ref: './paths/graph.yaml#/~1graph~1network'
+  /graph/metadata:
+    $ref: './paths/graph.yaml#/~1graph~1metadata'
+  /graph/layout:
+    $ref: './paths/layout.yaml#/~1graph~1layout'
+  /graph/layout/current:
+    $ref: './paths/layout.yaml#/~1graph~1layout~1current'
+  /graph/query/:
+    $ref: './paths/query.yaml#/~1graph~1query~1'
+  /graphs:
+    $ref: './paths/graphs.yaml#/~1graphs'
+  /graphs/{graph_id}/switch:
+    $ref: './paths/graphs.yaml#/~1graphs~1{graph_id}~1switch'
+  /datasets:
+    $ref: './paths/dataset.yaml#/~1datasets'
+  /backups:
+    $ref: './paths/backup.yaml#/~1backups'
+  /backups/{backup_id}:
+    $ref: './paths/backup.yaml#/~1backups~1{backup_id}'
+  /backups/{backup_id}/restore:
+    $ref: './paths/backup.yaml#/~1backups~1{backup_id}~1restore'
+  /backups/{backup_id}/download:
+    $ref: './paths/backup.yaml#/~1backups~1{backup_id}~1download'
+  /shutdown:
+    $ref: './paths/system.yaml#/~1shutdown'
+  /simulation/run:
+    $ref: './paths/simulation.yaml#/~1simulation~1run'
+  /simulation/influence-maximization:
+    $ref: './paths/simulation.yaml#/~1simulation~1influence-maximization'
+  /logs/query:
+    $ref: './paths/logs.yaml#/~1logs~1query'
+  /health:
+    $ref: './paths/health.yaml#/~1health'

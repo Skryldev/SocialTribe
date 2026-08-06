@@ -1,0 +1,28 @@
+{
+  "pros": [
+    "Optimal O(log n) time complexity for comparison-based search",
+    "Minimal space overhead: O(1) auxiliary memory",
+    "Simple and elegant algorithm, easy to understand",
+    "Information-theoretically optimal (achieves log n lower bound)",
+    "Iterative implementation avoids recursion stack overhead",
+    "Can be adapted for many variants (lower bound, upper bound, etc.)",
+    "Cache-efficient due to sequential memory access patterns",
+    "Works on any sorted random-access data structure (arrays, vectors)",
+    "Deterministic and predictable performance",
+    "Foundation for more complex data structures (B-trees, segment trees)",
+    "Can search over abstract monotonic functions, not just arrays"
+  ],
+  "cons": [
+    "Requires sorted input (sorting adds O(n log n) preprocessing cost)",
+    "Only works with random-access data structures (not linked lists)",
+    "Inefficient for small n (linear search may be faster due to branch prediction)",
+    "Recursive implementation uses O(log n) stack space",
+    "Integer overflow vulnerability in naive midpoint calculation",
+    "Multiple variants needed for duplicate elements (lower/upper bound)",
+    "Cannot handle dynamic datasets with frequent insertions/deletions",
+    "Poor cache performance for very large arrays that don't fit in cache",
+    "Requires comparison operator to be well-defined and transitive",
+    "Not suitable for external memory (disk-based) search directly",
+    "Performance degrades if array is not randomly accessible"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "union_find",
+  "name": "Union-Find",
+  "category": "disjoint_set",
+  "difficulty": "medium",
+
+  "timeComplexity": "O(α(V))",
+  "spaceComplexity": "O(V)",
+  "bestCase": "O(1)",
+  "worstCase": "O(α(V))",
+  "averageCase": "O(α(V))",
+
+  "stable": true,
+  "inPlace": true,
+  "recursive": true,
+  "parallelizable": false
+}

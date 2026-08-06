@@ -1,0 +1,27 @@
+{
+  "pros": [
+    "Handles negative edge weights (unlike running Dijkstra alone)",
+    "Faster than Floyd-Warshall for sparse graphs (E << V²)",
+    "More efficient than V runs of Bellman-Ford",
+    "Detects negative cycles early in the Bellman-Ford phase",
+    "Reweighting technique is elegant and theoretically sound",
+    "Uses efficient Dijkstra for the most expensive phase",
+    "Preserves all shortest path properties after reweighting",
+    "Well-suited for moderately sparse directed graphs",
+    "Potential function has independent mathematical interest",
+    "Parallelizable: each Dijkstra run is independent"
+  ],
+  "cons": [
+    "More complex to implement than Floyd-Warshall",
+    "Requires O(V²) memory to store all-pairs distances",
+    "Overhead of Bellman-Ford phase even for non-negative graphs",
+    "Not suitable for dense graphs (use Floyd-Warshall)",
+    "Cannot handle negative cycles (no algorithm can for paths)",
+    "Reweighting may cause numerical precision issues",
+    "Adding dummy node modifies graph structure temporarily",
+    "Dijkstra with binary heap may not be optimal for all graphs",
+    "Performance degrades with increasing graph density",
+    "Requires graph to be stored in memory (not external-memory friendly)",
+    "Implementation bugs in reweighting can be hard to detect"
+  ]
+}

@@ -1,0 +1,791 @@
+:root {
+  --rs-bg: #0f172a;
+  --rs-surface: #1e293b;
+  --rs-surface-hover: #273549;
+  --rs-border: #334155;
+  --rs-accent: #f59e0b;
+  --rs-accent-light: #fbbf24;
+  --rs-susceptible: #64748b;
+  --rs-infected: #ef4444;
+  --rs-recovered: #10b981;
+  --rs-text: #e2e8f0;
+  --rs-text-muted: #94a3b8;
+  --rs-font: 'Inter', system-ui, sans-serif;
+  --rs-font-mono: 'JetBrains Mono', monospace;
+  --rs-radius: 10px;
+  --rs-radius-sm: 6px;
+}
+
+/* ==========================================================================
+   Drawer Container
+   ========================================================================== */
+
+.rs-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 420px;
+  max-width: 100vw;
+  height: 100vh;
+  background: var(--rs-bg);
+  border-left: 1px solid rgba(245, 158, 11, 0.12);
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.5);
+  font-family: var(--rs-font);
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.rs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(245, 158, 11, 0.1);
+  flex-shrink: 0;
+  background: var(--rs-surface);
+}
+
+.rs-header-left { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+}
+
+.rs-header-icon {
+  width: 34px; 
+  height: 34px;
+  background: rgba(245, 158, 11, 0.12);
+  border-radius: 8px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  color: var(--rs-accent);
+  flex-shrink: 0;
+}
+
+.rs-header-title { 
+  font-size: 15px; 
+  font-weight: 700; 
+  color: var(--rs-text); 
+  margin: 0; 
+  line-height: 1.2;
+}
+
+.rs-header-meta { 
+  font-size: 10px; 
+  color: var(--rs-text-muted); 
+  margin: 2px 0 0; 
+  font-family: var(--rs-font-mono); 
+}
+
+.rs-header-actions { 
+  display: flex; 
+  gap: 6px; 
+  flex-shrink: 0;
+}
+
+.rs-header-btn {
+  width: 32px; 
+  height: 32px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 7px;
+  color: var(--rs-text-muted);
+  cursor: pointer;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  transition: all 0.15s ease;
+  padding: 0;
+}
+
+.rs-header-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--rs-text);
+}
+
+.rs-header-btn-close:hover { 
+  background: rgba(239, 68, 68, 0.15); 
+  border-color: rgba(239, 68, 68, 0.3); 
+  color: #f87171; 
+}
+
+/* ==========================================================================
+   Body
+   ========================================================================== */
+
+.rs-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 40px;
+}
+
+.rs-body::-webkit-scrollbar { 
+  width: 4px; 
+}
+
+.rs-body::-webkit-scrollbar-track { 
+  background: transparent; 
+}
+
+.rs-body::-webkit-scrollbar-thumb { 
+  background: rgba(245, 158, 11, 0.25); 
+  border-radius: 10px; 
+}
+
+.rs-body::-webkit-scrollbar-thumb:hover { 
+  background: rgba(245, 158, 11, 0.4); 
+}
+
+/* ==========================================================================
+   Sections
+   ========================================================================== */
+
+.rs-section { 
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04); 
+}
+
+.rs-section:last-child { 
+  border-bottom: none; 
+}
+
+.rs-section-header {
+  width: 100%;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: none; 
+  border: none;
+  color: var(--rs-text-muted);
+  font-family: var(--rs-font-mono); 
+  font-size: 10px; 
+  font-weight: 600;
+  text-transform: uppercase; 
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.rs-section-header:hover {
+  background: rgba(245, 158, 11, 0.04);
+}
+
+.rs-section-header-left { 
+  display: flex; 
+  align-items: center; 
+  gap: 8px; 
+}
+
+.rs-section-icon { 
+  color: var(--rs-accent); 
+  display: flex;
+  align-items: center;
+}
+
+.rs-section-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--rs-text-muted);
+  transition: transform 0.2s ease;
+}
+
+.rs-section-body { 
+  padding: 0 18px 16px; 
+  overflow: hidden; 
+}
+
+/* ==========================================================================
+   Label
+   ========================================================================== */
+
+.rs-label {
+  font-size: 9px; 
+  font-weight: 600; 
+  text-transform: uppercase;
+  letter-spacing: 0.06em; 
+  color: var(--rs-text-muted);
+  font-family: var(--rs-font-mono);
+  margin-bottom: 6px; 
+  margin-top: 10px;
+}
+
+.rs-label:first-child {
+  margin-top: 0;
+}
+
+/* ==========================================================================
+   Select
+   ========================================================================== */
+
+.rs-select {
+  width: 100%; 
+  padding: 8px 28px 8px 10px;
+  background: var(--rs-surface); 
+  border: 1px solid var(--rs-border);
+  border-radius: var(--rs-radius-sm); 
+  color: var(--rs-text);
+  font-size: 12px; 
+  font-family: var(--rs-font); 
+  outline: none; 
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+  box-sizing: border-box;
+
+  /* WebKitGTK (and some other engines) render <select> with the native
+     GTK theme's control chrome — a white/system background and its own
+     dropdown arrow — regardless of the `background`/`border` declared
+     above, unless native appearance is explicitly turned off. */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* appearance:none also removes the native dropdown arrow, so it needs
+     to be redrawn manually as a background image. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%2394a3b8' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 7l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 14px;
+}
+
+/* Style the dropdown's own option list. Support for this is inconsistent
+   (Chromium/WebView2 mostly ignores it; WebKitGTK partially honors it),
+   so it's a progressive enhancement, not something to rely on — the
+   trigger's own appearance fix above is what actually matters. */
+.rs-select option {
+  background: var(--rs-surface);
+  color: var(--rs-text);
+}
+
+.rs-select:hover {
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.rs-select:focus { 
+  border-color: var(--rs-accent); 
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.12);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.rs-btn {
+  display: inline-flex; 
+  align-items: center; 
+  gap: 6px;
+  padding: 7px 14px; 
+  border-radius: var(--rs-radius-sm);
+  font-size: 12px; 
+  font-weight: 600; 
+  cursor: pointer; 
+  border: none;
+  transition: all 0.15s ease;
+  font-family: var(--rs-font);
+}
+
+.rs-btn-ghost { 
+  background: rgba(255, 255, 255, 0.04); 
+  color: var(--rs-text); 
+  border: 1px solid rgba(255, 255, 255, 0.08); 
+}
+
+.rs-btn-ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.rs-btn-primary { 
+  background: var(--rs-accent); 
+  color: #0f172a; 
+}
+
+.rs-btn-primary:hover:not(:disabled) {
+  background: var(--rs-accent-light);
+}
+
+.rs-btn-success { 
+  background: var(--rs-recovered); 
+  color: white; 
+}
+
+.rs-btn-success:hover:not(:disabled) {
+  background: #059669;
+}
+
+.rs-btn-danger { 
+  background: var(--rs-infected); 
+  color: white; 
+}
+
+.rs-btn-danger:hover:not(:disabled) {
+  background: #dc2626;
+}
+
+.rs-btn-full { 
+  width: 100%; 
+  justify-content: center; 
+  margin-top: 8px; 
+}
+
+.rs-btn:disabled { 
+  opacity: 0.4; 
+  cursor: not-allowed; 
+}
+
+.rs-controls { 
+  display: flex; 
+  gap: 6px; 
+  flex-wrap: wrap; 
+  margin-bottom: 12px; 
+}
+
+/* ==========================================================================
+   Pills
+   ========================================================================== */
+
+.rs-pill-group { 
+  display: flex; 
+  gap: 5px; 
+  flex-wrap: wrap; 
+}
+
+.rs-pill {
+  padding: 5px 12px; 
+  border-radius: 16px;
+  font-size: 10px; 
+  font-weight: 600; 
+  cursor: pointer;
+  background: var(--rs-surface); 
+  border: 1px solid var(--rs-border);
+  color: var(--rs-text-muted);
+  transition: all 0.15s ease;
+  font-family: var(--rs-font);
+}
+
+.rs-pill:hover {
+  background: var(--rs-surface-hover);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: var(--rs-text);
+}
+
+.rs-pill-active { 
+  background: var(--rs-accent); 
+  border-color: var(--rs-accent); 
+  color: #0f172a; 
+}
+
+/* ==========================================================================
+   Slider / Range
+   ========================================================================== */
+
+.rs-slider { 
+  margin-top: 10px; 
+}
+
+.rs-slider-header { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 4px;
+}
+
+.rs-slider-header .rs-label {
+  margin: 0;
+}
+
+.rs-slider-val { 
+  font-size: 11px; 
+  color: var(--rs-accent); 
+  font-family: var(--rs-font-mono); 
+  font-weight: 600;
+  background: rgba(245, 158, 11, 0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.rs-range { 
+  width: 100%; 
+  accent-color: var(--rs-accent); 
+  height: 4px;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Number Input Row
+   ========================================================================== */
+
+.rs-number-row { 
+  display: flex; 
+  align-items: center; 
+  gap: 4px; 
+}
+
+.rs-number-row button {
+  width: 26px; 
+  height: 26px; 
+  background: var(--rs-surface); 
+  border: 1px solid var(--rs-border);
+  border-radius: 5px; 
+  color: var(--rs-text-muted); 
+  cursor: pointer; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.rs-number-row button:hover:not(:disabled) {
+  background: var(--rs-surface-hover);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: var(--rs-accent);
+}
+
+.rs-number-row button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.rs-number {
+  width: 44px; 
+  height: 26px; 
+  background: var(--rs-surface); 
+  border: 1px solid var(--rs-border);
+  border-radius: 5px; 
+  color: var(--rs-text); 
+  text-align: center; 
+  font-family: var(--rs-font-mono); 
+  font-size: 12px; 
+  outline: none;
+  box-sizing: border-box;
+}
+
+.rs-number:focus {
+  border-color: var(--rs-accent);
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.12);
+}
+
+/* ✅ FIX: Number hint styling */
+.rs-number-hint { 
+  font-size: 10px; 
+  color: var(--rs-text-muted); 
+  margin-left: 8px; 
+  font-family: var(--rs-font);
+}
+
+/* ✅ FIX: Threshold section */
+.rs-threshold {
+  margin-bottom: 10px;
+}
+
+.rs-threshold .rs-label {
+  margin-bottom: 8px;
+}
+
+.rs-threshold .rs-number-row {
+  display: inline-flex;
+}
+
+.rs-threshold .rs-number-hint {
+  display: inline;
+}
+
+/* ==========================================================================
+   Wave Model Note — ✅ FIXED
+   ========================================================================== */
+
+.rs-wave-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  margin-top: 10px;
+  background: rgba(245, 158, 11, 0.06);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  border-left: 3px solid var(--rs-accent);
+  border-radius: var(--rs-radius-sm);
+  font-size: 11px;
+  color: var(--rs-text-muted);
+  font-family: var(--rs-font);
+  line-height: 1.4;
+}
+
+.rs-wave-note svg {
+  color: var(--rs-accent);
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Seed Selection
+   ========================================================================== */
+
+.rs-seed-row { 
+  display: flex; 
+  gap: 12px; 
+  margin-bottom: 10px; 
+}
+
+.rs-seed-row > div { 
+  flex: 1; 
+}
+
+.rs-seed-row > div:first-child {
+  max-width: 120px;
+}
+
+.rs-seed-header { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-top: 12px; 
+  margin-bottom: 6px;
+}
+
+.rs-seed-header .rs-label {
+  margin: 0;
+}
+
+.rs-seed-count { 
+  font-size: 10px; 
+  color: var(--rs-accent-light); 
+  font-family: var(--rs-font-mono); 
+  font-weight: 600;
+  background: rgba(245, 158, 11, 0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.rs-seed-container { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 5px; 
+  max-height: 140px; 
+  overflow-y: auto; 
+  padding: 2px 0;
+}
+
+.rs-seed-container::-webkit-scrollbar {
+  width: 3px;
+}
+
+.rs-seed-container::-webkit-scrollbar-thumb {
+  background: rgba(245, 158, 11, 0.2);
+  border-radius: 10px;
+}
+
+/* ✅ FIX: Seed empty state with icon */
+.rs-seed-empty { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 11px; 
+  color: var(--rs-text-muted); 
+  text-align: center; 
+  padding: 14px; 
+  background: var(--rs-surface); 
+  border: 1px dashed var(--rs-border);
+  border-radius: 6px; 
+  font-family: var(--rs-font);
+}
+
+.rs-seed-empty svg {
+  opacity: 0.5;
+}
+
+.rs-seed-chip {
+  display: inline-flex; 
+  align-items: center; 
+  gap: 5px;
+  padding: 4px 10px; 
+  background: var(--rs-surface); 
+  border: 1px solid var(--rs-border);
+  border-radius: 14px; 
+  font-size: 10px; 
+  font-family: var(--rs-font-mono); 
+  color: var(--rs-text);
+  transition: all 0.15s ease;
+}
+
+.rs-seed-chip:hover {
+  border-color: rgba(245, 158, 11, 0.4);
+  background: var(--rs-surface-hover);
+}
+
+.rs-seed-text {
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ✅ FIX: Seed remove button */
+.rs-seed-remove { 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; 
+  opacity: 0.4; 
+  background: none;
+  border: none;
+  padding: 2px;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+  color: var(--rs-text-muted);
+}
+
+.rs-seed-remove:hover { 
+  opacity: 1; 
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* ==========================================================================
+   Metrics
+   ========================================================================== */
+
+.rs-metric {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+  padding: 8px 10px; 
+  background: var(--rs-surface); 
+  border-radius: 6px;
+  margin-bottom: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.rs-metric:last-child {
+  margin-bottom: 0;
+}
+
+.rs-metric-label { 
+  font-size: 10px; 
+  color: var(--rs-text-muted); 
+  font-family: var(--rs-font-mono); 
+  display: flex; 
+  align-items: center; 
+  gap: 5px; 
+}
+
+.rs-metric-label svg {
+  opacity: 0.6;
+}
+
+.rs-metric-value { 
+  font-size: 13px; 
+  font-weight: 700; 
+  font-family: var(--rs-font-mono); 
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Progress Bar
+   ========================================================================== */
+
+.rs-progress {
+  height: 5px; 
+  background: var(--rs-surface); 
+  border-radius: 5px;
+  overflow: hidden; 
+  margin-bottom: 10px;
+}
+
+.rs-progress-fill {
+  height: 100%; 
+  background: linear-gradient(90deg, var(--rs-accent), var(--rs-infected));
+  border-radius: 5px;
+}
+
+/* ==========================================================================
+   Chart
+   ========================================================================== */
+
+.rs-chart-wrap { 
+  margin-top: 14px; 
+  padding: 12px; 
+  background: var(--rs-surface); 
+  border-radius: 8px; 
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.rs-chart-wrap .rs-label {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+/* ==========================================================================
+   Spinner
+   ========================================================================== */
+
+.spin { 
+  animation: spin 0.8s linear infinite; 
+}
+
+@keyframes spin { 
+  to { 
+    transform: rotate(360deg); 
+  } 
+}
+
+/* ==========================================================================
+   Focus visible — Accessibility
+   ========================================================================== */
+
+.rs-btn:focus-visible,
+.rs-select:focus-visible,
+.rs-pill:focus-visible,
+.rs-number:focus-visible {
+  outline: 2px solid var(--rs-accent);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .rs-drawer,
+  .rs-section-header,
+  .rs-btn,
+  .rs-pill,
+  .rs-seed-chip,
+  .rs-progress-fill {
+    transition: none !important;
+  }
+  
+  .spin {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  .rs-drawer { 
+    width: 100%; 
+  }
+  
+  .rs-seed-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .rs-seed-row > div:first-child {
+    max-width: 100%;
+  }
+  
+  .rs-seed-text {
+    max-width: 100px;
+  }
+}

@@ -1,0 +1,62 @@
+[package]
+name = "lexer"
+version = "0.1.0"
+edition = "2021"
+description = "Lexer for graph query language"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+
+[dev-dependencies]
+pretty_assertions = "1.4"
+proptest = "1.4"           # Property-based testing
+rstest = "0.18"            # Parametrized tests
+test-case = "3.3"          # Table-driven tests
+criterion = "0.5"          # Benchmarking
+iai-callgrind = "0.13"     # Cache-friendly benchmarks
+rand = "0.8"               # Random test generation
+once_cell = "1.19"         # Lazy initialization for tests
+similar = "2.3"            # Diff comparison for snapshot tests
+insta = "1.34"             # Snapshot testing
+
+[lib]
+name = "lexer"
+path = "src/lib.rs"
+
+[[bench]]
+name = "lexer_benchmarks"
+harness = false
+
+[[test]]
+name = "token_tests"
+path = "tests/token_tests.rs"
+
+[[test]]
+name = "lexer_basic_tests"
+path = "tests/lexer_basic_tests.rs"
+
+[[test]]
+name = "lexer_advanced_tests"
+path = "tests/lexer_advanced_tests.rs"
+
+[[test]]
+name = "lexer_comments_tests"
+path = "tests/lexer_comments_tests.rs"
+
+[[test]]
+name = "lexer_error_tests"
+path = "tests/lexer_error_tests.rs"
+
+[[test]]
+name = "lexer_pattern_tests"
+path = "tests/lexer_pattern_tests.rs"
+
+[[test]]
+name = "lexer_integration_tests"
+path = "tests/lexer_integration_tests.rs"
+
+[[test]]
+name = "lexer_property_tests"
+path = "tests/lexer_property_tests.rs"

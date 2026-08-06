@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Initialize Distances",
+    "description": "Set the distance to the source node as 0 and all other nodes as infinity. Create a priority queue containing all unvisited nodes."
+  },
+  {
+    "title": "Select Minimum Distance Node",
+    "description": "Extract the unvisited node with the smallest tentative distance from the priority queue."
+  },
+  {
+    "title": "Mark as Visited",
+    "description": "Mark the selected node as visited. Its current distance is now finalized as the shortest path from the source."
+  },
+  {
+    "title": "Relax Neighbors",
+    "description": "For each unvisited neighbor of the current node, check if going through the current node offers a shorter path. If so, update the neighbor's distance and record the predecessor."
+  },
+  {
+    "title": "Repeat Until All Nodes Visited",
+    "description": "Continue extracting the minimum distance node and relaxing its neighbors until all reachable nodes are visited or the target node is reached."
+  },
+  {
+    "title": "Reconstruct Shortest Path",
+    "description": "Using the predecessor information, trace back from the target node to the source to reconstruct the actual shortest path."
+  }
+]

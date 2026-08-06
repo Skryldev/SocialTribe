@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Initialize Sets",
+    "description": "Create V disjoint sets, each containing a single element. Set parent[i] = i (each element is its own root) and rank[i] = 0 (or size[i] = 1) for all elements."
+  },
+  {
+    "title": "Find Operation",
+    "description": "To find which set element x belongs to, follow parent pointers recursively until reaching the root (where parent[root] = root). Apply path compression: update all visited nodes to point directly to the root, flattening the tree."
+  },
+  {
+    "title": "Path Compression",
+    "description": "During find(x), after locating the root, make every node on the path from x to root point directly to the root. This makes future find operations on these nodes O(1)."
+  },
+  {
+    "title": "Union Operation",
+    "description": "To merge two sets containing elements x and y: find their roots. If roots differ, attach the root with smaller rank to the root with larger rank (union by rank). If ranks equal, increment the new root's rank."
+  },
+  {
+    "title": "Union by Rank/Size",
+    "description": "Always attach the shorter tree under the taller tree's root. This ensures the tree height grows logarithmically, keeping find operations efficient. Size-based union is an alternative that tracks number of elements per set."
+  }
+]

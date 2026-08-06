@@ -1,0 +1,60 @@
+# Apply Layout Request
+ApplyLayoutRequest:
+  type: object
+  required:
+    - algorithm
+  properties:
+    algorithm:
+      type: string
+      description: Layout algorithm to apply
+      example: "force-directed"
+    params:
+      type: object
+      additionalProperties: true
+      description: Additional parameters for the layout algorithm
+      example: {}
+
+# Layout Node Position
+LayoutNodePosition:
+  type: object
+  additionalProperties:
+    type: number
+    format: float
+  description: Position coordinates for a node
+
+# Layout Node
+LayoutNode:
+  type: object
+  required:
+    - id
+    - position
+  properties:
+    id:
+      type: string
+    position:
+      $ref: '#/LayoutNodePosition'
+
+# Apply Layout Response
+ApplyLayoutResponse:
+  type: object
+  required:
+    - nodes
+    - algorithm
+    - executionTimeMs
+  properties:
+    nodes:
+      type: array
+      items:
+        $ref: '#/LayoutNode'
+    algorithm:
+      type: string
+    executionTimeMs:
+      type: number
+      format: float
+      description: Execution time in milliseconds
+
+# Current Layout Response
+CurrentLayoutResponse:
+  type: string
+  description: Response containing the current layout configuration (JSON stringified)
+  example: "{\"algorithm\":\"force-directed\",\"nodes\":[{\"id\":\"node-1\",\"position\":{\"x\":100,\"y\":200}}]}"

@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Determine Number of Digits",
+    "description": "Find the maximum value in the array to determine the number of digits (d) needed. For integers: d = number of digits in max_value. For fixed-width types (32-bit ints): d is constant based on chosen base (radix)."
+  },
+  {
+    "title": "Choose Base (Radix)",
+    "description": "Select the base b for each digit. Common choices: b=10 (decimal), b=256 (byte), b=65536 (16-bit). Larger b means fewer passes but more memory for counting array. Optimal b balances time and space."
+  },
+  {
+    "title": "Process Each Digit (LSD to MSD)",
+    "description": "For each digit position from least significant (LSD) to most significant (MSD), apply a stable Counting Sort using that digit as the key. LSD-first ensures that earlier (less significant) digits' ordering is preserved by later (more significant) passes."
+  },
+  {
+    "title": "Extract Digit Value",
+    "description": "For each element, extract the digit at the current position: digit = (element / b^position) % b. This isolates the relevant digit for the current sorting pass."
+  },
+  {
+    "title": "Apply Stable Counting Sort",
+    "description": "Use Counting Sort on the extracted digits. The stability of Counting Sort ensures that the ordering established by previous (less significant) digits is maintained when two elements have the same current digit."
+  },
+  {
+    "title": "Repeat for All Digits",
+    "description": "Continue processing digits from LSD to MSD. After processing the most significant digit, the array is fully sorted. The final ordering respects the hierarchical priority of digits: MSD is primary key, then next MSD, ..., LSD is least significant."
+  }
+]

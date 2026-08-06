@@ -1,0 +1,30 @@
+{
+  "pros": [
+    "Captures global importance: nodes that bridge different parts of the network",
+    "More informative than degree for identifying critical connectors",
+    "Identifies bottlenecks whose removal would fragment the network",
+    "Brandes' algorithm is asymptotically optimal for exact computation",
+    "Theoretically well-founded with clear mathematical definition",
+    "Applicable to both directed and undirected graphs",
+    "Works with weighted edges (e.g., road distances, communication costs)",
+    "Normalized scores allow cross-network comparison",
+    "Identifies nodes controlling information/resource flow",
+    "Each source node computation is independent (parallelizable)",
+    "Can be approximated via sampling for very large graphs",
+    "Foundation for community detection algorithms (Girvan-Newman)"
+  ],
+  "cons": [
+    "Computationally expensive: O(V·(V+E)) limits to graphs with < 10⁵ nodes",
+    "Requires all-pairs shortest paths — memory and time intensive",
+    "Impractical for real-time analysis of large dynamic networks",
+    "Assumes flows always follow shortest paths (may not hold in practice)",
+    "Nodes in different components receive zero centrality",
+    "Sensitive to graph structure changes (non-robust to edge insertion/deletion)",
+    "Normalization between directed and undirected graphs differs",
+    "Cannot distinguish between different types of shortest paths",
+    "Approximation algorithms introduce accuracy tradeoffs",
+    "Result interpretation can be non-intuitive for complex networks",
+    "High memory overhead for storing all predecessor lists simultaneously",
+    "Does not account for alternative paths (all shortest paths weighted equally)"
+  ]
+}

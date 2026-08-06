@@ -1,0 +1,344 @@
+/graph/viewport:
+  post:
+    tags:
+      - Viewport
+    summary: Get graph viewport
+    description: Retrieve nodes and edges within the specified viewport
+    operationId: getViewport
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/graph.yaml#/ViewportRequest'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/ViewportResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/graph/viewport/batch:
+  post:
+    tags:
+      - Viewport
+    summary: Batch Viewport Processing
+    description: Process multiple viewport requests in a single batch operation
+    operationId: batchViewport
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/graph.yaml#/BatchViewportRequest'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/BatchViewportResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/graph/nodes:
+  post:
+    tags:
+      - Graph
+    summary: Create Node
+    description: Create a new node in the graph
+    operationId: createNode
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/graph.yaml#/CreateNodeRequest'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/CreateNodeResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/graph/nodes/{node_id}:
+  patch:
+    tags:
+      - Graph
+    summary: Update Node
+    description: Update an existing node by its ID (partial update)
+    operationId: updateNode
+    parameters:
+      - $ref: '../parameters/graph.yaml#/node_id'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/graph.yaml#/UpdateNodeRequest'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/UpdateNodeResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+  delete:
+    tags:
+      - Graph
+    summary: Delete Node
+    description: Delete a node by its ID
+    operationId: deleteNode
+    parameters:
+      - $ref: '../parameters/graph.yaml#/node_id'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/DeleteNodeResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/graph/edges:
+  post:
+    tags:
+      - Graph
+    summary: Create Edge
+    description: Create a new edge connecting two nodes in the graph
+    operationId: createEdge
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/graph.yaml#/CreateEdgeRequest'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/CreateEdgeResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/graph/edges/{edge_id}:
+  delete:
+    tags:
+      - Graph
+    summary: Delete Edge
+    description: Delete an edge by its ID
+    operationId: deleteEdge
+    parameters:
+      - $ref: '../parameters/graph.yaml#/edge_id'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/DeleteEdgeResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/graph/import-dataset:
+  post:
+    tags:
+      - Graph
+    summary: Import Dataset
+    description: Import a dataset file to create or update a graph
+    operationId: importDataset
+    parameters:
+      - $ref: '../parameters/graph.yaml#/import_mode'
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            required:
+              - file
+            properties:
+              file:
+                type: string
+                format: binary
+                description: Dataset file to import
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/ImportDatasetResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/graph/stats:
+  get:
+    tags:
+      - Graph
+    summary: Get Graph Stats
+    description: Retrieve statistics for the current graph
+    operationId: getGraphStats
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/GraphStatsResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/graph/recommend/{user_id}:
+  get:
+    tags:
+      - Graph
+    summary: Get Recommendations
+    description: Get recommendations for a user based on graph analysis
+    operationId: getRecommendations
+    parameters:
+      - $ref: '../parameters/graph.yaml#/user_id'  # ✅ استفاده از user_id
+      - $ref: '../parameters/graph.yaml#/top_k'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/RecommendationResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/graph/recommend/{user_id}/details:
+  get:
+    tags:
+      - Graph
+    summary: Get Recommendation Details
+    description: Get detailed recommendations for a user with explanation
+    operationId: getRecommendationDetails
+    parameters:
+      - $ref: '../parameters/graph.yaml#/user_id'  # ✅ استفاده از user_id
+      - $ref: '../parameters/graph.yaml#/top_k'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/RecommendationDetailsResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/graph/ensemble-communities:
+  post:
+    tags:
+      - Graph
+    summary: Detect Ensemble Communities
+    description: Detect communities in the graph using ensemble clustering method
+    operationId: detectEnsembleCommunities
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/graph.yaml#/EnsembleCommunitiesRequest'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/EnsembleCommunitiesResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/graph/shortest-path:
+  post:
+    tags:
+      - Graph
+    summary: Find Shortest Path
+    description: Find the shortest path between two nodes in the graph
+    operationId: findShortestPath
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/graph.yaml#/ShortestPathRequest'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/ShortestPathResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/graph/common-neighbors:
+  post:
+    tags:
+      - Graph
+    summary: Find Common Neighbors
+    description: Find common neighbors between two nodes in the graph
+    operationId: findCommonNeighbors
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/graph.yaml#/ShortestPathRequest'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/CommonNeighborsResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/graph/network:
+  get:
+    tags:
+      - Graph
+    summary: Export Graph
+    description: Export the entire graph structure including all nodes and edges
+    operationId: exportGraph
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/ExportGraphResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/graph/metadata:
+  get:
+    tags:
+      - Graph
+    summary: Get Graph Metadata
+    description: Retrieve metadata for the current graph
+    operationId: getGraphMetadata
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/GraphMetadataResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'

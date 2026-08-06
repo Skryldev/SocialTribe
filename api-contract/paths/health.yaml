@@ -1,0 +1,16 @@
+/health:
+  get:
+    tags:
+      - System
+    summary: Health Check
+    description: Check the health status of the service
+    operationId: healthCheck
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/common.yaml#/HealthResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'

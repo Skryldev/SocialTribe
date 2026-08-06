@@ -1,0 +1,17 @@
+{
+  "id": "red_black_tree",
+  "name": "Red-Black-Tree",
+  "category": "tree",
+  "difficulty": "hard",
+
+  "timeComplexity": "O(log n) for search, insert, delete",
+  "spaceComplexity": "O(n)",
+  "bestCase": "O(log n)",
+  "worstCase": "O(log n)",
+  "averageCase": "O(log n)",
+
+  "stable": null,
+  "inPlace": false,
+  "recursive": true,
+  "parallelizable": false
+}

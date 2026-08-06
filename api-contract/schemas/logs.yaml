@@ -1,0 +1,67 @@
+# Log Filters
+LogFilters:
+  type: object
+  properties:
+    service:
+      type: array
+      items:
+        type: string
+      description: List of services to filter by
+      example: []
+    level:
+      type: array
+      items:
+        type: string
+      description: List of log levels to filter by
+      example: []
+
+# Log Sort
+LogSort:
+  type: object
+  properties:
+    field:
+      type: string
+      description: Field to sort by
+      example: "timestamp"
+    order:
+      type: string
+      enum:
+        - asc
+        - desc
+      description: Sort order
+      example: "desc"
+
+# Log Pagination
+LogPagination:
+  type: object
+  properties:
+    page:
+      type: integer
+      minimum: 1
+      default: 1
+      description: Page number
+      example: 1
+    pageSize:
+      type: integer
+      minimum: 1
+      maximum: 1000
+      default: 100
+      description: Number of items per page
+      example: 100
+
+# Query Logs Request
+QueryLogsRequest:
+  type: object
+  properties:
+    filters:
+      $ref: '#/LogFilters'
+    sort:
+      $ref: '#/LogSort'
+    pagination:
+      $ref: '#/LogPagination'
+
+# Query Logs Response
+QueryLogsResponse:
+  type: string
+  description: Response containing queried logs (JSON stringified)
+  example: "{\"logs\":[{\"timestamp\":\"2024-01-01T00:00:00Z\",\"level\":\"info\",\"service\":\"api\",\"message\":\"Server started\"}],\"total\":150,\"page\":1,\"pageSize\":100}"

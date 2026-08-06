@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Initialize Visited Set",
+    "description": "Create a set or boolean array to track which nodes have been visited. Mark the source node as visited and begin the recursive exploration from it."
+  },
+  {
+    "title": "Process Current Node (Pre-Visit)",
+    "description": "Perform any operation on the current node before exploring its neighbors. Common operations: record discovery time, add to topological order, check if target reached."
+  },
+  {
+    "title": "Recursively Explore Unvisited Neighbors",
+    "description": "For each neighbor of the current node: if it has NOT been visited, recursively apply DFS to that neighbor. The recursion goes deep into the graph before backtracking — hence 'depth-first'."
+  },
+  {
+    "title": "Backtrack When Stuck",
+    "description": "When a node has no unvisited neighbors, the recursive call returns to the previous node (backtracking). This is the natural unwinding of the recursion stack."
+  },
+  {
+    "title": "Process Current Node (Post-Visit)",
+    "description": "After all neighbors are explored, perform post-visit operations. Common: record finishing time (for topological sort), add to connected component list, check back edges for cycle detection."
+  },
+  {
+    "title": "Repeat for All Components",
+    "description": "After DFS from source completes, iterate over all nodes. If any node remains unvisited, start a new DFS from it. This ensures all connected components are explored."
+  }
+]

@@ -1,0 +1,64 @@
+# Run Simulation Request
+RunSimulationRequest:
+  type: object
+  required:
+    - model
+    - probability
+    - threshold
+    - maxTicks
+  properties:
+    model:
+      type: string
+      description: Type of simulation model to run
+      example: "wave"
+    probability:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 1
+      description: Probability parameter for the simulation
+      example: 0.3
+    threshold:
+      type: integer
+      minimum: 1
+      description: Threshold value for the simulation
+      example: 2
+    maxTicks:
+      type: integer
+      minimum: 1
+      description: Maximum number of simulation ticks
+      example: 100
+
+# Run Simulation Response
+RunSimulationResponse:
+  type: string
+  description: Response containing simulation results (JSON stringified)
+  example: "{\"simulation_id\":\"sim-123\",\"status\":\"completed\",\"ticks\":50,\"results\":{}}"
+
+# Influence Maximization Request
+InfluenceMaximizationRequest:
+  type: object
+  required:
+    - k
+    - method
+  properties:
+    k:
+      type: integer
+      minimum: 1
+      description: Number of seed nodes to select
+      example: 5
+    method:
+      type: string
+      description: Method for influence maximization
+      example: "optimal"
+      enum:
+        - optimal
+        - greedy
+        - degree
+        - random
+
+# Influence Maximization Response
+InfluenceMaximizationResponse:
+  type: string
+  description: Response containing influence maximization results (JSON stringified)
+  example: "{\"seed_nodes\":[\"node-1\",\"node-5\"],\"estimated_spread\":250,\"method\":\"optimal\"}"

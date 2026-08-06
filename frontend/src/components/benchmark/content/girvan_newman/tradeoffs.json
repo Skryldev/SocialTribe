@@ -1,0 +1,28 @@
+{
+  "pros": [
+    "Identifies natural community boundaries via edge betweenness",
+    "Produces interpretable hierarchical dendrogram of communities",
+    "Principled measure: edges with high betweenness are natural bridges",
+    "No prior knowledge of number of communities required",
+    "Works on both directed and undirected graphs",
+    "Handles weighted graphs naturally",
+    "Modularity Q provides objective criterion for best partition",
+    "Intuitive divisive approach mirrors graph connectivity structure",
+    "Detects communities at multiple scales simultaneously",
+    "Theoretically elegant: bridges graph theory and community structure"
+  ],
+  "cons": [
+    "Computationally expensive: O(V × E²) limits to small/medium graphs",
+    "Impractical for graphs with > 10⁴ nodes in most implementations",
+    "Must recompute betweenness after every single edge removal",
+    "Multiple edges may tie for highest betweenness (ambiguity)",
+    "Edge betweenness is expensive to compute precisely",
+    "Requires all-pairs shortest paths in each iteration",
+    "Cannot detect overlapping communities (hard partitions only)",
+    "Shortest path assumption may not hold for all networks",
+    "Removal of single edge can drastically change betweenness values",
+    "May fragment graph into many tiny components before optimal Q found",
+    "Deterministic tie-breaking can bias results",
+    "No theoretical guarantee of optimal modularity"
+  ]
+}

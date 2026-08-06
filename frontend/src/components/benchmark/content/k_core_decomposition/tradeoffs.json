@@ -1,0 +1,29 @@
+{
+  "pros": [
+    "Optimal linear time complexity: O(V + E) — provably optimal",
+    "Unique and deterministic decomposition (no randomness)",
+    "Hierarchical nested structure reveals core-periphery organization",
+    "More robust than degree centrality (considers global context)",
+    "Better predictor of spreading influence than degree (Kitsak et al., 2010)",
+    "Extremely efficient on large-scale graphs (billions of edges)",
+    "Simple to implement with clear algorithm (bucket sort + peeling)",
+    "Provides upper bound for chromatic number (χ ≤ degeneracy + 1)",
+    "Reveals structural cohesion and robustness",
+    "Applicable to both directed and undirected graphs",
+    "Generalizes naturally to weighted graphs",
+    "Stable: small edge changes typically affect only nearby cores"
+  ],
+  "cons": [
+    "Cannot distinguish nodes with same core number",
+    "Insensitive to edge weights in the basic version",
+    "Does not capture community structure directly",
+    "High-degree low-core nodes may be counterintuitive",
+    "Single peeling order may not reflect all structural nuances",
+    "Cannot handle signed or negative edge weights naturally",
+    "Limited to static graphs (requires recomputation for updates)",
+    "K-core may be disconnected (not a single connected component)",
+    "Does not consider path lengths or betweenness",
+    "May be too coarse for very homogeneous graphs",
+    "Core number of 0 for isolated nodes may not be meaningful"
+  ]
+}

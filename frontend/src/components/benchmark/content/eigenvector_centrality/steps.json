@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Build Adjacency Matrix",
+    "description": "Construct the adjacency matrix A from the graph structure where A[i][j] = 1 if edge exists, 0 otherwise. For weighted graphs, use actual edge weights."
+  },
+  {
+    "title": "Initialize Centrality Vector",
+    "description": "Start with a uniform centrality score of 1/N for all N nodes, or optionally use degree-based initialization for faster convergence."
+  },
+  {
+    "title": "Power Iteration",
+    "description": "Multiply the adjacency matrix by the current centrality vector: x_new = A · x_current. This distributes each node's centrality to its neighbors."
+  },
+  {
+    "title": "Normalize the Vector",
+    "description": "Normalize the resulting vector (typically L2 normalization to unit length) to prevent values from growing unbounded. The ratio between iterations approaches the dominant eigenvalue."
+  },
+  {
+    "title": "Check Convergence",
+    "description": "Compare consecutive centrality vectors. If the change (e.g., L2 norm of difference) falls below a threshold, stop. Otherwise continue iterating."
+  },
+  {
+    "title": "Extract Final Scores",
+    "description": "The converged vector represents the eigenvector centrality scores, proportional to the sum of neighbors' centralities."
+  }
+]

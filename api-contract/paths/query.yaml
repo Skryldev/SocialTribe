@@ -1,0 +1,22 @@
+/graph/query/:
+  post:
+    tags:
+      - Query
+    summary: Execute Plan
+    description: Execute a query plan on the graph
+    operationId: executePlan
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/query.yaml#/ExecutePlanRequest'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/query.yaml#/ExecutePlanResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'

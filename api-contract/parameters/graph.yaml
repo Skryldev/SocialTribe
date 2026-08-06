@@ -1,0 +1,66 @@
+# User ID Parameter (برای recommendations)
+user_id:
+  name: user_id
+  in: path
+  required: true
+  description: Unique identifier of the user
+  schema:
+    type: string
+  example: "user-123"
+
+# Node ID Parameter (برای سایر عملیات‌های گراف)
+node_id:
+  name: node_id
+  in: path
+  required: true
+  description: Unique identifier of the node
+  schema:
+    type: string
+  example: "node-123"
+
+# Edge ID Parameter
+edge_id:
+  name: edge_id
+  in: path
+  required: true
+  description: Unique identifier of the edge
+  schema:
+    type: string
+  example: "edge-123"
+
+# Import Mode Parameter
+import_mode:
+  name: mode
+  in: query
+  required: false
+  description: Import mode - switch replaces existing graph, merge adds to it
+  schema:
+    type: string
+    enum:
+      - switch
+      - merge
+    default: switch
+    pattern: '^(switch|merge)$'
+  example: switch
+
+# Graph ID Parameter
+graph_id:
+  name: graph_id
+  in: path
+  required: true
+  description: Unique identifier of the graph
+  schema:
+    type: string
+  example: "graph-123"
+
+# Top K Parameter
+top_k:
+  name: top_k
+  in: query
+  required: false
+  description: Number of recommendations to return
+  schema:
+    type: integer
+    default: 10
+    minimum: 1
+  example: 10

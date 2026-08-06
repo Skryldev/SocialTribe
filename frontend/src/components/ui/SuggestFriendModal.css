@@ -1,0 +1,338 @@
+/* ============================================
+   SuggestFriendModal.css
+   Staff-Level Design — Friend Suggestions
+   ============================================ */
+
+/* ──────────────────────────────────────────────
+   1. Design Tokens
+   ────────────────────────────────────────────── */
+:root {
+  --sg-surface: hsl(222 45% 10% / 0.5);
+  --sg-surface-hover: hsl(222 43% 14% / 0.7);
+  --sg-border: hsl(222 25% 18%);
+  --sg-border-subtle: hsl(222 22% 15%);
+
+  --sg-text-primary: hsl(210 40% 96%);
+  --sg-text-secondary: hsl(215 20% 68%);
+  --sg-text-tertiary: hsl(215 16% 47%);
+  --sg-text-muted: hsl(215 12% 38%);
+
+  --sg-accent: hsl(38 92% 52%);
+  --sg-accent-subtle: hsl(38 92% 52% / 0.12);
+  --sg-accent-border: hsl(38 92% 52% / 0.3);
+
+  --sg-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --sg-font-mono: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace;
+  --sg-font-size-xs: 0.625rem;
+  --sg-font-size-sm: 0.75rem;
+  --sg-font-size-base: 0.8125rem;
+
+  --sg-radius-sm: 6px;
+  --sg-radius-md: 10px;
+
+  --sg-space-1: 4px;
+  --sg-space-2: 8px;
+  --sg-space-3: 12px;
+  --sg-space-4: 16px;
+
+  --sg-duration-fast: 120ms;
+  --sg-duration-normal: 200ms;
+  --sg-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ──────────────────────────────────────────────
+   2. Subtitle
+   ────────────────────────────────────────────── */
+.sg-subtitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sg-subtitle strong {
+  color: var(--sg-text-secondary);
+  font-weight: 600;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+/* ──────────────────────────────────────────────
+   3. Body
+   ────────────────────────────────────────────── */
+.sg-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sg-space-3);
+  padding-bottom: var(--sg-space-2);
+  min-height: 80px;
+}
+
+/* ──────────────────────────────────────────────
+   4. Results Container
+   ────────────────────────────────────────────── */
+.sg-results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sg-space-3);
+}
+
+/* ──────────────────────────────────────────────
+   5. Count Badge
+   ────────────────────────────────────────────── */
+.sg-count {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sg-space-2);
+  align-self: flex-start;
+  padding: 5px 12px;
+  border-radius: var(--sg-radius-sm);
+  background: var(--sg-accent-subtle);
+  border: 1px solid var(--sg-accent-border);
+  color: var(--sg-accent);
+  font-size: var(--sg-font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.sg-count svg {
+  flex-shrink: 0;
+}
+
+/* ──────────────────────────────────────────────
+   6. List
+   ────────────────────────────────────────────── */
+.sg-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-height: 280px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: hsl(38 92% 52% / 0.2) transparent;
+  padding-right: 2px;
+}
+
+.sg-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sg-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sg-list::-webkit-scrollbar-thumb {
+  background: hsl(38 92% 52% / 0.2);
+  border-radius: 10px;
+}
+
+.sg-list::-webkit-scrollbar-thumb:hover {
+  background: hsl(38 92% 52% / 0.35);
+}
+
+/* ──────────────────────────────────────────────
+   7. List Item
+   ────────────────────────────────────────────── */
+.sg-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sg-space-3);
+  padding: 10px var(--sg-space-3);
+  border-radius: var(--sg-radius-md);
+  background: var(--sg-surface);
+  border: 1px solid var(--sg-border-subtle);
+  transition:
+    background var(--sg-duration-fast) var(--sg-ease-out),
+    border-color var(--sg-duration-fast) var(--sg-ease-out);
+  min-width: 0;
+}
+
+.sg-item:hover {
+  background: var(--sg-surface-hover);
+  border-color: var(--sg-border);
+}
+
+/* ── Avatar ─────────────────────────────────── */
+.sg-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--sg-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--sg-font-size-sm);
+  font-weight: 700;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+}
+
+.sg-avatar--amber {
+  background: hsl(38 92% 52% / 0.12);
+  color: hsl(38 92% 60%);
+  border-color: hsl(38 92% 52% / 0.2);
+}
+
+.sg-avatar--violet {
+  background: hsl(255 85% 65% / 0.12);
+  color: hsl(255 85% 75%);
+  border-color: hsl(255 85% 65% / 0.2);
+}
+
+.sg-avatar--blue {
+  background: hsl(217 91% 65% / 0.12);
+  color: hsl(217 91% 72%);
+  border-color: hsl(217 91% 65% / 0.2);
+}
+
+.sg-avatar--emerald {
+  background: hsl(160 84% 45% / 0.12);
+  color: hsl(160 84% 55%);
+  border-color: hsl(160 84% 45% / 0.2);
+}
+
+.sg-avatar--rose {
+  background: hsl(350 89% 65% / 0.12);
+  color: hsl(350 89% 72%);
+  border-color: hsl(350 89% 65% / 0.2);
+}
+
+.sg-avatar--cyan {
+  background: hsl(187 85% 55% / 0.12);
+  color: hsl(187 85% 65%);
+  border-color: hsl(187 85% 55% / 0.2);
+}
+
+/* ── Info ───────────────────────────────────── */
+.sg-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.sg-name {
+  font-size: var(--sg-font-size-base);
+  font-weight: 600;
+  color: var(--sg-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.sg-meta {
+  font-size: var(--sg-font-size-xs);
+  color: var(--sg-text-tertiary);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sg-meta-icon {
+  color: var(--sg-accent);
+  flex-shrink: 0;
+}
+
+/* ──────────────────────────────────────────────
+   8. Responsive
+   ────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .sg-list {
+    max-height: 220px;
+  }
+
+  .sg-item {
+    padding: 8px var(--sg-space-2);
+    gap: var(--sg-space-2);
+  }
+
+  .sg-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 11px;
+  }
+
+  .sg-name {
+    font-size: var(--sg-font-size-sm);
+  }
+}
+
+@media (min-width: 1600px) {
+  .sg-list {
+    max-height: 340px;
+  }
+
+  .sg-item {
+    padding: 12px var(--sg-space-4);
+  }
+
+  .sg-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: var(--sg-font-size-base);
+  }
+}
+
+/* ──────────────────────────────────────────────
+   9. Reduced Motion
+   ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .sg-item {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+  }
+
+  .sg-item:hover {
+    transform: none !important;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   10. Forced Colors / High Contrast
+   ────────────────────────────────────────────── */
+@media (forced-colors: active) {
+  .sg-item {
+    border: 1px solid CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .sg-item:hover {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .sg-avatar {
+    border-color: CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .sg-count {
+    border-color: CanvasText;
+  }
+
+  .sg-meta-icon {
+    color: CanvasText;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   11. Print
+   ────────────────────────────────────────────── */
+@media print {
+  .sg-item:hover {
+    transform: none;
+  }
+}

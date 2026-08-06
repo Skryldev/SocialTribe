@@ -1,0 +1,587 @@
+/* ============================================
+   NodeContextMenuModals.css
+   Senior-Level Design System — Shared Modal Styles
+   ============================================ */
+
+/* ──────────────────────────────────────────────
+   1. Design Tokens
+   ────────────────────────────────────────────── */
+:root {
+  /* Surfaces */
+  --modal-surface: hsl(222 47% 8%);
+  --modal-surface-elevated: hsl(222 45% 10%);
+  --modal-surface-hover: hsl(222 40% 13%);
+
+  /* Text */
+  --modal-text-primary: hsl(210 40% 96%);
+  --modal-text-secondary: hsl(215 20% 68%);
+  --modal-text-tertiary: hsl(215 16% 47%);
+
+  /* Accent */
+  --modal-accent: hsl(38 92% 52%);
+  --modal-accent-subtle: hsl(38 92% 52% / 0.08);
+  --modal-accent-border: hsl(38 92% 52% / 0.2);
+
+  /* Semantic */
+  --modal-danger: hsl(0 84% 60%);
+  --modal-danger-subtle: hsl(0 84% 60% / 0.1);
+  --modal-success: hsl(160 84% 45%);
+  --modal-success-subtle: hsl(160 84% 45% / 0.12);
+  --modal-violet: hsl(255 85% 65%);
+  --modal-violet-subtle: hsl(255 85% 65% / 0.12);
+  --modal-blue: hsl(217 91% 65%);
+
+  /* Borders */
+  --modal-border-subtle: hsl(222 28% 16%);
+  --modal-border: hsl(222 25% 20%);
+
+  /* Shadows */
+  --modal-shadow-sm: 0 2px 8px rgb(0 0 0 / 0.2);
+  --modal-shadow-lg: 0 24px 64px rgb(0 0 0 / 0.5);
+  --modal-shadow-glow: 0 0 30px hsl(38 92% 52% / 0.08);
+
+  /* Radii */
+  --modal-radius-sm: 8px;
+  --modal-radius-md: 12px;
+  --modal-radius-lg: 18px;
+  --modal-radius-xl: 24px;
+
+  /* Typography */
+  --modal-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --modal-font-mono: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace;
+  --modal-font-size-xs: 0.6875rem;
+  --modal-font-size-sm: 0.75rem;
+  --modal-font-size-base: 0.8125rem;
+  --modal-font-size-lg: 0.9375rem;
+  --modal-font-size-xl: 1.125rem;
+
+  /* Spacing */
+  --modal-space-1: 4px;
+  --modal-space-2: 8px;
+  --modal-space-3: 12px;
+  --modal-space-4: 16px;
+  --modal-space-5: 20px;
+  --modal-space-6: 24px;
+  --modal-space-8: 32px;
+
+  /* Transitions */
+  --modal-duration-fast: 120ms;
+  --modal-duration-normal: 200ms;
+  --modal-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ──────────────────────────────────────────────
+   2. Overlay
+   ────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--modal-space-8);
+  background: hsl(0 0% 0% / 0.55);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  box-sizing: border-box;
+}
+
+/* ──────────────────────────────────────────────
+   3. Modal Container
+   ────────────────────────────────────────────── */
+.modal-container {
+  position: relative;
+  width: 100%;
+  max-height: calc(100vh - 64px);
+  background: hsl(222 47% 8% / 0.92);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--modal-border-subtle);
+  border-radius: var(--modal-radius-xl);
+  box-shadow: var(--modal-shadow-lg), var(--modal-shadow-glow);
+  color: var(--modal-text-primary);
+  font-family: var(--modal-font);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  outline: none;
+}
+
+.modal-container--sm { max-width: 380px; }
+.modal-container--md { max-width: 480px; }
+.modal-container--lg { max-width: 600px; }
+
+/* ──────────────────────────────────────────────
+   4. Close Button
+   ────────────────────────────────────────────── */
+.modal-close {
+  position: absolute;
+  top: var(--modal-space-4);
+  right: var(--modal-space-4);
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--modal-radius-sm);
+  border: 1px solid var(--modal-border-subtle);
+  background: hsl(222 47% 8% / 0.8);
+  backdrop-filter: blur(10px);
+  color: var(--modal-text-tertiary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--modal-duration-fast) var(--modal-ease-out);
+}
+
+.modal-close:hover {
+  background: var(--modal-danger-subtle);
+  border-color: var(--modal-danger);
+  color: var(--modal-danger);
+}
+
+.modal-close:focus-visible {
+  outline: 2px solid var(--modal-accent);
+  outline-offset: 2px;
+}
+
+/* ──────────────────────────────────────────────
+   5. Modal Body (Scrollable)
+   ────────────────────────────────────────────── */
+.modal-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: var(--modal-space-6) var(--modal-space-6) var(--modal-space-4);
+  min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--modal-accent-border) transparent;
+}
+
+.modal-body::-webkit-scrollbar { width: 5px; }
+.modal-body::-webkit-scrollbar-track { background: transparent; }
+.modal-body::-webkit-scrollbar-thumb {
+  background: var(--modal-accent-border);
+  border-radius: 10px;
+}
+
+/* ──────────────────────────────────────────────
+   6. Modal Footer
+   ────────────────────────────────────────────── */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--modal-space-3);
+  padding: var(--modal-space-4) var(--modal-space-6) var(--modal-space-5);
+  border-top: 1px solid var(--modal-border-subtle);
+  background: hsl(222 47% 8% / 0.6);
+  backdrop-filter: blur(10px);
+  flex-shrink: 0;
+}
+
+/* ──────────────────────────────────────────────
+   7. Buttons
+   ────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--modal-space-2);
+  padding: 9px 20px;
+  border-radius: var(--modal-radius-sm);
+  font-family: var(--modal-font);
+  font-size: var(--modal-font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--modal-duration-fast) var(--modal-ease-out);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.btn--secondary {
+  background: transparent;
+  border-color: var(--modal-border);
+  color: var(--modal-text-secondary);
+}
+.btn--secondary:hover:not(:disabled) {
+  background: var(--modal-surface-hover);
+  color: var(--modal-text-primary);
+}
+
+.btn--danger {
+  background: var(--modal-danger);
+  color: #fff;
+}
+.btn--danger:hover:not(:disabled) {
+  background: hsl(0 80% 50%);
+  box-shadow: 0 4px 16px hsl(0 84% 60% / 0.35);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--modal-accent);
+  outline-offset: 2px;
+}
+
+/* ──────────────────────────────────────────────
+   8. Modal Header
+   ────────────────────────────────────────────── */
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: var(--modal-space-3);
+  padding-bottom: var(--modal-space-4);
+  margin-bottom: var(--modal-space-4);
+  border-bottom: 1px solid var(--modal-border-subtle);
+}
+
+.modal-header-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--modal-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.modal-header-icon--amber {
+  background: var(--modal-accent-subtle);
+  color: var(--modal-accent);
+}
+.modal-header-icon--danger {
+  background: var(--modal-danger-subtle);
+  color: var(--modal-danger);
+}
+.modal-header-icon--violet {
+  background: var(--modal-violet-subtle);
+  color: var(--modal-violet);
+}
+.modal-header-icon--blue {
+  background: hsl(217 91% 65% / 0.12);
+  color: var(--modal-blue);
+}
+.modal-header-icon--success {
+  background: var(--modal-success-subtle);
+  color: var(--modal-success);
+}
+
+.modal-header-text {
+  min-width: 0;
+}
+
+.modal-title {
+  font-size: var(--modal-font-size-lg);
+  font-weight: 700;
+  color: var(--modal-text-primary);
+  margin: 0;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.modal-subtitle {
+  font-size: var(--modal-font-size-xs);
+  color: var(--modal-text-tertiary);
+  margin: 2px 0 0;
+  line-height: 1.4;
+}
+
+.modal-subtitle strong {
+  color: var(--modal-text-secondary);
+  font-weight: 600;
+}
+
+/* ──────────────────────────────────────────────
+   9. States: Empty / Loading / Error
+   ────────────────────────────────────────────── */
+.empty-state,
+.loading-state,
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--modal-space-3);
+  padding: var(--modal-space-8) var(--modal-space-4);
+  text-align: center;
+  font-size: var(--modal-font-size-sm);
+  font-weight: 500;
+}
+
+.empty-state { color: var(--modal-text-tertiary); }
+.loading-state { color: var(--modal-text-secondary); }
+.error-state {
+  color: var(--modal-danger);
+  background: var(--modal-danger-subtle);
+  border-radius: var(--modal-radius-sm);
+  padding: var(--modal-space-3) var(--modal-space-4);
+  flex-direction: row;
+}
+
+.loading-spinner {
+  animation: spin 0.7s linear infinite;
+  color: var(--modal-accent);
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ──────────────────────────────────────────────
+   10. Badge
+   ────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.badge--sm { font-size: 10px; padding: 3px 10px; }
+.badge--default { background: var(--modal-surface-hover); color: var(--modal-text-secondary); }
+.badge--success { background: var(--modal-success-subtle); color: var(--modal-success); border: 1px solid hsl(160 84% 45% / 0.25); }
+.badge--danger { background: var(--modal-danger-subtle); color: var(--modal-danger); border: 1px solid hsl(0 84% 60% / 0.2); }
+.badge--violet { background: var(--modal-violet-subtle); color: var(--modal-violet); border: 1px solid hsl(255 85% 65% / 0.2); }
+
+/* ──────────────────────────────────────────────
+   11. Metric Card
+   ────────────────────────────────────────────── */
+.metric-card {
+  background: hsl(222 45% 10% / 0.7);
+  border: 1px solid var(--modal-border-subtle);
+  border-radius: var(--modal-radius-sm);
+  padding: var(--modal-space-3);
+  transition: background var(--modal-duration-fast);
+}
+.metric-card:hover { background: hsl(222 45% 10%); }
+
+.metric-card-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--modal-text-tertiary);
+  margin-bottom: var(--modal-space-2);
+}
+
+.metric-card-values {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--modal-space-1);
+}
+.metric-card-val { text-align: center; flex: 1; }
+.metric-card-label { font-size: 8px; color: var(--modal-text-tertiary); text-transform: uppercase; display: block; margin-bottom: 2px; }
+.metric-card-number { font-size: 18px; font-weight: 700; font-family: var(--modal-font-mono); color: var(--modal-text-primary); }
+.text-danger { color: var(--modal-danger) !important; }
+.metric-card-arrow { color: var(--modal-text-tertiary); flex-shrink: 0; margin-top: 12px; }
+
+.metric-card-change {
+  margin-top: var(--modal-space-1);
+  padding-top: var(--modal-space-1);
+  border-top: 1px solid hsl(255 255 255 / 0.04);
+  font-size: 9px;
+  font-weight: 600;
+  text-align: center;
+}
+.metric-card-change--up { color: var(--modal-success); }
+.metric-card-change--down { color: var(--modal-danger); }
+
+/* ──────────────────────────────────────────────
+   12. Delete Impact Section
+   ────────────────────────────────────────────── */
+.delete-impact {
+  background: hsl(222 45% 10% / 0.5);
+  border: 1px solid var(--modal-border-subtle);
+  border-radius: var(--modal-radius-md);
+  padding: var(--modal-space-4);
+  margin-bottom: var(--modal-space-3);
+}
+
+.delete-impact-header {
+  display: flex;
+  align-items: center;
+  gap: var(--modal-space-2);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--modal-accent);
+  margin-bottom: var(--modal-space-3);
+  padding-bottom: var(--modal-space-2);
+  border-bottom: 1px solid var(--modal-accent-border);
+}
+
+.delete-impact-stat {
+  display: flex;
+  align-items: center;
+  gap: var(--modal-space-2);
+  padding: var(--modal-space-2) var(--modal-space-3);
+  background: hsl(222 45% 10% / 0.6);
+  border-radius: var(--modal-radius-sm);
+  font-size: var(--modal-font-size-sm);
+  color: var(--modal-text-secondary);
+  margin-bottom: var(--modal-space-2);
+}
+.delete-impact-stat strong { color: var(--modal-accent); font-size: 1.15em; margin: 0 2px; }
+
+.delete-impact-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--modal-space-2);
+  padding: var(--modal-space-2) var(--modal-space-3);
+  background: var(--modal-danger-subtle);
+  border-left: 3px solid var(--modal-danger);
+  border-radius: 0 var(--modal-radius-sm) var(--modal-radius-sm) 0;
+  font-size: var(--modal-font-size-xs);
+  color: hsl(0 84% 70%);
+  font-weight: 500;
+  margin-bottom: var(--modal-space-2);
+}
+
+.delete-impact-warning--split {
+  background: hsl(38 92% 52% / 0.08);
+  border-left-color: var(--modal-accent);
+  color: hsl(38 92% 65%);
+}
+
+.delete-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--modal-space-2);
+  margin-bottom: var(--modal-space-4);
+}
+
+/* ──────────────────────────────────────────────
+   13. Affected Neighbors List
+   ────────────────────────────────────────────── */
+.delete-affected {
+  margin-top: var(--modal-space-2);
+}
+
+.delete-affected-header {
+  display: flex;
+  align-items: center;
+  gap: var(--modal-space-2);
+  font-size: var(--modal-font-size-xs);
+  font-weight: 600;
+  color: var(--modal-text-secondary);
+  margin-bottom: var(--modal-space-2);
+}
+
+.delete-affected-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 140px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--modal-accent-border) transparent;
+}
+
+.delete-affected-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px var(--modal-space-3);
+  background: hsl(222 45% 10% / 0.4);
+  border-radius: var(--modal-radius-sm);
+  font-size: var(--modal-font-size-xs);
+  gap: var(--modal-space-2);
+}
+
+.delete-affected-name {
+  color: var(--modal-text-primary);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.delete-affected-degree {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--modal-font-mono);
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.degree-before { color: var(--modal-text-tertiary); }
+.degree-after { color: var(--modal-accent); font-weight: 700; }
+.degree-isolated { color: var(--modal-danger); }
+
+.delete-affected-more {
+  text-align: center;
+  font-size: var(--modal-font-size-xs);
+  color: var(--modal-text-tertiary);
+  padding: var(--modal-space-1) 0;
+}
+
+/* ──────────────────────────────────────────────
+   14. Responsive
+   ────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .modal-overlay { padding: var(--modal-space-4); }
+  .modal-container { border-radius: var(--modal-radius-lg); max-height: calc(100vh - 32px); }
+  .modal-body { padding: var(--modal-space-5) var(--modal-space-4) var(--modal-space-3); }
+  .modal-footer { padding: var(--modal-space-3) var(--modal-space-4) var(--modal-space-4); flex-direction: column; }
+  .btn { justify-content: center; width: 100%; }
+  .delete-metrics { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 1600px) {
+  .modal-overlay { padding: var(--modal-space-8); }
+  .modal-container--md { max-width: 520px; }
+  .modal-body { padding: var(--modal-space-8) var(--modal-space-8) var(--modal-space-5); }
+  .modal-footer { padding: var(--modal-space-5) var(--modal-space-8) var(--modal-space-6); }
+}
+
+/* ──────────────────────────────────────────────
+   15. Reduced Motion
+   ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .modal-container,
+  .btn,
+  .modal-close,
+  .metric-card {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+  }
+  .loading-spinner { animation: none; opacity: 0.5; }
+}
+
+/* ──────────────────────────────────────────────
+   16. Forced Colors / High Contrast
+   ────────────────────────────────────────────── */
+@media (forced-colors: active) {
+  .modal-container { border: 2px solid CanvasText; background: Canvas; color: CanvasText; }
+  .btn--danger { background: Mark; color: MarkText; }
+  .modal-close { border: 1px solid ButtonText; }
+  .delete-impact-warning { border-left-color: Mark; }
+}
+
+/* ──────────────────────────────────────────────
+   17. Selection
+   ────────────────────────────────────────────── */
+.modal-container ::selection {
+  background: hsl(38 92% 52% / 0.25);
+  color: var(--modal-text-primary);
+}
+
+/* ──────────────────────────────────────────────
+   18. Safe Area (Notch)
+   ────────────────────────────────────────────── */
+@supports (padding: max(0px)) {
+  .modal-overlay {
+    padding-left: max(var(--modal-space-4), env(safe-area-inset-left));
+    padding-right: max(var(--modal-space-4), env(safe-area-inset-right));
+    padding-top: max(var(--modal-space-4), env(safe-area-inset-top));
+    padding-bottom: max(var(--modal-space-4), env(safe-area-inset-bottom));
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Preprocess Graph (Optional)",
+    "description": "Convert the graph to an adjacency list representation. For directed graphs, convert to undirected if needed. Optionally sort nodes by degree for optimization."
+  },
+  {
+    "title": "Iterate Over Edges",
+    "description": "For each edge (u,v), examine the neighbors of both endpoints to identify potential third vertices that could form a triangle."
+  },
+  {
+    "title": "Find Common Neighbors",
+    "description": "For each edge, find nodes that are connected to both endpoints simultaneously. These common neighbors complete the triangle structure."
+  },
+  {
+    "title": "Identify Unique Triangles",
+    "description": "Apply deduplication strategy to ensure each triangle {a,b,c} is counted only once, regardless of which edge was examined first."
+  },
+  {
+    "title": "Store or Count Results",
+    "description": "Either count total triangles, list all unique triangles, or compute triangle-related metrics per node."
+  }
+]

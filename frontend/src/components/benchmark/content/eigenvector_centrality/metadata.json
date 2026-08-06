@@ -1,0 +1,17 @@
+{
+  "id": "eigenvector_centrality",
+  "name": "Eigenvector-Centrality",
+  "category": "centrality",
+  "difficulty": "medium",
+
+  "timeComplexity": "O(V^²)",
+  "spaceComplexity": "O(V)",
+  "bestCase": "O(k * V)",
+  "worstCase": "O(k * V^²)",
+  "averageCase": "O(k * (V + E))",
+
+  "stable": null,
+  "inPlace": false,
+  "recursive": false,
+  "parallelizable": true
+}

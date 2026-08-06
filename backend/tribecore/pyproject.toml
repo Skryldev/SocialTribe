@@ -1,0 +1,109 @@
+[build-system]
+requires = [
+    "setuptools>=80",
+    "setuptools-scm>=8.1",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "tribecore"
+
+dynamic = [
+    "version"
+]
+
+description = "High-Performance Graph Algorithms Engine powered by Zig"
+
+readme = "README.md"
+
+requires-python = ">=3.10"
+
+license = "MIT"
+
+license-files = [
+    "LICENSE"
+]
+
+authors = [
+    { name = "Alireza" }
+]
+
+keywords = [
+    "graph",
+    "zig",
+    "algorithms",
+    "network",
+    "centrality",
+    "leiden",
+    "performance"
+]
+
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+
+    "Programming Language :: Python :: Implementation :: CPython",
+
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+
+dependencies = [
+    "numpy>=1.24"
+]
+
+
+[project.urls]
+
+Homepage = "https://github.com/Asky23/SocialTribe"
+
+Repository = "https://github.com/Asky23/SocialTribe"
+
+Issues = "https://github.com/Asky23/SocialTribe/issues"
+
+
+[tool.setuptools]
+
+package-dir = { "" = "src" }
+
+include-package-data = true
+
+
+[tool.setuptools.packages.find]
+
+where = [
+    "src"
+]
+
+
+[tool.setuptools.package-data]
+
+tribecore = [
+    "_libs/*.dll",
+    "_libs/*.so",
+    "_libs/*.dylib"
+]
+
+
+[tool.setuptools_scm]
+
+root = "../.."
+relative_to = "pyproject.toml"
+search_parent_directories = true
+tag_regex = "^v(?P<version>.*)$"
+version_scheme = "guess-next-dev"
+local_scheme = "no-local-version"

@@ -1,0 +1,17 @@
+{
+  "id": "binary_search",
+  "name": "Binary-Search",
+  "category": "sorting",
+  "difficulty": "easy",
+
+  "timeComplexity": "O(log n)",
+  "spaceComplexity": "O(1)",
+  "bestCase": "O(1)",
+  "worstCase": "O(log n)",
+  "averageCase": "O(log n)",
+
+  "stable": null,
+  "inPlace": true,
+  "recursive": false,
+  "parallelizable": false
+}

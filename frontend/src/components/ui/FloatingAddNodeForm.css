@@ -1,0 +1,334 @@
+/* components/ui/FloatingAddNodeForm.css */
+@import './FloatingaddnodeformTheme.css';
+
+/* ============================================================
+   FloatingAddNodeForm — panel
+   ============================================================ */
+
+.fanf-modal {
+  position: fixed;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--anb-border-subtle);
+  border-radius: var(--anb-radius-lg);
+  font-family: var(--anb-font-ui);
+  box-shadow: var(--anb-shadow-panel);
+  overflow: hidden;
+  transition: border-color 0.25s var(--anb-ease-out), box-shadow 0.25s var(--anb-ease-out);
+}
+
+.fanf-modal-hovered {
+  border-color: var(--anb-accent-border);
+  box-shadow: 0 28px 52px -12px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--anb-accent-border) inset;
+}
+
+/* Ambient background texture */
+.fanf-pattern {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Header */
+.fanf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--anb-border-subtle);
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.fanf-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fanf-header-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--anb-accent-soft);
+  border-radius: var(--anb-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--anb-accent-strong);
+}
+
+.fanf-title {
+  margin: 0;
+  font-size: var(--anb-text-md);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--anb-text-primary);
+}
+
+.fanf-subtitle {
+  margin: 2px 0 0;
+  font-size: var(--anb-text-2xs);
+  color: var(--anb-text-secondary);
+}
+
+.fanf-close-btn {
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--anb-border-subtle);
+  border-radius: var(--anb-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--anb-text-secondary);
+  transition: all 0.2s ease;
+}
+
+.fanf-close-btn:hover {
+  background: var(--anb-danger-soft);
+  border-color: rgba(244, 104, 92, 0.3);
+  color: var(--anb-danger);
+}
+
+/* Form Body */
+.fanf-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Form Fields */
+.fanf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fanf-field-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--anb-text-2xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--anb-text-secondary);
+}
+
+.fanf-required {
+  color: var(--anb-danger);
+  margin-left: 2px;
+}
+
+.fanf-optional {
+  color: var(--anb-text-tertiary);
+  font-weight: 400;
+  font-size: 9px;
+  margin-left: 8px;
+}
+
+/* Input */
+.fanf-input {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid var(--anb-border-subtle);
+  border-radius: var(--anb-radius-md);
+  color: var(--anb-text-primary);
+  font-size: var(--anb-text-sm);
+  font-family: var(--anb-font-ui);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.fanf-input:focus {
+  border-color: var(--anb-accent);
+  background: rgba(30, 41, 59, 0.8);
+  box-shadow: 0 0 0 2px var(--anb-accent-soft);
+}
+
+.fanf-input::placeholder {
+  color: var(--anb-text-tertiary);
+  font-weight: 400;
+}
+
+.fanf-input-error {
+  border-color: var(--anb-danger);
+}
+
+.fanf-input-error:focus {
+  border-color: var(--anb-danger);
+  box-shadow: 0 0 0 2px var(--anb-danger-soft);
+}
+
+.fanf-input-mono {
+  font-family: var(--anb-font-mono);
+  font-size: var(--anb-text-xs);
+}
+
+/* Character Counter */
+.fanf-counter {
+  text-align: right;
+  font-size: 8px;
+  font-family: var(--anb-font-mono);
+  color: var(--anb-text-tertiary);
+  margin-top: 2px;
+}
+
+.fanf-counter-warning {
+  color: var(--anb-accent-strong);
+}
+
+/* Auto-generated ID hint */
+.fanf-id-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--anb-teal-soft);
+  border: 1px solid var(--anb-teal-border);
+  border-radius: var(--anb-radius-md);
+  font-size: var(--anb-text-xs);
+  font-family: var(--anb-font-mono);
+  margin-top: -4px;
+  overflow: hidden;
+}
+
+.fanf-id-hint span:first-of-type {
+  flex-shrink: 0;
+  color: var(--anb-teal);
+}
+
+.fanf-id-hint span:last-of-type {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--anb-text-secondary);
+}
+
+.fanf-id-hint button {
+  background: none;
+  border: none;
+  color: var(--anb-text-tertiary);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.fanf-id-hint button:hover {
+  background: var(--anb-teal-soft);
+  color: var(--anb-teal);
+}
+
+/* Actions */
+.fanf-actions {
+  display: flex;
+  gap: 10px;
+  padding: 16px 20px 20px;
+  border-top: 1px solid var(--anb-border-subtle);
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.fanf-btn-cancel {
+  flex: 1;
+  padding: 10px 16px;
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid var(--anb-border-subtle);
+  border-radius: var(--anb-radius-md);
+  color: var(--anb-text-secondary);
+  font-size: var(--anb-text-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.fanf-btn-cancel:hover {
+  background: rgba(30, 41, 59, 1);
+  border-color: var(--anb-border-strong);
+  color: var(--anb-text-primary);
+}
+
+.fanf-btn-submit {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, var(--anb-accent) 0%, var(--anb-accent-press) 100%);
+  border: none;
+  border-radius: var(--anb-radius-md);
+  color: white;
+  font-size: var(--anb-text-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(76, 126, 255, 0.3);
+}
+
+.fanf-btn-submit:hover:not(.disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(76, 126, 255, 0.4);
+}
+
+.fanf-btn-submit.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Focus indicator line (mirrors whichever field currently has focus) */
+.fanf-focus-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--anb-accent), var(--anb-teal), transparent);
+  border-radius: 0 0 var(--anb-radius-lg) var(--anb-radius-lg);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .fanf-modal {
+    width: calc(100vw - 32px) !important;
+    left: 16px !important;
+    right: 16px !important;
+    top: 50% !important;
+    transform: translateY(-50%);
+  }
+
+  .fanf-header {
+    padding: 14px 16px;
+  }
+
+  .fanf-body {
+    padding: 16px;
+  }
+
+  .fanf-actions {
+    padding: 14px 16px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fanf-modal,
+  .fanf-input,
+  .fanf-btn-submit,
+  .fanf-close-btn {
+    transition: none;
+  }
+}

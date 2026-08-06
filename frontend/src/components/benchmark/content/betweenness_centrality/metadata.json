@@ -1,0 +1,17 @@
+{
+  "id": "betweenness_centrality",
+  "name": "Betweenness-Centrality",
+  "category": "centrality",
+  "difficulty": "hard",
+
+  "timeComplexity": "O(V * (V + E)) for unweighted, O(V * (V + E) log V) for weighted",
+  "spaceComplexity": "O(V + E)",
+  "bestCase": "O(V * (V + E))",
+  "worstCase": "O(V * (V + E))",
+  "averageCase": "O(V * (V + E))",
+
+  "stable": true,
+  "inPlace": false,
+  "recursive": false,
+  "parallelizable": true
+}

@@ -1,0 +1,17 @@
+{
+  "id": "degree_centrality",
+  "name": "Degree-Centrality",
+  "category": "centrality",
+  "difficulty": "easy",
+
+  "timeComplexity": "O(V)",
+  "spaceComplexity": "O(1)",
+  "bestCase": "O(1)",
+  "worstCase": "O(V)",
+  "averageCase": "O(V)",
+
+  "stable": null,
+  "inPlace": true,
+  "recursive": false,
+  "parallelizable": true
+}

@@ -1,0 +1,63 @@
+/* ============================================================
+   Design tokens — Graph I/O
+   A restrained warm-slate surface with two functional accents:
+   amber = import / write actions, blue = export / read actions.
+   Violet/red reserved for backups and destructive actions only.
+   ============================================================ */
+
+:root {
+  /* Surfaces */
+  --iem-bg-0: #0b0e14;
+  --iem-bg-1: #12161f;
+  --iem-bg-2: #171c27;
+  --iem-bg-3: #1e2430;
+  --iem-border: rgba(148, 163, 184, 0.12);
+  --iem-border-strong: rgba(148, 163, 184, 0.22);
+
+  /* Text */
+  --iem-text-0: #f1f5f9;
+  --iem-text-1: #cbd5e1;
+  --iem-text-2: #94a3b8;
+  --iem-text-3: #5f6b7d;
+
+  /* Accents */
+  --iem-amber: #f0a828;
+  --iem-amber-dim: rgba(240, 168, 40, 0.14);
+  --iem-amber-border: rgba(240, 168, 40, 0.3);
+
+  --iem-blue: #4c8dff;
+  --iem-blue-dim: rgba(76, 141, 255, 0.14);
+  --iem-blue-border: rgba(76, 141, 255, 0.3);
+
+  --iem-violet: #a78bfa;
+  --iem-violet-dim: rgba(167, 139, 250, 0.12);
+  --iem-violet-border: rgba(167, 139, 250, 0.28);
+
+  --iem-red: #f56565;
+  --iem-red-dim: rgba(245, 101, 101, 0.12);
+  --iem-red-border: rgba(245, 101, 101, 0.28);
+
+  --iem-green: #4ade80;
+  --iem-green-dim: rgba(74, 222, 128, 0.12);
+
+  /* Type */
+  --iem-font-ui: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --iem-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Radii */
+  --iem-r-sm: 8px;
+  --iem-r-md: 12px;
+  --iem-r-lg: 18px;
+  --iem-r-xl: 24px;
+
+  /* Motion */
+  --iem-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --iem-ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

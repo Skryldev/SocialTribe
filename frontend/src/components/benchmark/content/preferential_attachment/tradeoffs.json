@@ -1,0 +1,27 @@
+{
+  "pros": [
+    "Extremely simple and fast to compute (O(1) per pair)",
+    "Captures fundamental 'rich get richer' network dynamics",
+    "No parameters to tune or optimize",
+    "Works well for growing networks where popularity drives connections",
+    "Explains emergence of scale-free degree distributions",
+    "Computationally trivial compared to neighbor-set methods",
+    "Naturally handles directed graphs with in/out-degree variants",
+    "Provides theoretical foundation for network growth models",
+    "Scores are straightforward to interpret and rank",
+    "Useful baseline for comparing more complex prediction algorithms",
+    "Robust to missing data (only needs degree, not full neighborhood)"
+  ],
+  "cons": [
+    "Ignores shared context and common neighbors entirely",
+    "Zero score for degree-zero nodes (cold start problem)",
+    "Cannot capture triadic closure or community structure",
+    "Over-simplifies real connection formation mechanisms",
+    "Performs poorly in networks where homophily dominates",
+    "Assumes linear relationship (may not hold in practice)",
+    "Does not distinguish between different types of connections",
+    "Cannot identify unusual or unexpected connections",
+    "Biased toward existing high-degree nodes, reducing diversity",
+    "Less effective in static or slowly-evolving networks"
+  ]
+}

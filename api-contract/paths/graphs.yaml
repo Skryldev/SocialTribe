@@ -1,0 +1,35 @@
+/graphs:
+  get:
+    tags:
+      - Graphs
+    summary: Get Graphs List
+    description: Retrieve list of all available graphs
+    operationId: getGraphs
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/GraphsListResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/graphs/{graph_id}/switch:
+  post:
+    tags:
+      - Graphs
+    summary: Switch Graph
+    description: Switch to a specific graph by its ID
+    operationId: switchGraph
+    parameters:
+      - $ref: '../parameters/graph.yaml#/graph_id'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/graph.yaml#/SwitchGraphResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'

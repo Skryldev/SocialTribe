@@ -1,0 +1,29 @@
+[package]
+name = "semantic"
+version = "0.1.0"
+edition = "2021"
+description = "Semantic analysis for graph query language"
+
+[dependencies]
+lexer = { path = "../lexer" }
+parser = { path = "../parser" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+
+[dev-dependencies]
+pretty_assertions = "1.4"
+rstest = "0.18"
+test-case = "3.3"
+
+[lib]
+name = "semantic"
+path = "src/lib.rs"
+
+[[test]]
+name = "diagnostics_tests"
+path = "tests/diagnostics_tests.rs"
+
+[[test]]
+name = "semantic_validation_tests"
+path = "tests/semantic_validation_tests.rs"

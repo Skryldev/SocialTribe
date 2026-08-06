@@ -1,0 +1,21 @@
+{
+  "pros": [
+    "Captures global network structure, not just local connections",
+    "Recursive importance: influenced by important neighbors",
+    "Handles directed graphs naturally (in-links vs out-links)",
+    "Robust to manipulation compared to simple degree counts",
+    "Convergence guaranteed for connected graphs with damping factor",
+    "Scalable to billion-node graphs with distributed implementation",
+    "Provides interpretable probability distribution over nodes"
+  ],
+  "cons": [
+    "Computationally expensive on very large graphs (multiple iterations)",
+    "Damping factor is arbitrary and affects results significantly",
+    "Cannot distinguish between different types of connections",
+    "New nodes start with zero rank (cold start problem)",
+    "Memory-intensive for storing full transition matrices",
+    "Convergence can be slow for graphs with near-bipartite structure",
+    "Sensitive to link farms and spam (though more resistant than simpler methods)",
+    "Does not consider temporal dynamics of link creation"
+  ]
+}

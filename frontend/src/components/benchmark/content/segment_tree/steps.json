@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Build the Segment Tree",
+    "description": "Construct the tree from the input array. Start with leaves representing individual elements. Build internal nodes bottom-up by combining children according to the operation (sum, min, max, gcd, etc.). For an array of size n, the tree has ≈ 2n nodes."
+  },
+  {
+    "title": "Store Tree in Array",
+    "description": "Represent the tree using a flat array where node at index i has children at 2i+1 (left) and 2i+2 (right) for 0-indexed, or 2i and 2i+1 for 1-indexed. The root is at index 0 (or 1). Leaves correspond to original array elements."
+  },
+  {
+    "title": "Process Range Query",
+    "description": "To query a range [l, r], recursively traverse from root. Three cases at each node: (1) node's range is completely inside query → return node's value; (2) node's range is completely outside → return identity element; (3) partial overlap → recursively query both children and combine results."
+  },
+  {
+    "title": "Process Point Update",
+    "description": "To update a single element at index idx, traverse from root to the leaf corresponding to idx. Update the leaf value, then propagate changes back up: at each parent, recompute its value from its two children."
+  },
+  {
+    "title": "Process Range Update (Lazy Propagation)",
+    "description": "For range updates (e.g., add x to all elements in [l, r]), use lazy propagation. Store pending updates at internal nodes. When a node is fully covered by the update, update its value and mark it 'lazy'. Only push pending updates down when children are accessed."
+  }
+]

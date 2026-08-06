@@ -1,0 +1,17 @@
+{
+  "id": "radix_sort",
+  "name": "Radix-Sort",
+  "category": "sorting",
+  "difficulty": "medium",
+
+  "timeComplexity": "O(d * (n + b))",
+  "spaceComplexity": "O(n + b)",
+  "bestCase": "O(d * (n + b))",
+  "worstCase": "O(d * (n + b))",
+  "averageCase": "O(d * (n + b))",
+
+  "stable": true,
+  "inPlace": false,
+  "recursive": false,
+  "parallelizable": true
+}

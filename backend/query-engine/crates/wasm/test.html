@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>WASM Graph Query Test</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #1e1e1e; color: #d4d4d4; }
+        #output { background: #2d2d2d; padding: 15px; border-radius: 8px; white-space: pre-wrap; max-height: 600px; overflow: auto; font-size: 13px; }
+        .success { color: #4ec9b0; }
+        .error { color: #f48771; }
+        .info { color: #569cd6; }
+        button { 
+            background: #0e639c; color: white; border: none; padding: 10px 20px; 
+            border-radius: 4px; cursor: pointer; font-size: 14px; margin-right: 10px;
+        }
+        button:hover { background: #1177bb; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        input, textarea { 
+            background: #2d2d2d; color: #d4d4d4; border: 1px solid #3d3d3d; 
+            padding: 8px; border-radius: 4px; font-family: monospace; width: 100%; 
+            box-sizing: border-box; margin: 8px 0;
+        }
+        textarea { height: 80px; resize: vertical; }
+        .flex { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        .stats { color: #808080; font-size: 12px; margin-top: 8px; }
+        .warning { color: #dcdcaa; }
+        .error-text { color: #f48771; }
+    </style>
+</head>
+<body>
+    <h1>🧪 WASM Graph Query Engine Test</h1>
+    
+    <div class="flex">
+        <button id="testBtn" onclick="runTest()">▶ Run Query</button>
+        <button id="testSimpleBtn" onclick="runSimpleTest()">▶ Run Simple Query</button>
+        <button id="testExplainBtn" onclick="runExplainTest()">📊 Explain</button>
+        <button onclick="clearOutput()">🗑 Clear</button>
+        <span id="status" style="color: #808080; font-size: 14px;">⏳ Initializing...</span>
+    </div>
+
+    <div>
+        <label>Query:</label>
+        <textarea id="queryInput">MATCH (source:socialUser)-[:weightedEdge*1..3]->(target:socialUser)
+WHERE source.name = "User 2"
+RETURN source, target</textarea>
+    </div>
+
+    <div>
+        <label>Node Count:</label>
+        <input type="number" id="nodeCount" value="1000" style="width: 100px;" />
+        <label style="margin-left: 20px;">Relationship Count:</label>
+        <input type="number" id="relCount" value="5000" style="width: 100px;" />
+    </div>
+
+    <div id="output">Click a button to run a query...</div>
+    <div id="stats" class="stats"></div>
+
+    <script type="module">
+        import init, { 
+            compile_query, 
+            explain_query,
+            parse_query,
+            lex_query,
+            validate_query,
+            plan_query,
+            analyze_query,
+            get_version,
+            init_panic_hook
+        } from './pkg/wasm.js';
+
+        let wasmReady = false;
+
+        // Initialize WASM
+        async function initWasm() {
+            const status = document.getElementById('status');
+            const output = document.getElementById('output');
+            
+            try {
+                status.textContent = '⏳ Loading WASM...';
+                await init();
+                init_panic_hook();
+                wasmReady = true;
+                const version = get_version();
+                console.log('✅ WASM loaded successfully. Version:', version);
+                status.textContent = '✅ WASM Ready (v' + version + ')';
+                status.style.color = '#4ec9b0';
+                output.textContent = '✅ WASM loaded successfully. Ready to run queries.';
+                output.className = 'info';
+            } catch (error) {
+                console.error('❌ Failed to initialize WASM:', error);
+                status.textContent = '❌ WASM initialization failed';
+                status.style.color = '#f48771';
+                output.textContent = '❌ Failed to initialize WASM:\n' + error.message;
+                output.className = 'error';
+            }
+        }
+
+        // Helper: log with timestamp
+        function logToOutput(text, type = 'info') {
+            const output = document.getElementById('output');
+            const timestamp = new Date().toLocaleTimeString();
+            output.textContent += `\n[${timestamp}] ${text}`;
+            output.className = type;
+            output.scrollTop = output.scrollHeight;
+        }
+
+        // Helper: clear output
+        window.clearOutput = function() {
+            document.getElementById('output').textContent = '';
+            document.getElementById('stats').textContent = '';
+        };
+
+        // Helper: safe JSON stringify
+        function safeStringify(obj) {
+            try {
+                return JSON.stringify(obj, null, 2);
+            } catch (e) {
+                return String(obj);
+            }
+        }
+
+        // Run main test
+        window.runTest = async function() {
+            if (!wasmReady) {
+                document.getElementById('output').textContent = '⏳ Please wait for WASM to load...';
+                return;
+            }
+
+            const output = document.getElementById('output');
+            const stats = document.getElementById('stats');
+            output.textContent = '';
+            stats.textContent = '';
+            
+            const query = document.getElementById('queryInput').value;
+            const nodeCount = parseInt(document.getElementById('nodeCount').value) || 1000;
+            const relCount = parseInt(document.getElementById('relCount').value) || 5000;
+            
+            logToOutput(`🔍 Query:\n${query}`, 'info');
+            logToOutput(`📊 Parameters: node_count=${nodeCount}, relationship_count=${relCount}`, 'info');
+            
+            const startTime = performance.now();
+            
+            try {
+                logToOutput(`⏳ Compiling query...`, 'info');
+                const result = compile_query(query, nodeCount, relCount);
+                const duration = ((performance.now() - startTime) / 1000).toFixed(3);
+                
+                console.log('📊 Result:', result);
+                
+                if (result && result.success === false) {
+                    logToOutput(`❌ Compilation failed:`, 'error');
+                    if (result.errors) {
+                        result.errors.forEach(err => logToOutput(`   - ${err}`, 'error'));
+                    }
+                    if (result.warnings) {
+                        result.warnings.forEach(warn => logToOutput(`   ⚠️ ${warn}`, 'warning'));
+                    }
+                    output.className = 'error';
+                    stats.textContent = `❌ Failed after ${duration}s`;
+                    return;
+                }
+                
+                logToOutput(`✅ Compilation successful! (${duration}s)`, 'success');
+                
+                // Show summary
+                if (result.tokens) {
+                    logToOutput(`📝 Tokens: ${result.tokens.length}`, 'info');
+                }
+                if (result.ast) {
+                    logToOutput(`📄 AST generated`, 'info');
+                }
+                if (result.logical_plan) {
+                    logToOutput(`📊 Logical plan generated`, 'info');
+                }
+                if (result.optimized_plan) {
+                    logToOutput(`⚡ Optimized plan generated`, 'info');
+                }
+                if (result.physical_plan) {
+                    logToOutput(`🔧 Physical plan generated`, 'info');
+                }
+                if (result.explain_data) {
+                    const explain = result.explain_data;
+                    logToOutput(`💰 Estimated cost: ${explain.estimated_cost}`, 'info');
+                    logToOutput(`📈 Estimated rows: ${explain.estimated_rows}`, 'info');
+                }
+                
+                // Show detailed result
+                logToOutput(`\n📋 Full Result:\n${safeStringify(result)}`, 'info');
+                
+                stats.textContent = `✅ Success • Duration: ${duration}s • Tokens: ${result.tokens?.length || 0} • Cost: ${result.explain_data?.estimated_cost || 'N/A'}`;
+                stats.style.color = '#4ec9b0';
+                output.className = 'success';
+                
+            } catch (error) {
+                console.error('❌ Error:', error);
+                logToOutput(`❌ Error: ${error.message}`, 'error');
+                if (error.stack) {
+                    logToOutput(`Stack: ${error.stack}`, 'error');
+                }
+                output.className = 'error';
+                stats.textContent = `❌ Error: ${error.message}`;
+                stats.style.color = '#f48771';
+            }
+        };
+
+        // Run simple test (no variable-length path)
+        window.runSimpleTest = async function() {
+            if (!wasmReady) {
+                document.getElementById('output').textContent = '⏳ Please wait for WASM to load...';
+                return;
+            }
+
+            const output = document.getElementById('output');
+            output.textContent = '';
+            
+            const query = `MATCH (n) RETURN n`;
+            const nodeCount = parseInt(document.getElementById('nodeCount').value) || 1000;
+            const relCount = parseInt(document.getElementById('relCount').value) || 5000;
+            
+            logToOutput(`🔍 Simple Query:\n${query}`, 'info');
+            
+            const startTime = performance.now();
+            
+            try {
+                const result = compile_query(query, nodeCount, relCount);
+                const duration = ((performance.now() - startTime) / 1000).toFixed(3);
+                
+                console.log('📊 Simple Result:', result);
+                
+                if (result && result.success === false) {
+                    logToOutput(`❌ Failed: ${result.errors?.join(', ') || 'Unknown error'}`, 'error');
+                    output.className = 'error';
+                    return;
+                }
+                
+                logToOutput(`✅ Simple query successful! (${duration}s)`, 'success');
+                logToOutput(`📋 Result:\n${safeStringify(result)}`, 'info');
+                
+                document.getElementById('stats').textContent = `✅ Success • Duration: ${duration}s`;
+                document.getElementById('stats').style.color = '#4ec9b0';
+                output.className = 'success';
+                
+            } catch (error) {
+                console.error('❌ Error:', error);
+                logToOutput(`❌ Error: ${error.message}`, 'error');
+                output.className = 'error';
+            }
+        };
+
+        // Run explain test
+        window.runExplainTest = async function() {
+            if (!wasmReady) {
+                document.getElementById('output').textContent = '⏳ Please wait for WASM to load...';
+                return;
+            }
+
+            const output = document.getElementById('output');
+            output.textContent = '';
+            
+            const query = document.getElementById('queryInput').value;
+            const nodeCount = parseInt(document.getElementById('nodeCount').value) || 1000;
+            const relCount = parseInt(document.getElementById('relCount').value) || 5000;
+            
+            logToOutput(`📊 Explain Query:\n${query}`, 'info');
+            
+            try {
+                const result = explain_query(query, nodeCount, relCount);
+                console.log('📊 Explain Result:', result);
+                
+                if (result && result.success === false) {
+                    logToOutput(`❌ Explain failed: ${result.errors?.join(', ') || 'Unknown error'}`, 'error');
+                    output.className = 'error';
+                    return;
+                }
+                
+                logToOutput(`✅ Explain generated successfully`, 'success');
+                logToOutput(`📋 Explain Result:\n${safeStringify(result)}`, 'info');
+                
+                output.className = 'success';
+                
+            } catch (error) {
+                console.error('❌ Error:', error);
+                logToOutput(`❌ Error: ${error.message}`, 'error');
+                output.className = 'error';
+            }
+        };
+
+        // Initialize on load
+        initWasm();
+
+        // Handle Ctrl+Enter to run query
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                e.preventDefault();
+                runTest();
+            }
+        });
+
+        console.log('🧪 WASM Test Page loaded.');
+        console.log('📖 Instructions:');
+        console.log('  - Click "Run Query" to compile the query');
+        console.log('  - Click "Run Simple Query" for a basic test');
+        console.log('  - Click "Explain" for detailed explain plan');
+        console.log('  - Press Ctrl+Enter to run the current query');
+    </script>
+</body>
+</html>

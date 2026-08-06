@@ -1,0 +1,571 @@
+/* ==========================================================================
+   ConnectionChecker — Path Finder Professional Styles
+   ========================================================================== */
+
+:root {
+  --cc-surface: #0f172a;
+  --cc-surface-alt: #1e293b;
+  --cc-border: rgba(255, 255, 255, 0.06);
+  --cc-accent: #f59e0b;
+  --cc-accent-light: #fbbf24;
+  --cc-accent-dark: #ea580c;
+  --cc-success: #34d399;
+  --cc-error: #f87171;
+  --cc-text: #f1f5f9;
+  --cc-text-secondary: #94a3b8;
+  --cc-text-muted: #64748b;
+  --cc-radius: 14px;
+  --cc-radius-sm: 8px;
+  --cc-font-mono: 'JetBrains Mono', monospace;
+  --cc-font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ==========================================================================
+   Container
+   ========================================================================== */
+
+.connection-checker-container {
+  background: linear-gradient(135deg, var(--cc-surface) 0%, var(--cc-surface-alt) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.1);
+  border-radius: var(--cc-radius);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.connection-checker-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cc-accent), var(--cc-accent-dark), transparent);
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.cc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--cc-border);
+  gap: 12px;
+}
+
+.cc-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cc-header-icon {
+  width: 34px;
+  height: 34px;
+  background: rgba(245, 158, 11, 0.12);
+  border-radius: var(--cc-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cc-accent);
+  flex-shrink: 0;
+}
+
+.cc-header-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cc-text);
+  letter-spacing: -0.01em;
+}
+
+.cc-header-subtitle {
+  margin: 1px 0 0;
+  font-size: 10px;
+  color: var(--cc-text-secondary);
+}
+
+/* Status Badge */
+.cc-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 14px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--cc-font-mono);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cc-status-badge.connected {
+  background: rgba(52, 211, 153, 0.12);
+  color: var(--cc-success);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+.cc-status-badge.disconnected {
+  background: rgba(248, 113, 113, 0.12);
+  color: var(--cc-error);
+  border: 1px solid rgba(248, 113, 113, 0.25);
+}
+
+/* ==========================================================================
+   Selection Area
+   ========================================================================== */
+
+.cc-selection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--cc-border);
+  flex-wrap: wrap;
+}
+
+.cc-select-group {
+  flex: 1;
+  min-width: 140px;
+}
+
+.cc-select-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--cc-text-muted);
+}
+
+.cc-swap-icon {
+  color: var(--cc-accent);
+  flex-shrink: 0;
+  padding: 4px;
+  cursor: pointer;
+}
+
+/* Check Button */
+.cc-check-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, var(--cc-accent), var(--cc-accent-dark));
+  border: none;
+  border-radius: var(--cc-radius-sm);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cc-check-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Result Card
+   ========================================================================== */
+
+.result-card {
+  margin: 12px 16px;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.result-connected {
+  background: rgba(52, 211, 153, 0.04);
+  border: 1px solid rgba(52, 211, 153, 0.15);
+}
+
+.result-disconnected {
+  background: rgba(248, 113, 113, 0.04);
+  border: 1px solid rgba(248, 113, 113, 0.15);
+}
+
+/* Result Header */
+.result-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.result-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.result-icon.success {
+  background: rgba(52, 211, 153, 0.15);
+  color: var(--cc-success);
+}
+
+.result-icon.error {
+  background: rgba(248, 113, 113, 0.15);
+  color: var(--cc-error);
+}
+
+.result-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.result-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cc-text);
+}
+
+.result-description {
+  font-size: 10px;
+  color: var(--cc-text-secondary);
+}
+
+/* ==========================================================================
+   Endpoint Users
+   ========================================================================== */
+
+.endpoint-users {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.endpoint-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.endpoint-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+}
+
+.endpoint-avatar.source {
+  background: linear-gradient(135deg, var(--cc-accent), var(--cc-accent-dark));
+}
+
+.endpoint-avatar.target {
+  background: linear-gradient(135deg, var(--cc-accent-light), var(--cc-accent));
+}
+
+.endpoint-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--cc-text);
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.endpoint-label {
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--cc-text-muted);
+  font-weight: 600;
+}
+
+/* Connector */
+.endpoint-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.connector-line {
+  width: 100%;
+  height: 1px;
+  background: rgba(245, 158, 11, 0.3);
+  transform-origin: center;
+}
+
+.connector-icon {
+  color: var(--cc-accent);
+}
+
+/* ==========================================================================
+   Path Visualization
+   ========================================================================== */
+
+.path-visualization {
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.path-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  font-size: 10px;
+  color: var(--cc-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.path-nodes-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.path-node-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  padding: 4px 10px;
+  cursor: default;
+}
+
+.path-node-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+}
+
+.path-node-name {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--cc-text);
+}
+
+.path-node-arrow {
+  color: var(--cc-accent);
+  margin-left: 2px;
+}
+
+/* ==========================================================================
+   Disconnected State
+   ========================================================================== */
+
+.disconnected-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 14px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.disconnected-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.disconnected-avatar {
+  width: 42px;
+  height: 42px;
+  background: rgba(71, 85, 105, 0.4);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cc-text-secondary);
+}
+
+.disconnected-name {
+  font-size: 10px;
+  color: var(--cc-text-secondary);
+}
+
+.disconnected-separator {
+  color: var(--cc-error);
+}
+
+.disconnected-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+  background: rgba(248, 113, 113, 0.06);
+  border-radius: 7px;
+  font-size: 10px;
+  color: var(--cc-error);
+}
+
+/* ==========================================================================
+   Empty State
+   ========================================================================== */
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.empty-icon-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+.empty-icon-circle {
+  width: 56px;
+  height: 56px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cc-accent);
+}
+
+.empty-icon-sparkle {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  color: var(--cc-accent-light);
+}
+
+.empty-title {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cc-text);
+}
+
+.empty-description {
+  margin: 0;
+  font-size: 11px;
+  color: var(--cc-text-muted);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.cc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 16px;
+  border-top: 1px solid var(--cc-border);
+  background: rgba(0, 0, 0, 0.15);
+  font-size: 9px;
+  color: var(--cc-text-muted);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 680px) {
+  .cc-selection {
+    flex-direction: column;
+  }
+
+  .cc-select-group {
+    width: 100%;
+  }
+
+  .cc-swap-icon {
+    transform: rotate(90deg);
+    align-self: center;
+  }
+
+  .cc-check-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .endpoint-users {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .endpoint-connector {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .connector-line {
+    width: 40px;
+  }
+
+  .path-nodes-container {
+    flex-direction: column;
+  }
+
+  .path-node-arrow {
+    transform: rotate(90deg);
+  }
+
+  .disconnected-visual {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .disconnected-separator {
+    transform: rotate(90deg);
+  }
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .connection-checker-container * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "johnson",
+  "name": "Johnson-Algorithm",
+  "category": "shortest_path",
+  "difficulty": "hard",
+
+  "timeComplexity": "O(VE + V log V * E)",
+  "spaceComplexity": "O(V + E)",
+  "bestCase": "O(VE + V^2 log V)",
+  "worstCase": "O(VE + V^2 log V)",
+  "averageCase": "O(VE + V^2 log V)",
+
+  "stable": null,
+  "inPlace": false,
+  "recursive": false,
+  "parallelizable": true
+}

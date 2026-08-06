@@ -1,0 +1,22 @@
+/logs/query:
+  post:
+    tags:
+      - Logs
+    summary: Query Logs
+    description: Query logs with filters, sorting and pagination
+    operationId: queryLogs
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/logs.yaml#/QueryLogsRequest'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/logs.yaml#/QueryLogsResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'

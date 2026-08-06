@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Initialize Open and Closed Sets",
+    "description": "Create an open set (priority queue) containing the start node with f-score = g + h, and an empty closed set for visited nodes. g(start) = 0, h(start) = heuristic estimate to goal."
+  },
+  {
+    "title": "Select Node with Lowest F-Score",
+    "description": "Extract the node with the minimum f(n) = g(n) + h(n) from the open set, where g(n) is the actual cost from start and h(n) is the heuristic estimate to goal."
+  },
+  {
+    "title": "Check for Goal",
+    "description": "If the selected node is the goal, reconstruct and return the optimal path by following parent pointers back to start."
+  },
+  {
+    "title": "Move to Closed Set",
+    "description": "Add the current node to the closed set, indicating it has been fully processed and its optimal path from start is known."
+  },
+  {
+    "title": "Expand Neighbors",
+    "description": "For each unvisited neighbor, calculate tentative g-score. If better than previously known, update g, f, and parent pointer. Add to open set if not already present."
+  },
+  {
+    "title": "Repeat or Report Failure",
+    "description": "Continue until goal is found or open set is empty (no path exists)."
+  }
+]

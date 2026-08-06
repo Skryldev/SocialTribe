@@ -1,0 +1,390 @@
+/* ==========================================================================
+   CentralityLeaderboard — Professional Ranked List Styles
+   ========================================================================== */
+
+:root {
+  --cl-surface: #1e293b;
+  --cl-border: rgba(245, 158, 11, 0.1);
+  --cl-accent: #f59e0b;
+  --cl-accent-light: #fbbf24;
+  --cl-accent-dark: #ea580c;
+  --cl-text: #e2e8f0;
+  --cl-text-secondary: #94a3b8;
+  --cl-text-muted: #64748b;
+  --cl-radius: 12px;
+  --cl-radius-sm: 8px;
+  --cl-font-mono: 'JetBrains Mono', monospace;
+  --cl-font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ==========================================================================
+   Container
+   ========================================================================== */
+
+.centrality-leaderboard {
+  background: linear-gradient(175deg, var(--cl-surface) 0%, rgba(30, 41, 59, 0.9) 50%, rgba(245, 158, 11, 0.03) 100%);
+  border: 1px solid var(--cl-border);
+  border-radius: var(--cl-radius);
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.centrality-leaderboard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 14px;
+  right: 14px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cl-accent) 30%, var(--cl-accent-dark) 70%, transparent);
+  opacity: 0.5;
+  border-radius: 0 0 2px 2px;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.leaderboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(245, 158, 11, 0.08);
+  gap: 10px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-icon {
+  width: 28px;
+  height: 28px;
+  background: rgba(245, 158, 11, 0.12);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cl-accent);
+  flex-shrink: 0;
+}
+
+.leaderboard-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cl-text-secondary);
+  margin: 0;
+}
+
+.header-count {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--cl-accent-light);
+  font-family: var(--cl-font-mono);
+}
+
+/* ==========================================================================
+   Leaderboard List
+   ========================================================================== */
+
+.leaderboard-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.leaderboard-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.leaderboard-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.leaderboard-scroll::-webkit-scrollbar-thumb {
+  background: rgba(245, 158, 11, 0.2);
+  border-radius: 10px;
+}
+
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* ==========================================================================
+   Leaderboard Item
+   ========================================================================== */
+
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(245, 158, 11, 0.05);
+  border-radius: 9px;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  will-change: background-color;
+}
+
+.leaderboard-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--cl-accent);
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+  border-radius: 0 2px 2px 0;
+}
+
+.leaderboard-item:hover::before {
+  transform: scaleY(1);
+}
+
+.item-top-rank {
+  background: rgba(245, 158, 11, 0.03);
+  border-color: rgba(245, 158, 11, 0.1);
+}
+
+/* ==========================================================================
+   Rank Badge
+   ========================================================================== */
+
+.item-rank {
+  flex-shrink: 0;
+}
+
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--cl-font-mono);
+  border: 1px solid transparent;
+  position: relative;
+  user-select: none;
+}
+
+.rank-badge svg {
+  flex-shrink: 0;
+}
+
+.rank-number {
+  min-width: 12px;
+  text-align: center;
+}
+
+/* Top 3 */
+.rank-top {
+  background: var(--rank-bg);
+  border-color: var(--rank-border);
+  box-shadow: var(--rank-glow);
+  color: var(--rank-color);
+}
+
+.rank-1 {
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+.rank-normal {
+  background: rgba(100, 116, 139, 0.08);
+  border-color: rgba(100, 116, 139, 0.12);
+  color: var(--cl-text-muted);
+}
+
+.rank-sparkle {
+  position: absolute;
+  top: -4px;
+  right: -2px;
+  color: var(--cl-accent-light);
+}
+
+/* ==========================================================================
+   Item Info
+   ========================================================================== */
+
+.item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.item-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cl-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-id {
+  font-size: 9px;
+  font-family: var(--cl-font-mono);
+  color: var(--cl-text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   Item Value
+   ========================================================================== */
+
+.item-value {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.value-number {
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--cl-font-mono);
+  color: var(--cl-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Progress Bar (Top 3)
+   ========================================================================== */
+
+.item-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.item-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cl-accent), var(--cl-accent-dark));
+  border-radius: 0 1px 0 0;
+  transition: width 0.6s ease;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.leaderboard-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px solid rgba(245, 158, 11, 0.06);
+  font-size: 9px;
+  color: var(--cl-text-muted);
+}
+
+/* ==========================================================================
+   Empty State
+   ========================================================================== */
+
+.leaderboard-empty {
+  text-align: center;
+  padding: 40px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-icon-wrap {
+  color: var(--cl-text-muted);
+  opacity: 0.4;
+  margin-bottom: 12px;
+}
+
+.empty-text {
+  color: var(--cl-text-secondary);
+  margin: 0 0 4px;
+  font-size: 13px;
+}
+
+.empty-subtitle {
+  font-size: 10px;
+  color: var(--cl-text-muted);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .centrality-leaderboard {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .leaderboard-item {
+    padding: 6px 10px;
+    gap: 8px;
+  }
+
+  .rank-badge {
+    padding: 3px 6px;
+    font-size: 9px;
+  }
+
+  .rank-1 {
+    font-size: 10px;
+  }
+
+  .item-name {
+    font-size: 11px;
+  }
+
+  .value-number {
+    font-size: 12px;
+  }
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .centrality-leaderboard *,
+  .leaderboard-item {
+    transition: none !important;
+    animation-duration: 0.01ms !important;
+  }
+
+  .leaderboard-item::before {
+    transition: none;
+  }
+}

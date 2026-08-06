@@ -1,0 +1,17 @@
+{
+  "id": "quick_sort",
+  "name": "Quick-Sort",
+  "category": "sorting",
+  "difficulty": "medium",
+
+  "timeComplexity": "O(n log n)",
+  "spaceComplexity": "O(log n)",
+  "bestCase": "O(n log n)",
+  "worstCase": "O(n^²)",
+  "averageCase": "O(n log n)",
+
+  "stable": false,
+  "inPlace": true,
+  "recursive": true,
+  "parallelizable": true
+}

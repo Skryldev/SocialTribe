@@ -1,0 +1,39 @@
+/graph/layout:
+  post:
+    tags:
+      - Layout
+    summary: Apply Layout
+    description: Apply a layout algorithm to position nodes in the graph
+    operationId: applyLayout
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/layout.yaml#/ApplyLayoutRequest'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/layout.yaml#/ApplyLayoutResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/graph/layout/current:
+  get:
+    tags:
+      - Layout
+    summary: Get Current Layout
+    description: Retrieve the current layout of the graph
+    operationId: getCurrentLayout
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/layout.yaml#/CurrentLayoutResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'

@@ -1,0 +1,160 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: socialtribe-frontend
+    image: skryldev/socialtribe-frontend
+    restart: unless-stopped
+    ports:
+      - "4173:4173"
+    environment:
+      NODE_ENV: production
+    depends_on:
+      tribedb:
+        condition: service_healthy
+      tribebench:
+        condition: service_healthy
+    networks:
+      - socialtribe
+
+  server:
+    container_name: socialtribe-api
+    image: skryldev/socialtribe-api-server
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    depends_on:
+      tribedb:
+        condition: service_healthy
+    environment:
+      - DOCKER_ENV=true
+      - LOG_OUTPUT=stdout
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - ENVIRONMENT=${ENVIRONMENT:-production}
+      - PORT=8080
+      - APP_DATA_ROOT=/app/data
+      - SNAPSHOT_ROOT=/app/snapshots
+      - BACKUP_ROOT=/app/backups
+      - LOGS_ROOT=/app/logs
+      - REGISTRY_PATH=/app/data/graph_registry.json
+      - PYTHONPATH=/app
+      - STORAGE_HOST=tribedb
+      - STORAGE_PORT=50051
+      - STORAGE_TIMEOUT=10
+      - STORAGE_RETRY_ATTEMPTS=30
+      - STORAGE_RETRY_DELAY=2
+    volumes:
+      - server_data:/app/data
+      - server_snapshots:/app/snapshots
+      - server_backups:/app/backups
+      - server_logs:/app/logs
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+    networks:
+      - socialtribe
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 128M
+
+  tribedb:
+    container_name: socialtribe-db
+    image: skryldev/socialtribe-tribedb
+    restart: unless-stopped
+    ports:
+      - "50051:50051"
+      - "50052:50052"
+    environment:
+      - DOCKER_ENV=true
+      - LOG_OUTPUT=stdout
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - ENVIRONMENT=${ENVIRONMENT:-production}
+      - PORT=50051
+      - GRPC_PORT=50052
+      - STORE_PATH=/app/store
+    volumes:
+      - tribedb_data:/app/store
+      - tribedb_logs:/app/logs
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1:50052/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+    networks:
+      - socialtribe
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 128M
+
+  tribebench:
+    container_name: socialtribe-benchmark
+    image: skryldev/socialtribe-tribebench
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1:3001/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+    networks:
+      - socialtribe
+
+volumes:
+  tribedb_data:
+    driver: local
+  tribedb_logs:
+    driver: local
+  server_data:
+    driver: local
+  server_snapshots:
+    driver: local
+  server_backups:
+    driver: local
+  server_logs:
+    driver: local
+
+networks:
+  socialtribe:
+    driver: bridge
+    name: socialtribe

@@ -1,0 +1,31 @@
+[package]
+name = "wasm"
+version = "0.1.0"
+edition = "2021"
+description = "WebAssembly bindings for graph query engine"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+lexer = { path = "../lexer" }
+parser = { path = "../parser" }
+semantic = { path = "../semantic" }
+planner = { path = "../planner" }
+wasm-bindgen = "0.2"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde-wasm-bindgen = "0.6"
+js-sys = "0.3"
+console_error_panic_hook = "0.1"
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
+pretty_assertions = "1.4"
+
+[[test]]
+name = "wasm_native_tests"
+path = "tests/wasm_native_tests.rs"
+
+[package.metadata.wasm-pack]
+memory = 64

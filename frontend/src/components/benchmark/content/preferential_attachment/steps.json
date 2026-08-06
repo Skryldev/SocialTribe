@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Compute Node Degrees",
+    "description": "Calculate the degree (number of connections) for both source and target nodes. For directed graphs, specify whether to use in-degree, out-degree, or both."
+  },
+  {
+    "title": "Multiply Degrees",
+    "description": "Multiply the degrees of the two nodes together. The product represents the likelihood of a connection forming between them."
+  },
+  {
+    "title": "Apply Normalization (Optional)",
+    "description": "If desired, normalize the score by dividing by the sum of degree products for all node pairs, or by the square of total edges, to get a probability-like value."
+  }
+]

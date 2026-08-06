@@ -1,0 +1,27 @@
+{
+  "pros": [
+    "Computes all-pairs shortest paths in a single execution",
+    "Simple implementation with clean triple-nested loop structure",
+    "Optimal O(V³) for dense graphs (beats V runs of Dijkstra)",
+    "Handles negative edge weights (unlike Dijkstra)",
+    "Detects negative cycles via diagonal elements",
+    "Constant factor is very small (simple min and addition operations)",
+    "In-place updates minimize memory usage",
+    "Easily parallelizable (inner loops are independent)",
+    "Naturally produces predecessor matrix for path reconstruction",
+    "Well-suited for GPU implementation due to regular memory access",
+    "Deterministic execution time (always exactly V³ iterations)"
+  ],
+  "cons": [
+    "Fixed O(V³) time regardless of graph sparsity",
+    "Inefficient for sparse graphs (use Johnson's algorithm instead)",
+    "Requires O(V²) memory even for small graphs",
+    "Cannot handle graphs with more than ~10⁴ nodes practically",
+    "Must process entire matrix even if only few paths needed",
+    "No early termination possible (must complete all k iterations)",
+    "Floating-point errors can accumulate over many iterations",
+    "Overkill when only single-source or single-pair paths needed",
+    "Doesn't benefit from graph structure (always V³ operations)",
+    "Matrix representation less intuitive than adjacency lists for some"
+  ]
+}

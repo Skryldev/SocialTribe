@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Initialize Centrality Scores",
+    "description": "Set harmonic centrality H(v) = 0 for all nodes v. These will accumulate the sum of reciprocal distances from each source node."
+  },
+  {
+    "title": "For Each Source Node: BFS/SSSP",
+    "description": "For each node s as source: run BFS (unweighted) or Dijkstra (weighted) to compute the shortest distance dist(s, v) to every other node v. Nodes unreachable from s have distance = ∞."
+  },
+  {
+    "title": "Compute Reciprocal Distances",
+    "description": "For each reachable node v ≠ s, compute 1 / dist(s, v). Unreachable nodes contribute 0 (since 1/∞ = 0). This is the key difference from Closeness — disconnectedness is handled naturally."
+  },
+  {
+    "title": "Accumulate Harmonic Sum",
+    "description": "Add all reciprocal distances to the source's score: H(s) += Σ_{v ≠ s} 1 / dist(s, v). This sum is the harmonic centrality of node s."
+  },
+  {
+    "title": "Normalize Scores (Optional)",
+    "description": "Divide by (n-1) to get the average reciprocal distance. This normalizes scores to [0, 1] range where 1 means directly connected to all other nodes."
+  }
+]

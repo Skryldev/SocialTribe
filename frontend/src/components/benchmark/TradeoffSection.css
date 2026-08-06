@@ -1,0 +1,336 @@
+/* TradeoffSection.css
+ * Scoped under .ts-* (tradeoff-section).
+ * Consistent with .cs-* and .is-* naming from the rest of the suite.
+ * All colours via CSS custom properties; fallbacks provided for isolation.
+ */
+
+/* ─── Root ───────────────────────────────────────────────────────────────── */
+.ts-root {
+  /* padding / border / radius inherited from global .section */
+}
+
+/* ─── Summary bar ────────────────────────────────────────────────────────── */
+.ts-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ts-summary__stats {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Stat pill */
+.ts-summary__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  user-select: none;
+}
+
+.ts-summary__pill--pro {
+  background: color-mix(in srgb, #22c55e 10%, transparent);
+  color: #4ade80;
+  border-color: color-mix(in srgb, #22c55e 25%, transparent);
+}
+
+.ts-summary__pill--con {
+  background: color-mix(in srgb, #ef4444 10%, transparent);
+  color: #f87171;
+  border-color: color-mix(in srgb, #ef4444 25%, transparent);
+}
+
+.ts-summary__pill-count {
+  font-size: 18px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.ts-summary__pill-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.85;
+}
+
+/* Ratio progress bar */
+.ts-summary__ratio-track {
+  height: 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, #ef4444 30%, var(--border-muted, #2d2d44));
+  overflow: hidden;
+}
+
+.ts-summary__ratio-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+}
+
+/* ─── Two-column grid ────────────────────────────────────────────────────── */
+.ts-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+/* ─── Single column ──────────────────────────────────────────────────────── */
+.ts-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  border-radius: var(--radius-md, 10px);
+  border: 1px solid var(--border-muted, #2d2d44);
+}
+
+.ts-column--pro {
+  background: color-mix(in srgb, #22c55e 4%, var(--bg-card, #1e1e2e));
+  border-color: color-mix(in srgb, #22c55e 18%, transparent);
+}
+
+.ts-column--con {
+  background: color-mix(in srgb, #ef4444 4%, var(--bg-card, #1e1e2e));
+  border-color: color-mix(in srgb, #ef4444 18%, transparent);
+}
+
+/* Column header */
+.ts-column__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-muted, #2d2d44);
+  margin-bottom: 2px;
+}
+
+.ts-column__icon {
+  display: flex;
+  align-items: center;
+}
+
+.ts-column--pro .ts-column__icon { color: #4ade80; }
+.ts-column--con .ts-column__icon { color: #f87171; }
+
+.ts-column__title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  flex: 1;
+}
+
+.ts-column--pro .ts-column__title { color: #4ade80; }
+.ts-column--con .ts-column__title { color: #f87171; }
+
+.ts-column__count {
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+
+.ts-column--pro .ts-column__count {
+  background: color-mix(in srgb, #22c55e 18%, transparent);
+  color: #4ade80;
+}
+
+.ts-column--con .ts-column__count {
+  background: color-mix(in srgb, #ef4444 18%, transparent);
+  color: #f87171;
+}
+
+.ts-column__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ─── Individual tradeoff card ───────────────────────────────────────────── */
+.ts-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 22px 1fr 20px;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm, 7px);
+  border: 1px solid transparent;
+  cursor: default;
+  transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+  min-width: 0;
+}
+
+.ts-card--pro {
+  background: color-mix(in srgb, #22c55e 6%, var(--bg-primary, #111120));
+  border-color: color-mix(in srgb, #22c55e 15%, transparent);
+}
+
+.ts-card--con {
+  background: color-mix(in srgb, #ef4444 6%, var(--bg-primary, #111120));
+  border-color: color-mix(in srgb, #ef4444 15%, transparent);
+}
+
+.ts-card--pro:hover {
+  border-color: color-mix(in srgb, #22c55e 45%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, #22c55e 8%, transparent);
+  background: color-mix(in srgb, #22c55e 10%, var(--bg-primary, #111120));
+}
+
+.ts-card--con:hover {
+  border-color: color-mix(in srgb, #ef4444 45%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, #ef4444 8%, transparent);
+  background: color-mix(in srgb, #ef4444 10%, var(--bg-primary, #111120));
+}
+
+/* Icon */
+.ts-card__icon {
+  display: flex;
+  align-items: center;
+  padding-top: 1px;
+  flex-shrink: 0;
+}
+
+.ts-card--pro .ts-card__icon { color: #4ade80; }
+.ts-card--con .ts-card__icon { color: #f87171; }
+
+/* Text */
+.ts-card__text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-secondary, #9ca3af);
+}
+
+/* Index badge — subtle decorative counter */
+.ts-card__index {
+  font-size: 10px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono, monospace);
+  line-height: 1;
+  padding-top: 2px;
+  opacity: 0.3;
+  justify-self: end;
+  flex-shrink: 0;
+}
+
+.ts-card--pro .ts-card__index { color: #4ade80; }
+.ts-card--con .ts-card__index { color: #f87171; }
+
+/* ─── Column empty placeholder ───────────────────────────────────────────── */
+.ts-col-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px 12px;
+  border-radius: var(--radius-sm, 7px);
+  font-size: 12px;
+  text-align: center;
+}
+
+.ts-col-empty--pro { color: color-mix(in srgb, #22c55e 50%, var(--text-muted, #6b7280)); }
+.ts-col-empty--con { color: color-mix(in srgb, #ef4444 50%, var(--text-muted, #6b7280)); }
+
+.ts-col-empty p { margin: 0; }
+
+/* ─── Use-case chips strip ───────────────────────────────────────────────── */
+.ts-usecases {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px;
+  background: var(--bg-tertiary, #16162a);
+  border: 1px solid var(--border-muted, #2d2d44);
+  border-radius: var(--radius-md, 10px);
+}
+
+.ts-usecases__header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted, #6b7280);
+}
+
+.ts-usecases__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ts-usecases__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent-primary-light, #818cf8);
+  background: color-mix(in srgb, var(--accent-primary, #6366f1) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #6366f1) 24%, transparent);
+  cursor: default;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.ts-usecases__chip:hover {
+  background: color-mix(in srgb, var(--accent-primary, #6366f1) 18%, transparent);
+  border-color: color-mix(in srgb, var(--accent-primary, #6366f1) 40%, transparent);
+}
+
+/* ─── Global empty state ─────────────────────────────────────────────────── */
+.ts-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 48px 24px;
+  color: var(--text-muted, #6b7280);
+  font-size: 13px;
+  text-align: center;
+}
+
+.ts-empty p { margin: 0; }
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .ts-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .ts-card {
+    grid-template-columns: 20px 1fr;
+  }
+
+  /* Hide decorative index on small screens */
+  .ts-card__index {
+    display: none;
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .ts-card,
+  .ts-usecases__chip {
+    transition: none;
+  }
+}

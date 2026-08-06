@@ -1,0 +1,51 @@
+# Git
+.git
+.gitignore
+.github
+
+# IDE
+.vscode
+.idea
+
+# Build
+bin/
+dist/
+build/
+coverage/
+
+# Go
+vendor/
+
+# Environment
+.env
+.env.*
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+README.md
+LICENSE
+CHANGELOG.md
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+SECURITY.md
+SUPPORT.md
+
+# Tests
+testdata/
+*.test
+*.out
+
+# Temporary
+tmp/
+.cache/

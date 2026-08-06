@@ -1,0 +1,12 @@
+{
+  "id": "closeness_centrality",
+  "name": "Closeness-Centrality",
+  "category": "centrality",
+  "difficulty": "hard",
+
+  "timeComplexity": "O(V × (V + E))",
+  "spaceComplexity": "O(V^²)",
+  "bestCase": "O(V × (V + E))",
+  "worstCase": "O(V × (V + E))",
+  "averageCase": "O(V × (V + E))"
+}

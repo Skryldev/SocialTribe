@@ -1,0 +1,30 @@
+{
+  "pros": [
+    "Guaranteed O(log n) worst-case for all operations",
+    "Fewer rotations than AVL during insertion (max 2 vs 1, but simpler fix-ups)",
+    "Deletion requires at most 3 rotations (vs O(log n) for AVL)",
+    "Well-suited for update-heavy workloads (insert/delete frequently)",
+    "Battle-tested: used in C++ STL, Java Collections, Linux kernel",
+    "Atomic recolorings possible without structural changes",
+    "Parent pointers enable efficient iterative traversal",
+    "Amortized constant number of structural changes per update",
+    "Relaxed balance allows better performance with concurrent access",
+    "Can be augmented for order statistics (OS-tree), intervals, etc.",
+    "1 bit per node for color (typically packed into existing pointer bits)",
+    "Foundation for many real-world systems (schedulers, memory managers)"
+  ],
+  "cons": [
+    "Taller than AVL trees (2 log n vs 1.44 log n) — slower lookups",
+    "More complex implementation: 6+ insertion/deletion cases",
+    "Requires parent pointer (extra 8 bytes per node on 64-bit systems)",
+    "Debugging is harder due to color invariants",
+    "Recoloring cascades can propagate to root (O(log n) recolorings)",
+    "Not cache-friendly: pointer chasing causes cache misses",
+    "Not suitable for disk-based storage (B-trees are better)",
+    "Sequential insertions can create less balanced structure than AVL",
+    "Color bit often wastes 7 bits due to byte alignment",
+    "More code, more bugs: correct implementation is notoriously difficult",
+    "Thread safety requires complex fine-grained locking",
+    "Iterative fix-up with parent pointers can be harder to follow than recursion"
+  ]
+}

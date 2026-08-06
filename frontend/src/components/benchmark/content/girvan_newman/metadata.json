@@ -1,0 +1,17 @@
+{
+  "id": "girvan_newman",
+  "name": "Girvan-Newman",
+  "category": "community",
+  "difficulty": "hard",
+
+  "timeComplexity": "O(V * E^²)",
+  "spaceComplexity": "O(V + E)",
+  "bestCase": "O(V * E)",
+  "worstCase": "O(V * E²)",
+  "averageCase": "O(V * E²)",
+
+  "stable": false,
+  "inPlace": false,
+  "recursive": false,
+  "parallelizable": true
+}

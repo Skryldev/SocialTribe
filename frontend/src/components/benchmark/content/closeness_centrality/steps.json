@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Run BFS",
+    "description": "Perform Breadth-First Search from the source node to find shortest paths to all other nodes."
+  },
+  {
+    "title": "Record Distances",
+    "description": "Store the distance to each reachable node discovered during BFS."
+  },
+  {
+    "title": "Sum Distances",
+    "description": "Calculate the total sum of distances to all reachable nodes."
+  },
+  {
+    "title": "Compute Centrality",
+    "description": "Divide the number of reachable nodes (excluding self) by the total distance to get the closeness centrality between 0 and 1."
+  }
+]

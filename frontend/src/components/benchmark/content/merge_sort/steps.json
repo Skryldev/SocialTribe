@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Divide Array into Halves",
+    "description": "Find the middle index: mid = left + (right - left) // 2. Recursively divide the array into two roughly equal halves until each subarray contains 0 or 1 element (base case: already sorted)."
+  },
+  {
+    "title": "Sort Left Half",
+    "description": "Recursively apply Merge Sort to the left subarray from index left to mid. This subarray is sorted in-place through recursive division and merging."
+  },
+  {
+    "title": "Sort Right Half",
+    "description": "Recursively apply Merge Sort to the right subarray from index mid+1 to right. Both halves are independently sorted before merging."
+  },
+  {
+    "title": "Create Temporary Arrays",
+    "description": "Copy both sorted halves into temporary arrays (L and R). Add a sentinel value (∞) at the end of each to simplify bounds checking, or track indices explicitly."
+  },
+  {
+    "title": "Merge Sorted Halves",
+    "description": "Compare elements from both temporary arrays, placing the smaller element back into the original array. Advance the pointer of the array from which the element was taken. Continue until all elements from both halves are placed back."
+  },
+  {
+    "title": "Copy Remaining Elements",
+    "description": "If one half is exhausted before the other, copy all remaining elements from the non-empty half directly to the original array (they are already sorted)."
+  }
+]

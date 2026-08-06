@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Initialize Communities",
+    "description": "Assign each node to its own singleton community. Initialize modularity Q and compute node degrees and total edge weight (2m)."
+  },
+  {
+    "title": "Local Moving (Phase 1)",
+    "description": "Similar to Louvain: iterate over nodes in random order. For each node, compute ΔQ of moving to neighboring communities. Move to community yielding maximum positive gain. Repeat until no improvement possible."
+  },
+  {
+    "title": "Refinement (Phase 2)",
+    "description": "Split each community from Phase 1 into sub-communities to ensure well-connectedness. For each community, initialize each node as its own refined sub-community. Merge nodes locally within the community while ensuring all sub-communities remain connected. This guarantees no internally disconnected communities."
+  },
+  {
+    "title": "Graph Aggregation (Phase 3)",
+    "description": "Build a compressed graph where refined sub-communities become super-nodes. Edge weights between super-nodes are sums of edge weights between their constituent nodes. The refined partition (not the Phase 1 partition) determines the aggregation."
+  },
+  {
+    "title": "Recursive Application",
+    "description": "Apply Phases 1-3 recursively on the aggregated graph. Continue until modularity cannot be improved further, creating a hierarchy of increasingly coarse communities."
+  }
+]

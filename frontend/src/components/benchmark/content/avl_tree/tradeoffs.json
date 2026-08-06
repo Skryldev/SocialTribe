@@ -1,0 +1,30 @@
+{
+  "pros": [
+    "Guaranteed O(log n) height — strictest balance among all self-balancing BSTs",
+    "Faster lookups than Red-Black trees due to stricter balance (1.44 vs 2.0 log n)",
+    "All operations (search, insert, delete) are O(log n) worst-case",
+    "Self-balancing: no degenerate O(n) cases unlike standard BST",
+    "Only one rotation needed after insertion (efficient)",
+    "Can be augmented for order statistics, range queries, and intervals",
+    "Deterministic performance — no randomization or amortized analysis needed",
+    "Simple balance criterion: |height(left) - height(right)| ≤ 1",
+    "Well-understood and widely taught in computer science",
+    "Foundation for more complex tree structures",
+    "Excellent for applications with high lookup-to-update ratio",
+    "Provides sorted iteration in O(n) via in-order traversal"
+  ],
+  "cons": [
+    "More rotations than Red-Black trees during deletions (up to O(log n))",
+    "Each node must store height or balance factor (2 bytes overhead per node)",
+    "Slower insertions and deletions than Red-Black trees due to stricter balance",
+    "Recursive implementation can cause stack overflow on very deep trees",
+    "Not cache-friendly: pointer chasing leads to poor memory locality",
+    "Higher constant factors than simple BST for small n",
+    "More complex to implement correctly than standard BST",
+    "Not suitable for disk-based storage (use B-trees instead)",
+    "Thread-safety requires locking entire paths (difficult to parallelize)",
+    "Rebalancing after deletion is more complex than insertion",
+    "No guaranteed amortized bounds like Splay trees",
+    "Memory fragmentation from many small node allocations"
+  ]
+}

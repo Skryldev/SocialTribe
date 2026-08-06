@@ -1,0 +1,53 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+
+  "productName": "Social Tribe",
+  "mainBinaryName": "social-tribe",
+  "version": "2.17.3",
+  "identifier": "com.askari.socialtribe",
+
+  "build": {
+    "beforeDevCommand": "bun run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "bun run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Social Tribe",
+        "width": 800,
+        "height": 600,
+        "maximized": true,
+        "decorations": false,
+        "minWidth": 800,
+        "minHeight": 600
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "nsis": {
+        "installerIcon": "icons/icon.ico",
+        "uninstallerIcon": "icons/icon.ico"
+      }
+    },
+    "externalBin": [
+      "bin/benchmark-server",
+      "bin/tribe-database",
+      "bin/tribe-backend-server"
+    ]
+  }
+}

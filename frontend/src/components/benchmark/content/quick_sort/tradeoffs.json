@@ -1,0 +1,30 @@
+{
+  "pros": [
+    "Excellent average-case performance: O(n log n) with small constant factor",
+    "In-place sorting: O(log n) auxiliary space for recursion stack",
+    "Cache-friendly sequential memory access pattern",
+    "Fewer comparisons and swaps than Heap Sort in practice",
+    "Easily parallelizable (independent subarrays after partitioning)",
+    "Hoare partitioning does approximately n/3 swaps (very efficient)",
+    "Can be optimized with hybrid approaches (Introsort, median-of-three)",
+    "Empirically fastest comparison-based sort for most datasets",
+    "Three-way partitioning variant handles duplicates efficiently",
+    "Foundation for QuickSelect (selection in O(n) average time)",
+    "Simple inner loop enables good compiler optimization",
+    "Dominates standard library implementations (C++, Java primitives, Rust, Go)"
+  ],
+  "cons": [
+    "O(n²) worst-case time complexity with naive pivot selection",
+    "Not stable: does not preserve order of equal elements",
+    "Recursive implementation risks stack overflow on worst-case input",
+    "Performance heavily dependent on pivot quality",
+    "Degrades to O(n²) on already-sorted arrays with first/last element pivot",
+    "Not adaptive: cannot exploit partially sorted input",
+    "More comparisons than Merge Sort (~1.39 vs 1.00 n log n)",
+    "Random pivot adds overhead of random number generation",
+    "Partitioning logic is error-prone and hard to implement correctly",
+    "Requires random access (not suitable for linked lists)",
+    "Branch mispredictions on modern CPUs can impact performance",
+    "Standard implementations often switch to insertion sort for small n"
+  ]
+}

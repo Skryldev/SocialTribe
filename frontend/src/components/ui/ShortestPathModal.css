@@ -1,0 +1,648 @@
+/* ============================================
+   ShortestPathModal.css
+   Staff-Level Palette: "Graphite × Warm Stone"
+   Professional · Minimal · Enterprise-Grade
+   ============================================ */
+
+/* ──────────────────────────────────────────────
+   1. Design Tokens
+   ────────────────────────────────────────────── */
+:root {
+  /* Accent — Warm Gold */
+  --sp-accent: hsl(40 65% 50%);
+  --sp-accent-light: hsl(42 70% 62%);
+  --sp-accent-subtle: hsl(40 65% 50% / 0.08);
+  --sp-accent-border: hsl(40 65% 50% / 0.2);
+  --sp-accent-glow: hsl(40 65% 50% / 0.15);
+
+  /* Source — Espresso Brown */
+  --sp-source: hsl(25 40% 35%);
+  --sp-source-light: hsl(25 40% 48%);
+  --sp-source-subtle: hsl(25 40% 35% / 0.1);
+  --sp-source-border: hsl(25 40% 35% / 0.3);
+  --sp-source-glow: hsl(25 40% 35% / 0.18);
+
+  /* Target — Bronze */
+  --sp-target: hsl(35 55% 42%);
+  --sp-target-light: hsl(35 55% 55%);
+  --sp-target-subtle: hsl(35 55% 42% / 0.1);
+  --sp-target-border: hsl(35 55% 42% / 0.3);
+  --sp-target-glow: hsl(35 55% 42% / 0.18);
+
+  /* Semantic */
+  --sp-success: hsl(140 35% 48%);
+  --sp-success-subtle: hsl(140 35% 48% / 0.1);
+  --sp-success-border: hsl(140 35% 48% / 0.2);
+  --sp-danger: hsl(4 50% 48%);
+  --sp-danger-subtle: hsl(4 50% 48% / 0.1);
+
+  /* Surfaces — Warm Graphite System */
+  --sp-surface-base: hsl(30 8% 5%);
+  --sp-surface: hsl(30 6% 8% / 0.6);
+  --sp-surface-card: hsl(30 5% 11% / 0.7);
+  --sp-surface-hover: hsl(30 5% 14% / 0.8);
+  --sp-border-subtle: hsl(30 4% 16%);
+  --sp-border: hsl(30 4% 20%);
+
+  /* Text — Warm White System */
+  --sp-text-primary: hsl(35 20% 90%);
+  --sp-text-secondary: hsl(32 10% 62%);
+  --sp-text-tertiary: hsl(30 8% 48%);
+  --sp-text-muted: hsl(30 8% 40%);
+
+  /* Typography — Compact & Refined */
+  --sp-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --sp-font-mono: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace;
+  --sp-font-size-xs: 0.625rem;
+  --sp-font-size-sm: 0.6875rem;
+  --sp-font-size-base: 0.71875rem;
+  --sp-font-size-lg: 0.78125rem;
+
+  /* Radii */
+  --sp-radius-sm: 5px;
+  --sp-radius-md: 8px;
+  --sp-radius-lg: 11px;
+  --sp-radius-xl: 14px;
+  --sp-radius-full: 9999px;
+
+  /* Spacing — Compact */
+  --sp-space-1: 3px;
+  --sp-space-2: 6px;
+  --sp-space-3: 10px;
+  --sp-space-4: 14px;
+  --sp-space-5: 18px;
+  --sp-space-6: 22px;
+
+  /* Transitions */
+  --sp-duration-fast: 100ms;
+  --sp-duration-normal: 160ms;
+  --sp-duration-slow: 240ms;
+  --sp-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ──────────────────────────────────────────────
+   2. Header Subtitle
+   ────────────────────────────────────────────── */
+.sp-header-subtitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--sp-font-size-sm);
+  color: var(--sp-text-tertiary);
+}
+
+.sp-header-node {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  color: var(--sp-text-secondary);
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sp-header-node--source svg { color: var(--sp-source-light); flex-shrink: 0; }
+.sp-header-node--target svg { color: var(--sp-target-light); flex-shrink: 0; }
+
+.sp-header-arrow {
+  opacity: 0.3;
+  flex-shrink: 0;
+  color: var(--sp-text-muted);
+}
+
+/* ──────────────────────────────────────────────
+   3. Loading
+   ────────────────────────────────────────────── */
+.sp-loading-wrapper {
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ──────────────────────────────────────────────
+   4. Result Container
+   ────────────────────────────────────────────── */
+.sp-result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-space-3);
+}
+
+/* ──────────────────────────────────────────────
+   5. Status Bar — Compact
+   ────────────────────────────────────────────── */
+.sp-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-space-2);
+  padding: var(--sp-space-2) var(--sp-space-3);
+  background: var(--sp-surface);
+  border: 1px solid var(--sp-border-subtle);
+  border-radius: var(--sp-radius-md);
+}
+
+.sp-status-left {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-space-2);
+  flex-wrap: wrap;
+}
+
+.sp-status-right {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.sp-hops-label {
+  font-size: var(--sp-font-size-xs);
+  color: var(--sp-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.sp-hops-value {
+  font-size: var(--sp-font-size-lg);
+  font-weight: 700;
+  color: var(--sp-accent-light);
+  font-family: var(--sp-font-mono);
+}
+
+.sp-hops-unit {
+  font-size: var(--sp-font-size-xs);
+  color: var(--sp-text-tertiary);
+  font-weight: 500;
+  font-family: var(--sp-font);
+}
+
+/* ──────────────────────────────────────────────
+   6. Message Card — Compact
+   ────────────────────────────────────────────── */
+.sp-message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-space-2);
+  padding: var(--sp-space-2) var(--sp-space-3);
+  background: hsl(40 65% 50% / 0.05);
+  border: 1px solid hsl(40 65% 50% / 0.1);
+  border-radius: var(--sp-radius-md);
+  border-left: 2px solid hsl(40 65% 50% / 0.4);
+}
+
+.sp-message-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--sp-radius-sm);
+  background: hsl(40 65% 50% / 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sp-accent-light);
+  flex-shrink: 0;
+}
+
+.sp-message-text {
+  margin: 0;
+  font-size: var(--sp-font-size-xs);
+  color: var(--sp-text-secondary);
+  line-height: 1.5;
+}
+
+/* ──────────────────────────────────────────────
+   7. No Path — Compact
+   ────────────────────────────────────────────── */
+.sp-no-path {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-space-2);
+  padding: var(--sp-space-5) var(--sp-space-3);
+  text-align: center;
+}
+
+.sp-no-path-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--sp-surface-card);
+  border: 1px solid var(--sp-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sp-text-muted);
+  margin-bottom: var(--sp-space-1);
+}
+
+.sp-no-path-text {
+  font-size: var(--sp-font-size-sm);
+  font-weight: 600;
+  color: var(--sp-text-secondary);
+}
+
+.sp-no-path-hint {
+  font-size: var(--sp-font-size-xs);
+  color: var(--sp-text-muted);
+  max-width: 220px;
+  line-height: 1.4;
+}
+
+/* ──────────────────────────────────────────────
+   8. Path Chain — Compact
+   ────────────────────────────────────────────── */
+.sp-chain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  padding: var(--sp-space-4) var(--sp-space-1);
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: thin;
+  scrollbar-color: var(--sp-accent-border) transparent;
+  min-height: 80px;
+}
+
+.sp-chain::-webkit-scrollbar { height: 3px; }
+.sp-chain::-webkit-scrollbar-track { background: transparent; margin: 0 6px; }
+.sp-chain::-webkit-scrollbar-thumb {
+  background: var(--sp-accent-border);
+  border-radius: var(--sp-radius-full);
+}
+
+.sp-chain-item {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ──────────────────────────────────────────────
+   9. Path Node Card — Compact & Refined
+   ────────────────────────────────────────────── */
+.sp-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--sp-surface-card);
+  border: 1.5px solid var(--sp-border);
+  border-radius: var(--sp-radius-lg);
+  min-width: 72px;
+  cursor: default;
+  position: relative;
+  backdrop-filter: blur(12px);
+  transition:
+    border-color var(--sp-duration-normal) var(--sp-ease-out),
+    box-shadow var(--sp-duration-normal) var(--sp-ease-out);
+}
+
+/* Source — Espresso */
+.sp-node--source {
+  border-color: var(--sp-source-border);
+  background: var(--sp-source-subtle);
+  box-shadow: 0 0 20px var(--sp-source-glow);
+}
+
+/* Target — Bronze */
+.sp-node--target {
+  border-color: var(--sp-target-border);
+  background: var(--sp-target-subtle);
+  box-shadow: 0 0 20px var(--sp-target-glow);
+}
+
+/* Circle */
+.sp-node-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: hsl(30 5% 16%);
+  border: 1.5px solid hsl(30 4% 22%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sp-text-secondary);
+  font-weight: 700;
+  font-size: 12px;
+  font-family: var(--sp-font-mono);
+}
+
+.sp-node--source .sp-node-circle {
+  background: linear-gradient(135deg, hsl(25 40% 40%) 0%, hsl(25 40% 28%) 100%);
+  border-color: hsl(25 40% 48% / 0.3);
+  color: hsl(35 40% 88%);
+}
+
+.sp-node--target .sp-node-circle {
+  background: linear-gradient(135deg, hsl(35 55% 50%) 0%, hsl(35 55% 35%) 100%);
+  border-color: hsl(35 55% 55% / 0.3);
+  color: hsl(35 40% 88%);
+}
+
+.sp-node-step-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--sp-text-secondary);
+}
+
+/* Label */
+.sp-node-label {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--sp-text-secondary);
+  font-family: var(--sp-font-mono);
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+/* Progress Bar */
+.sp-node-progress {
+  width: 100%;
+  height: 1.5px;
+  background: hsl(30 4% 18%);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.sp-node-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--sp-source), var(--sp-accent) 50%, var(--sp-target));
+  border-radius: 1px;
+  transition: width 0.5s var(--sp-ease-out);
+}
+
+/* Role Badge — Smaller */
+.sp-node-role {
+  position: absolute;
+  top: -7px;
+  font-size: 6.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  padding: 2px 7px;
+  border-radius: var(--sp-radius-full);
+  backdrop-filter: blur(6px);
+  z-index: 2;
+}
+
+.sp-node-role--source {
+  background: hsl(25 40% 35% / 0.25);
+  color: hsl(25 40% 75%);
+  border: 1px solid hsl(25 40% 35% / 0.35);
+}
+
+.sp-node-role--target {
+  background: hsl(35 55% 42% / 0.25);
+  color: hsl(35 55% 75%);
+  border: 1px solid hsl(35 55% 42% / 0.35);
+}
+
+/* ──────────────────────────────────────────────
+   10. Connector — Compact
+   ────────────────────────────────────────────── */
+.sp-connector {
+  display: flex;
+  align-items: center;
+  width: 24px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sp-connector-line {
+  flex: 1;
+  height: 2px;
+  position: relative;
+  border-radius: 1px;
+  overflow: hidden;
+  background: hsl(30 4% 16%);
+}
+
+.sp-connector-line-inner {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    hsl(25 40% 35% / 0.6),
+    hsl(40 65% 50% / 0.65) 50%,
+    hsl(35 55% 42% / 0.6)
+  );
+  border-radius: 1px;
+}
+
+.sp-connector-arrow-wrap {
+  margin-left: -2px;
+  flex-shrink: 0;
+}
+
+.sp-connector-arrow {
+  color: var(--sp-accent-light);
+  filter: drop-shadow(0 0 3px hsl(40 65% 50% / 0.25));
+}
+
+/* ──────────────────────────────────────────────
+   11. Summary Footer — Compact
+   ────────────────────────────────────────────── */
+.sp-summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: var(--sp-space-3);
+  background: var(--sp-surface);
+  border: 1px solid var(--sp-border-subtle);
+  border-radius: var(--sp-radius-md);
+}
+
+.sp-summary-stat {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-space-2);
+  padding: 0 var(--sp-space-3);
+}
+
+.sp-summary-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--sp-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sp-summary-icon--nodes {
+  background: hsl(25 40% 35% / 0.1);
+  color: var(--sp-source-light);
+}
+
+.sp-summary-icon--edges {
+  background: hsl(40 65% 50% / 0.1);
+  color: var(--sp-accent-light);
+}
+
+.sp-summary-icon--type {
+  background: hsl(35 55% 42% / 0.1);
+  color: var(--sp-target-light);
+}
+
+.sp-summary-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sp-summary-value {
+  font-size: var(--sp-font-size-base);
+  font-weight: 700;
+  color: var(--sp-text-primary);
+  font-family: var(--sp-font-mono);
+  line-height: 1.2;
+}
+
+.sp-summary-value--type {
+  font-family: var(--sp-font);
+  font-size: var(--sp-font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--sp-accent-light);
+}
+
+.sp-summary-label {
+  font-size: 9px;
+  color: var(--sp-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.sp-summary-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--sp-border-subtle);
+  flex-shrink: 0;
+}
+
+/* ──────────────────────────────────────────────
+   12. Responsive — Mobile
+   ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .sp-chain {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--sp-space-3) var(--sp-space-1);
+    gap: 0;
+    min-height: auto;
+  }
+
+  .sp-chain-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sp-node {
+    min-width: 60px;
+    padding: 8px 12px;
+    gap: 5px;
+  }
+
+  .sp-node-circle {
+    width: 26px;
+    height: 26px;
+    font-size: 10px;
+  }
+
+  .sp-node-label {
+    font-size: 8px;
+    max-width: 60px;
+  }
+
+  .sp-node-progress { display: none; }
+
+  .sp-connector {
+    width: 2px;
+    height: 18px;
+    flex-direction: column;
+    margin-left: 26px;
+  }
+
+  .sp-connector-line { width: 2px; height: 100%; }
+  .sp-connector-line-inner {
+    background: linear-gradient(180deg,
+      hsl(25 40% 35% / 0.6),
+      hsl(40 65% 50% / 0.65) 50%,
+      hsl(35 55% 42% / 0.6)
+    );
+  }
+  .sp-connector-arrow-wrap { transform: rotate(90deg); margin-left: -3px; margin-top: -3px; }
+  .sp-connector-arrow { transform: rotate(90deg); }
+
+  .sp-status { flex-direction: column; align-items: flex-start; gap: var(--sp-space-1); }
+  .sp-summary { flex-direction: column; gap: var(--sp-space-2); align-items: stretch; }
+  .sp-summary-stat { padding: var(--sp-space-1) 0; }
+  .sp-summary-divider { width: 100%; height: 1px; }
+}
+
+/* ──────────────────────────────────────────────
+   13. Responsive — Large Screens
+   ────────────────────────────────────────────── */
+@media (min-width: 1600px) {
+  .sp-node {
+    min-width: 84px;
+    padding: 12px 16px;
+    gap: 7px;
+  }
+  .sp-node-circle { width: 36px; height: 36px; font-size: 13px; }
+  .sp-node-label { font-size: 10px; max-width: 80px; }
+  .sp-connector { width: 28px; }
+}
+
+/* ──────────────────────────────────────────────
+   14. Reduced Motion
+   ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .sp-node,
+  .sp-connector,
+  .sp-node-circle,
+  .sp-node-progress-fill {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+  }
+  .sp-node:hover { transform: none !important; }
+  .sp-connector-arrow { filter: none; }
+}
+
+/* ──────────────────────────────────────────────
+   15. Forced Colors
+   ────────────────────────────────────────────── */
+@media (forced-colors: active) {
+  .sp-node { border: 2px solid CanvasText; background: Canvas; color: CanvasText; }
+  .sp-node--source, .sp-node--target { border-color: Highlight; }
+  .sp-node-circle { background: Canvas; border: 2px solid CanvasText; color: CanvasText; }
+  .sp-node--source .sp-node-circle,
+  .sp-node--target .sp-node-circle { background: Highlight; color: HighlightText; border-color: Highlight; }
+  .sp-connector-line-inner { background: CanvasText; }
+  .sp-connector-arrow { color: CanvasText; filter: none; }
+  .sp-summary-divider { background: CanvasText; }
+  .sp-message { border-left-color: Highlight; }
+}
+
+/* ──────────────────────────────────────────────
+   16. Print
+   ────────────────────────────────────────────── */
+@media print {
+  .sp-node-role { display: none; }
+  .sp-connector-arrow { display: none; }
+  .sp-chain { overflow-x: visible; }
+  .sp-node-progress { display: none; }
+}

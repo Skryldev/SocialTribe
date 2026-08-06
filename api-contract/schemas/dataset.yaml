@@ -1,0 +1,5 @@
+# Datasets List Response
+DatasetsListResponse:
+  type: string
+  description: Response containing list of datasets (JSON stringified)
+  example: "[{\"id\":\"dataset-1\",\"name\":\"Social Network Dataset\"}]"

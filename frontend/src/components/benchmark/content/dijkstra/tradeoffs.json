@@ -1,0 +1,26 @@
+{
+  "pros": [
+    "Optimal for non-negative weighted graphs",
+    "Provides shortest paths to all nodes from a single source",
+    "Simple to understand and implement",
+    "Guaranteed to find correct shortest paths (provably correct)",
+    "Greedy approach makes it efficient for sparse graphs",
+    "Widely used and well-tested in production systems",
+    "Easy to reconstruct actual paths, not just distances",
+    "Can be optimized with different priority queue implementations",
+    "Easily modified for bidirectional search optimization",
+    "Forms the foundation for A* algorithm and other pathfinding variants"
+  ],
+  "cons": [
+    "Cannot handle negative edge weights (causes incorrect results)",
+    "Must examine all nodes to find shortest path to a single target",
+    "O(V²) time complexity for dense graphs without priority queue",
+    "Memory overhead for storing distances and predecessors",
+    "Priority queue operations add constant factor overhead",
+    "Single-source only; inefficient for all-pairs shortest paths",
+    "Struggles with graphs that have many equal-weight paths",
+    "Does not account for real-time traffic or dynamic edge weights",
+    "Inefficient for very large graphs unless combined with preprocessing",
+    "Requires graph to fit in memory (not naturally external-memory friendly)"
+  ]
+}

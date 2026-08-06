@@ -1,0 +1,17 @@
+{
+  "id": "fenwick_tree",
+  "name": "Fenwick-Tree",
+  "category": "range_query",
+  "difficulty": "medium",
+
+  "timeComplexity": "O(log n)",
+  "spaceComplexity": "O(n)",
+  "bestCase": "O(log n)",
+  "worstCase": "O(log n)",
+  "averageCase": "O(log n)",
+
+  "stable": null,
+  "inPlace": false,
+  "recursive": false,
+  "parallelizable": false
+}

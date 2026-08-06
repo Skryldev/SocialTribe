@@ -1,0 +1,217 @@
+/* components/ui/AddNodeButton.css */
+@import './FloatingaddnodeformTheme.css';
+
+/* ============================================================
+   AddNodeButton — vertical (portrait) floating action control
+   ============================================================ */
+
+.anb-dock {
+  position: fixed;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: var(--anb-font-ui);
+}
+
+.anb-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 56px;
+  min-height: 132px;
+  padding: 16px 0 14px;
+  gap: 10px;
+  background: linear-gradient(180deg, var(--anb-surface-2) 0%, var(--anb-surface-1) 100%);
+  border: 1px solid var(--anb-border-subtle);
+  border-radius: var(--anb-radius-pill);
+  box-shadow: var(--anb-shadow-soft);
+  color: var(--anb-text-primary);
+  cursor: pointer;
+  transition: box-shadow 0.25s var(--anb-ease-out), border-color 0.25s var(--anb-ease-out),
+    background 0.25s var(--anb-ease-out);
+}
+
+.anb-btn:hover:not(.anb-btn-locked),
+.anb-btn:focus-visible:not(.anb-btn-locked) {
+  border-color: var(--anb-accent-border);
+  box-shadow: var(--anb-shadow-lift);
+}
+
+.anb-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--anb-accent-soft), var(--anb-shadow-soft);
+}
+
+.anb-btn:active:not(.anb-btn-locked) {
+  background: linear-gradient(180deg, var(--anb-surface-1) 0%, var(--anb-surface-0) 100%);
+}
+
+.anb-btn-locked {
+  cursor: not-allowed;
+  color: var(--anb-text-tertiary);
+  box-shadow: none;
+}
+
+/* Icon */
+.anb-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: var(--anb-radius-pill);
+  background: var(--anb-accent-soft);
+  color: var(--anb-accent-strong);
+  overflow: hidden;
+}
+
+.anb-btn-locked .anb-icon {
+  background: var(--anb-surface-1);
+  color: var(--anb-text-tertiary);
+}
+
+/* Divider + signature "signal" node dot */
+.anb-divider {
+  position: relative;
+  width: 1px;
+  height: 22px;
+  background: var(--anb-border-strong);
+  flex-shrink: 0;
+}
+
+.anb-signal-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--anb-accent);
+  transform: translate(-50%, -50%);
+  animation: anb-pulse 2.6s ease-in-out infinite;
+}
+
+.anb-btn-locked .anb-signal-dot {
+  background: var(--anb-text-tertiary);
+  animation: none;
+}
+
+@keyframes anb-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(76, 126, 255, 0.45); }
+  50% { box-shadow: 0 0 0 5px rgba(76, 126, 255, 0); }
+}
+
+/* Vertical label — reads top-to-bottom, keeps the control in portrait */
+.anb-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: var(--anb-text-2xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--anb-text-secondary);
+  white-space: nowrap;
+}
+
+.anb-btn-locked .anb-label {
+  color: var(--anb-text-tertiary);
+}
+
+/* Node count chip */
+.anb-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  margin-top: auto;
+  border-radius: var(--anb-radius-pill);
+  background: var(--anb-accent-soft);
+  color: var(--anb-accent-strong);
+  font-family: var(--anb-font-mono);
+  font-size: var(--anb-text-2xs);
+  font-weight: 700;
+}
+
+/* Tooltip */
+.anb-tooltip {
+  position: absolute;
+  right: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 168px;
+  padding: 10px 14px;
+  background: var(--anb-surface-1);
+  border: 1px solid var(--anb-border-subtle);
+  border-radius: var(--anb-radius-md);
+  box-shadow: var(--anb-shadow-soft);
+  pointer-events: none;
+}
+
+.anb-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  background: var(--anb-surface-1);
+  border-right: 1px solid var(--anb-border-subtle);
+  border-top: 1px solid var(--anb-border-subtle);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.anb-tooltip-title {
+  font-size: var(--anb-text-sm);
+  font-weight: 600;
+  color: var(--anb-text-primary);
+}
+
+.anb-tooltip-hint {
+  font-size: var(--anb-text-2xs);
+  color: var(--anb-text-tertiary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .anb-dock {
+    right: 14px;
+  }
+
+  .anb-btn {
+    width: 48px;
+    min-height: 108px;
+    gap: 8px;
+    padding: 12px 0 10px;
+  }
+
+  .anb-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .anb-tooltip {
+    display: none;
+  }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .anb-signal-dot {
+    animation: none;
+  }
+  .anb-btn,
+  .anb-tooltip {
+    transition: none;
+  }
+}

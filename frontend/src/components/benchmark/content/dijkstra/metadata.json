@@ -1,0 +1,17 @@
+{
+  "id": "dijkstra",
+  "name": "Dijkstra's Algorithm",
+  "category": "shortest_path",
+  "difficulty": "medium",
+
+  "timeComplexity": "O((V + E) log V)",
+  "spaceComplexity": "O(V)",
+  "bestCase": "O((V + E) log V)",
+  "worstCase": "O((V + E) log V)",
+  "averageCase": "O((V + E) log V)",
+
+  "stable": null,
+  "inPlace": false,
+  "recursive": false,
+  "parallelizable": true
+}

@@ -1,0 +1,27 @@
+{
+  "pros": [
+    "Near-linear time complexity O(V log V) on real-world graphs",
+    "Scales to massive networks (millions of nodes, billions of edges)",
+    "Produces naturally hierarchical community structure",
+    "No prior knowledge of number of communities needed",
+    "High-quality partitions with modularity close to theoretical optimum",
+    "Simple to implement with clear two-phase structure",
+    "Handles weighted graphs natively",
+    "Widely tested and validated across disciplines",
+    "Multi-level approach captures communities at different resolutions",
+    "Memory-efficient: only needs adjacency list and community assignments"
+  ],
+  "cons": [
+    "Non-deterministic results due to randomized node ordering",
+    "May produce internally disconnected communities (fixed in Leiden)",
+    "Modularity resolution limit: misses small communities in large graphs",
+    "NP-hard underlying problem; heuristic may get stuck in local optima",
+    "No guarantee of optimality or approximation ratio",
+    "Cannot detect overlapping communities (one node, one community)",
+    "Performance degrades on very dense graphs (closer to O(V²))",
+    "Results sensitive to initial conditions and iteration order",
+    "Modularity function has known limitations (resolution limit)",
+    "Cannot distinguish hierarchical levels automatically",
+    "Community quality may vary significantly across different runs"
+  ]
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Extract Neighbor Sets",
+    "description": "Retrieve the complete set of neighbors for both nodes from the graph. Ensure sets are in a format that supports efficient set operations."
+  },
+  {
+    "title": "Compute Intersection",
+    "description": "Calculate the intersection of the two neighbor sets: |Γ(u) ∩ Γ(v)|. This represents the shared connections between the nodes."
+  },
+  {
+    "title": "Compute Union",
+    "description": "Calculate the union of the two neighbor sets: |Γ(u) ∪ Γ(v)|. This represents all distinct connections of both nodes combined."
+  },
+  {
+    "title": "Calculate Jaccard Ratio",
+    "description": "Divide the size of the intersection by the size of the union. The result is a normalized similarity score between 0 (no common neighbors) and 1 (identical neighbor sets)."
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "pros": [
+    "Intuitive normalized score between 0 and 1",
+    "Easy to understand and interpret (percentage of shared neighbors)",
+    "Accounts for both common and total neighbors simultaneously",
+    "Simple and computationally efficient set operations",
+    "No parameters to tune or optimize",
+    "Symmetric and well-defined for all node pairs",
+    "Natural distance metric when converted (1 - Jaccard)",
+    "Robust baseline for comparing complex link prediction algorithms",
+    "Widely applicable beyond graphs (sets, documents, biology)",
+    "Handles varying node degrees through automatic normalization"
+  ],
+  "cons": [
+    "Does not consider neighbor importance or weighted connections",
+    "Penalizes high-degree nodes more than Sørensen-Dice",
+    "Cannot capture structural patterns beyond immediate neighbors",
+    "Zero score when nodes share no common neighbors (limited coverage)",
+    "Sensitive to noise and missing edges in sparse graphs",
+    "May underestimate similarity in dense network regions",
+    "Equal treatment of all neighbors ignores connection strength",
+    "Not suitable for directed graphs without modification",
+    "Biased towards lower scores in scale-free networks",
+    "Less effective for very large graphs where most pairs have score 0"
+  ]
+}

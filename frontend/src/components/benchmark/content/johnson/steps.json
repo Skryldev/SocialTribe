@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Add Dummy Node",
+    "description": "Create a new dummy node q and add zero-weight edges from q to every other node in the graph. This ensures all nodes are reachable for the Bellman-Ford initialization step."
+  },
+  {
+    "title": "Run Bellman-Ford from Dummy Node",
+    "description": "Execute Bellman-Ford algorithm from q to compute the shortest distance h(v) = dist(q, v) for all nodes. If a negative cycle is detected, terminate the algorithm as shortest paths are undefined."
+  },
+  {
+    "title": "Reweight All Edges",
+    "description": "For each edge (u,v) with original weight w(u,v), compute a new weight: w'(u,v) = w(u,v) + h(u) - h(v). This transformation makes all edge weights non-negative while preserving shortest path ordering."
+  },
+  {
+    "title": "Remove Dummy Node",
+    "description": "Remove the dummy node q and its incident edges from the graph. The remaining graph has all non-negative edge weights."
+  },
+  {
+    "title": "Run Dijkstra from Each Node",
+    "description": "Execute Dijkstra's algorithm from each node in the reweighted graph to compute all-pairs shortest paths using the transformed edge weights."
+  },
+  {
+    "title": "Transform Distances Back",
+    "description": "For each computed distance dist'(u,v) in the reweighted graph, recover the original distance: dist(u,v) = dist'(u,v) - h(u) + h(v)."
+  }
+]

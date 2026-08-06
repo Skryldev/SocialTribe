@@ -1,0 +1,17 @@
+{
+  "id": "louvain",
+  "name": "Louvain",
+  "category": "community",
+  "difficulty": "hard",
+
+  "timeComplexity": "O(V log V)",
+  "spaceComplexity": "O(V + E)",
+  "bestCase": "O(V + E)",
+  "worstCase": "O(V log V)",
+  "averageCase": "O(V log V)",
+
+  "stable": false,
+  "inPlace": false,
+  "recursive": true,
+  "parallelizable": true
+}

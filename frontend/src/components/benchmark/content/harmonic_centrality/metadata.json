@@ -1,0 +1,17 @@
+{
+  "id": "harmonic_centrality",
+  "name": "Harmonic-Centrality",
+  "category": "centrality",
+  "difficulty": "medium",
+
+  "timeComplexity": "O(V * (V + E))",
+  "spaceComplexity": "O(V)",
+  "bestCase": "O(V * (V + E))",
+  "worstCase": "O(V * (V + E))",
+  "averageCase": "O(V * (V + E))",
+
+  "stable": true,
+  "inPlace": false,
+  "recursive": false,
+  "parallelizable": true
+}

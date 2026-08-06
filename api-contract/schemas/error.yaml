@@ -1,0 +1,25 @@
+HTTPValidationError:
+  type: object
+  properties:
+    detail:
+      type: array
+      items:
+        $ref: '#/ValidationErrorDetail'
+
+ValidationErrorDetail:
+  type: object
+  properties:
+    loc:
+      type: array
+      items:
+        oneOf:
+          - type: string
+          - type: integer
+    msg:
+      type: string
+    type:
+      type: string
+    input:
+      type: string
+    ctx:
+      type: object

@@ -1,0 +1,17 @@
+{
+  "id": "triangle_detection",
+  "name": "Triangle-Detection",
+  "category": "community",
+  "difficulty": "medium",
+
+  "timeComplexity": "O(V * d^²)",
+  "spaceComplexity": "O(V)",
+  "bestCase": "O(E)",
+  "worstCase": "O(V³)",
+  "averageCase": "O(E^(3/2))",
+
+  "stable": null,
+  "inPlace": true,
+  "recursive": false,
+  "parallelizable": true
+}

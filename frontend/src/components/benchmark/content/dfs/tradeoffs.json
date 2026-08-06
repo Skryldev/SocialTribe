@@ -1,0 +1,30 @@
+{
+  "pros": [
+    "Lower memory than BFS for balanced graphs (O(log V) vs O(V))",
+    "Natural for recursive backtracking problems (maze, puzzles, constraints)",
+    "Classifies edges (tree, back, forward, cross) — crucial for many algorithms",
+    "Foundation for topological sort in DAGs (post-order gives reverse topo order)",
+    "Enables cycle detection via back edge identification",
+    "Powers Tarjan's algorithm for SCC, articulation points, bridges",
+    "Simple recursive implementation (few lines of code)",
+    "Can be used for exhaustive search in decision trees and game trees",
+    "Discovers deep solutions quickly (good when solutions are deep)",
+    "Works with both directed and undirected graphs",
+    "Can record discovery/finishing times for rich graph analysis",
+    "Iterative version avoids stack overflow while preserving depth-first order"
+  ],
+  "cons": [
+    "Recursive implementation risks stack overflow on deep graphs (e.g., V=10⁶ path)",
+    "Does NOT find shortest path (unlike BFS)",
+    "May go down infinite depth in infinite graphs (mitigated by depth limit)",
+    "Can get stuck in deep unfruitful branches (no heuristic like A*)",
+    "Iterative version is more complex to implement with correct post-order",
+    "Stack space can be O(V) for skewed graphs (e.g., linked list, star)",
+    "Cannot be parallelized easily due to sequential nature",
+    "Memory overhead for recursion metadata in some languages",
+    "Less intuitive for shortest-distance problems than BFS",
+    "Not suitable for distributed graph processing without modification",
+    "Backtracking can be expensive if solutions are shallow and graph is deep",
+    "Depth-limited and iterative deepening add complexity over basic BFS"
+  ]
+}

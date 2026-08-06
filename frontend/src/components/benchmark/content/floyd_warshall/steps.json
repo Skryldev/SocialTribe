@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Initialize Distance Matrix",
+    "description": "Create a V×V matrix where dist[i][j] = weight of edge (i,j) if it exists, 0 if i=j, and infinity otherwise. Initialize the predecessor matrix for path reconstruction."
+  },
+  {
+    "title": "Consider Each Intermediate Node",
+    "description": "For each node k (from 0 to V-1), consider it as a potential intermediate node for all pairs of nodes (i,j). This is the outermost loop of the triple nested iteration."
+  },
+  {
+    "title": "Evaluate Path Through Intermediate",
+    "description": "For each pair (i,j), compare the current best distance dist[i][j] with the path going through k: dist[i][k] + dist[k][j]."
+  },
+  {
+    "title": "Update Distance if Shorter",
+    "description": "If the path through k is shorter than the current best, update dist[i][j] = dist[i][k] + dist[k][j] and set predecessor[i][j] = predecessor[k][j]."
+  },
+  {
+    "title": "Check for Negative Cycles",
+    "description": "After processing all k, check the diagonal: if any dist[i][i] < 0, a negative cycle exists involving node i."
+  }
+]

@@ -1,0 +1,326 @@
+/* IntuitionSection.css
+ * Scoped under .is-* (intuition-section) — never collides with .cs-* or .vs-*.
+ * Follows the same CSS-var token system as ComplexitySection.css.
+ */
+
+/* ─── Root ───────────────────────────────────────────────────────────────── */
+.is-root {
+  /* padding / border inherited from .section */
+}
+
+/* ─── Theory summary callout ─────────────────────────────────────────────── */
+.is-summary {
+  display: flex;
+  gap: 14px;
+  padding: 18px 20px;
+  background: color-mix(in srgb, var(--accent-primary, #6366f1) 7%, var(--bg-card, #1e1e2e));
+  border: 1px solid color-mix(in srgb, var(--accent-primary, #6366f1) 22%, transparent);
+  border-radius: var(--radius-md, 10px);
+  margin-bottom: 28px;
+}
+
+.is-summary__icon-col {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--accent-primary, #6366f1);
+}
+
+.is-summary__body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.is-summary__prose {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-secondary, #9ca3af);
+  line-height: 1.75;
+}
+
+.is-summary__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-primary-light, #818cf8);
+  transition: color 0.15s ease;
+  align-self: flex-start;
+}
+
+.is-summary__toggle:hover {
+  color: var(--accent-primary, #6366f1);
+}
+
+.is-summary__toggle:focus-visible {
+  outline: 2px solid var(--accent-primary, #6366f1);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* ─── Meta badges ────────────────────────────────────────────────────────── */
+.is-meta {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.is-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border: 1px solid transparent;
+  line-height: 1;
+}
+
+.is-badge--category {
+  background: color-mix(in srgb, var(--accent-secondary, #06b6d4) 12%, transparent);
+  color: var(--accent-secondary, #06b6d4);
+  border-color: color-mix(in srgb, var(--accent-secondary, #06b6d4) 28%, transparent);
+}
+
+.is-badge--easy {
+  background: color-mix(in srgb, #22c55e 12%, transparent);
+  color: #4ade80;
+  border-color: color-mix(in srgb, #22c55e 28%, transparent);
+}
+
+.is-badge--medium {
+  background: color-mix(in srgb, #f59e0b 12%, transparent);
+  color: #fbbf24;
+  border-color: color-mix(in srgb, #f59e0b 28%, transparent);
+}
+
+.is-badge--hard {
+  background: color-mix(in srgb, #ef4444 12%, transparent);
+  color: #f87171;
+  border-color: color-mix(in srgb, #ef4444 28%, transparent);
+}
+
+/* ─── Timeline container ─────────────────────────────────────────────────── */
+.is-timeline {
+  display: flex;
+  flex-direction: column;
+  /* No gap — spacing is managed by .is-step__connector-track height */
+}
+
+/* ─── Single step row ────────────────────────────────────────────────────── */
+.is-step {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 0 16px;
+  /* Enough bottom space for the connector to breathe */
+  padding-bottom: 4px;
+}
+
+/* ── Left spine column ── */
+.is-step__spine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Step node circle */
+.is-step__node {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-tertiary, #16162a);
+  border: 2px solid var(--border-muted, #2d2d44);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  z-index: 1;
+}
+
+.is-step:hover .is-step__node {
+  border-color: var(--accent-primary, #6366f1);
+  background: color-mix(in srgb, var(--accent-primary, #6366f1) 10%, var(--bg-tertiary, #16162a));
+}
+
+/* The number label — hidden visually, we rely on the icon for the last step */
+.is-step__number {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted, #6b7280);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  position: absolute;
+}
+
+/* Lucide icon inside node */
+.is-step__node-icon {
+  color: var(--text-muted, #6b7280);
+  /* Hide the icon; show only the number. On last step the checkmark replaces number. */
+  display: none;
+}
+
+.is-step__node-icon--done {
+  display: block;
+  color: var(--accent-primary, #6366f1);
+}
+
+/* When last step: hide the number, show the icon */
+.is-step:last-child .is-step__number {
+  display: none;
+}
+
+/* When NOT last step: number visible, regular circle icon hidden */
+.is-step:not(:last-child) .is-step__node-icon {
+  display: none;
+}
+
+/* Connector track (invisible track, holds fill) */
+.is-step__connector-track {
+  flex: 1;
+  width: 2px;
+  background: var(--border-muted, #2d2d44);
+  margin: 4px 0;
+  border-radius: 1px;
+  overflow: hidden;
+  min-height: 32px;
+}
+
+/* Animated fill */
+.is-step__connector-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    var(--accent-primary, #6366f1),
+    color-mix(in srgb, var(--accent-primary, #6366f1) 40%, transparent)
+  );
+  transform-origin: top;
+}
+
+/* ── Right card column ── */
+.is-step__card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  background: var(--bg-card, #1e1e2e);
+  border: 1px solid var(--border-muted, #2d2d44);
+  border-radius: var(--radius-md, 10px);
+  cursor: default;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  min-width: 0;
+}
+
+.is-step__card:hover,
+.is-step:hover .is-step__card {
+  border-color: color-mix(in srgb, var(--accent-primary, #6366f1) 40%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary, #6366f1) 8%, transparent);
+}
+
+.is-step__card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.is-step__eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-primary-light, #818cf8);
+}
+
+.is-step__title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary, #e2e8f0);
+  line-height: 1.3;
+}
+
+.is-step__description {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary, #9ca3af);
+  line-height: 1.7;
+}
+
+/* Optional hint chip */
+.is-step__hint {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 7px 10px;
+  background: color-mix(in srgb, var(--accent-secondary, #06b6d4) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-secondary, #06b6d4) 22%, transparent);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--accent-secondary, #06b6d4);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+.is-step__hint svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ─── Empty state ────────────────────────────────────────────────────────── */
+.is-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 48px 24px;
+  color: var(--text-muted, #6b7280);
+  font-size: 13px;
+  text-align: center;
+}
+
+.is-empty p { margin: 0; }
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .is-summary {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .is-step {
+    grid-template-columns: 26px 1fr;
+    gap: 0 12px;
+  }
+
+  .is-step__node {
+    width: 26px;
+    height: 26px;
+  }
+
+  .is-step__number {
+    font-size: 10px;
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .is-step__card,
+  .is-step__node,
+  .is-summary__toggle {
+    transition: none;
+  }
+}

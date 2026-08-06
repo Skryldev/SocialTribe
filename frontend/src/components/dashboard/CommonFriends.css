@@ -1,0 +1,619 @@
+/* ==========================================================================
+   CommonFriends — Mutual Connections Professional Styles
+   Compact sizing, no text overflow, clean layout
+   ========================================================================== */
+
+:root {
+  --cf-surface: #0f172a;
+  --cf-surface-alt: #1e293b;
+  --cf-border: rgba(255, 255, 255, 0.05);
+  --cf-accent: #f59e0b;
+  --cf-accent-light: #fbbf24;
+  --cf-accent-dark: #ea580c;
+  --cf-text: #f1f5f9;
+  --cf-text-secondary: #94a3b8;
+  --cf-text-muted: #64748b;
+  --cf-radius: 12px;
+  --cf-radius-sm: 8px;
+  --cf-font-mono: 'JetBrains Mono', monospace;
+  --cf-font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ==========================================================================
+   Container
+   ========================================================================== */
+
+.common-friends-container {
+  background: linear-gradient(135deg, var(--cf-surface) 0%, var(--cf-surface-alt) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.1);
+  border-radius: var(--cf-radius);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+.common-friends-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cf-accent), var(--cf-accent-dark), transparent);
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.cf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--cf-border);
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cf-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.cf-header-icon {
+  width: 28px;
+  height: 28px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.1);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cf-accent);
+  flex-shrink: 0;
+}
+
+.cf-header-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cf-text);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.cf-header-subtitle {
+  margin: 1px 0 0;
+  font-size: 10px;
+  color: var(--cf-text-secondary);
+  white-space: nowrap;
+}
+
+.cf-mutual-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--cf-accent-light);
+  font-family: var(--cf-font-mono);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Selection Area
+   ========================================================================== */
+
+.cf-selection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--cf-border);
+}
+
+.cf-select-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.cf-select-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--cf-text-muted);
+}
+
+.cf-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cf-accent);
+  flex-shrink: 0;
+  cursor: pointer;
+  padding: 4px;
+  margin-top: 14px;
+}
+
+/* ==========================================================================
+   Content Area
+   ========================================================================== */
+
+.cf-content {
+  padding: 10px 14px;
+}
+
+/* ==========================================================================
+   Stats Row — 3 columns, compact, no overflow
+   ========================================================================== */
+
+.cf-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.stat-card.highlighted {
+  background: rgba(251, 191, 36, 0.05);
+  border-color: rgba(251, 191, 36, 0.15);
+}
+
+.stat-card-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+
+.stat-card-value {
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--cf-font-mono);
+  color: var(--cf-text);
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.stat-card-label {
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--cf-text-secondary);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.stat-card-glow {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Users Compare Section
+   ========================================================================== */
+
+.cf-users-compare {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  flex-wrap: wrap;
+}
+
+.cf-user-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.cf-user-tag-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.cf-user-tag-avatar.source {
+  background: linear-gradient(135deg, var(--cf-accent), var(--cf-accent-dark));
+}
+
+.cf-user-tag-avatar.target {
+  background: linear-gradient(135deg, var(--cf-accent-light), var(--cf-accent));
+}
+
+.cf-user-tag-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--cf-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+}
+
+.cf-user-tag-divider {
+  font-size: 11px;
+  color: var(--cf-text-muted);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Mutual Friends Section Header
+   ========================================================================== */
+
+.cf-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+
+.cf-section-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--cf-text);
+}
+
+.cf-section-count {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 8px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  border-radius: 10px;
+  color: var(--cf-accent-light);
+  font-family: var(--cf-font-mono);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Friends Grid — Auto-fill, compact badges
+   ========================================================================== */
+
+.cf-friends-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 6px;
+  max-height: 260px;
+  overflow-y: auto;
+  padding: 2px 0;
+}
+
+.cf-friends-grid::-webkit-scrollbar {
+  width: 4px;
+}
+
+.cf-friends-grid::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+}
+
+.cf-friends-grid::-webkit-scrollbar-thumb {
+  background: rgba(245, 158, 11, 0.2);
+  border-radius: 10px;
+}
+
+.cf-friends-grid::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 158, 11, 0.35);
+}
+
+/* ==========================================================================
+   Friend Badge — Compact, fixed internal sizing
+   ========================================================================== */
+
+.friend-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  cursor: pointer;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.friend-badge-avatar {
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, var(--cf-accent), var(--cf-accent-dark));
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.friend-badge-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+
+.friend-badge-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--cf-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.friend-badge-relation {
+  font-size: 8px;
+  color: var(--cf-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.friend-badge-arrow {
+  color: var(--cf-accent);
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.friend-badge:hover .friend-badge-arrow {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   No Mutual State
+   ========================================================================== */
+
+.no-mutual-state {
+  text-align: center;
+  padding: 28px 16px;
+  background: rgba(248, 113, 113, 0.03);
+  border: 1px solid rgba(248, 113, 113, 0.1);
+  border-radius: 8px;
+}
+
+.no-mutual-icon-wrap {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.no-mutual-icon {
+  width: 42px;
+  height: 42px;
+  background: rgba(248, 113, 113, 0.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f87171;
+}
+
+.no-mutual-title {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cf-text);
+}
+
+.no-mutual-description {
+  margin: 0;
+  font-size: 10px;
+  color: var(--cf-text-muted);
+  line-height: 1.4;
+}
+
+.no-mutual-description strong {
+  color: var(--cf-text-secondary);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Select Users Empty State
+   ========================================================================== */
+
+.select-users-state {
+  text-align: center;
+  padding: 36px 20px;
+}
+
+.select-users-icon-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.select-users-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cf-accent);
+}
+
+.select-users-sparkle {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  color: var(--cf-accent-light);
+}
+
+.select-users-title {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cf-text);
+}
+
+.select-users-description {
+  margin: 0;
+  font-size: 10px;
+  color: var(--cf-text-muted);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.cf-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border-top: 1px solid var(--cf-border);
+  background: rgba(0, 0, 0, 0.15);
+  font-size: 9px;
+  color: var(--cf-text-muted);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 680px) {
+  .cf-selection {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cf-select-group {
+    width: 100%;
+  }
+
+  .cf-connector {
+    transform: rotate(90deg);
+    align-self: center;
+    margin-top: 0;
+  }
+
+  .cf-stats-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .cf-users-compare {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .cf-user-tag-divider {
+    transform: rotate(90deg);
+  }
+
+  .cf-friends-grid {
+    grid-template-columns: 1fr 1fr;
+    max-height: 200px;
+    gap: 4px;
+  }
+
+  .cf-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .cf-header {
+    padding: 8px 12px;
+  }
+
+  .cf-content {
+    padding: 8px 12px;
+  }
+
+  .cf-friends-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .friend-badge {
+    padding: 5px 8px;
+  }
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .common-friends-container *,
+  .friend-badge,
+  .stat-card,
+  .cf-connector {
+    transition: none !important;
+    animation-duration: 0.01ms !important;
+  }
+}

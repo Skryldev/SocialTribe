@@ -1,0 +1,22 @@
+{
+  "pros": [
+    "Intuitive interpretation of local network density",
+    "Captures important triadic closure patterns",
+    "Useful for detecting communities and cliques",
+    "Normalized between 0 and 1 for easy comparison",
+    "Robust indicator of small-world network properties",
+    "Simple to compute for individual nodes",
+    "Reveals functional modules in biological networks",
+    "Differentiates random networks from real-world networks"
+  ],
+  "cons": [
+    "Computationally expensive for large dense graphs O(V³)",
+    "Local measure only captures immediate neighborhood",
+    "Sensitive to nodes with low degree (degree < 2 returns 0)",
+    "Cannot distinguish different triangle configurations",
+    "Average local clustering biased by low-degree nodes",
+    "Global and average local measures can give different results",
+    "Does not capture higher-order clustering (squares, etc.)",
+    "Limited to undirected graphs without adaptation"
+  ]
+}

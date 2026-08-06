@@ -1,0 +1,16 @@
+{
+  "pros": [
+    "Intuitive measure of centrality and influence",
+    "Computes efficiently with BFS",
+    "Works on weighted graphs with modification",
+    "Identifies efficient spreaders of information",
+    "Useful for network flow and transportation analysis"
+  ],
+  "cons": [
+    "Requires connected graph for meaningful results",
+    "Sensitive to disconnected graph components",
+    "Computationally expensive for large graphs",
+    "Not suitable for very large networks",
+    "Less useful in highly connected networks where distances are similar"
+  ]
+}

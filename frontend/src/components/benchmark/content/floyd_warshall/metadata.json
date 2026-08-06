@@ -1,0 +1,17 @@
+{
+  "id": "floyd_warshall",
+  "name": "Floyd-Warshall",
+  "category": "shortest_path",
+  "difficulty": "medium",
+
+  "timeComplexity": "O(V^³)",
+  "spaceComplexity": "O(V^²)",
+  "bestCase": "O(V^³)",
+  "worstCase": "O(V^³)",
+  "averageCase": "O(V^³)",
+
+  "stable": null,
+  "inPlace": true,
+  "recursive": false,
+  "parallelizable": true
+}

@@ -1,0 +1,44 @@
+[package]
+name = "planner"
+version = "0.1.0"
+edition = "2021"
+description = "Query planner and optimizer for graph query engine"
+
+[dependencies]
+lexer = { path = "../lexer" }
+parser = { path = "../parser" }
+semantic = { path = "../semantic" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+lru = "0.12"
+
+[dev-dependencies]
+pretty_assertions = "1.4"
+rstest = "0.18"
+test-case = "3.3"
+criterion = "0.5"
+
+[lib]
+name = "planner"
+path = "src/lib.rs"
+
+[[test]]
+name = "logical_plan_tests"
+path = "tests/logical_plan_tests.rs"
+
+[[test]]
+name = "physical_plan_tests"
+path = "tests/physical_plan_tests.rs"
+
+[[test]]
+name = "optimizer_tests"
+path = "tests/optimizer_tests.rs"
+
+[[test]]
+name = "planner_integration_tests"
+path = "tests/planner_integration_tests.rs"
+
+[[bench]]
+name = "planner_benchmarks"
+harness = false

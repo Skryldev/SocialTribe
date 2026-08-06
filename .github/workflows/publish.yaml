@@ -1,0 +1,171 @@
+name: Build and Publish tribecore
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  PYTHON_VERSION: "3.12"
+  ZIG_VERSION: "0.16.0"
+
+jobs:
+  build:
+    name: Build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            zig-target: x86_64-linux-gnu.2.17
+            lib-ext: so
+            lib-name: libgraphcore.so
+
+          - os: windows-latest
+            zig-target: x86_64-windows-gnu
+            lib-ext: dll
+            lib-name: graphcore.dll
+
+          - os: macos-latest
+            zig-target: aarch64-macos
+            lib-ext: dylib
+            lib-name: libgraphcore.dylib
+
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/backend/tribecore
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: backend/tribecore/pyproject.toml
+
+      - name: Setup Zig
+        uses: mlugg/setup-zig@v2
+        with:
+          version: ${{ env.ZIG_VERSION }}
+
+      - name: Install build dependencies
+        run: python -m pip install --upgrade pip build setuptools-scm twine
+
+      - name: Verify package version from git tag
+        run: python scripts/check_version.py
+
+      - name: Build Zig native library
+        working-directory: ${{ github.workspace }}/backend/tribecore/zig_core
+        shell: bash
+        run: |
+          zig version
+          echo "Building for target: ${{ matrix.zig-target }}"
+          zig build --release=fast \
+            -Dtarget=${{ matrix.zig-target }} \
+            -Dcpu=baseline \
+            --prefix "$PWD/zig-out"
+
+      - name: Prepare native library
+        shell: bash
+        run: |
+          mkdir -p src/tribecore/_libs
+          LIB_FILE=$(find zig_core/zig-out -name "${{ matrix.lib-name }}" -type f | head -1)
+          if [ -z "$LIB_FILE" ]; then
+            echo "::error::${{ matrix.lib-name }} not found!"
+            echo "Contents of zig-out:"
+            find zig_core/zig-out -type f
+            exit 1
+          fi
+          cp "$LIB_FILE" src/tribecore/_libs/
+          echo "Library installed:"
+          ls -lh src/tribecore/_libs/
+
+      - name: Build wheel
+        shell: bash
+        run: python -m build --wheel
+
+      - name: Repair Linux wheel (manylinux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq patchelf
+          pip install auditwheel
+          auditwheel show dist/*.whl
+          auditwheel repair --plat manylinux_2_17_x86_64 -w dist_repaired dist/*.whl
+          rm dist/*.whl
+          mv dist_repaired/*.whl dist/
+          rmdir dist_repaired
+          echo "Repaired wheel(s):"
+          ls -lh dist/*.whl
+
+      - name: Build sdist (Linux only)
+        if: runner.os == 'Linux'
+        run: python -m build --sdist
+
+      - name: Validate distributions
+        run: twine check dist/*
+
+      - name: Inspect artifacts
+        run: python scripts/inspect_artifacts.py
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: tribecore-${{ matrix.os }}
+          path: backend/tribecore/dist/*
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    name: Publish to PyPI
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/tribecore/
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+          pattern: tribecore-*
+          merge-multiple: true
+
+      - name: Show distributions
+        run: |
+          echo "Distributions ready to publish:"
+          ls -lh dist/
+
+      - name: Validate ZIP integrity
+        shell: bash
+        run: |
+          shopt -s nullglob
+          for whl in dist/*.whl; do
+            python3 -c "import zipfile, sys; bad = zipfile.ZipFile('$whl').testzip(); sys.exit(1) if bad else print(f'OK: $whl')"
+          done
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
+          attestations: true
+          verbose: true

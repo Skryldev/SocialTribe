@@ -1,0 +1,555 @@
+@import './Tokens.css';
+
+/* ============================================================
+   Import Panel — Professional Dark Theme
+   ============================================================ */
+
+/* ── Container ── */
+.ip-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ── Header ── */
+.ip-header {
+  margin-bottom: 20px;
+}
+
+.ip-header-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.ip-header-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--iem-r-sm);
+  background: var(--iem-blue-dim);
+  border: 1px solid var(--iem-blue-border);
+  color: var(--iem-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ip-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--iem-text-0);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.ip-subtitle {
+  font-size: 11.5px;
+  color: var(--iem-text-2);
+  margin: 1px 0 0 0;
+  font-weight: 400;
+}
+
+/* ── Last Import Banner ── */
+.ip-last-import {
+  background: var(--iem-green-dim);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  border-radius: var(--iem-r-md);
+  padding: 10px 14px;
+  margin-bottom: 18px;
+}
+
+.ip-last-import-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  color: var(--iem-green);
+}
+
+.ip-last-import-inner strong {
+  color: var(--iem-green);
+  font-weight: 600;
+}
+
+.ip-last-import-meta {
+  color: rgba(74, 222, 128, 0.7);
+  font-size: 10.5px;
+  margin-left: 4px;
+}
+
+/* ── Method Tabs ── */
+.ip-method-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-md);
+  padding: 3px;
+}
+
+.ip-method-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 10px;
+  background: transparent;
+  border: none;
+  border-radius: var(--iem-r-sm);
+  color: var(--iem-text-2);
+  font: 600 11.5px/1 var(--iem-font-ui);
+  cursor: pointer;
+  transition: all 0.15s var(--iem-ease-out);
+  white-space: nowrap;
+}
+
+.ip-method-tab:hover {
+  color: var(--iem-text-1);
+  background: var(--iem-bg-3);
+}
+
+.ip-method-tab--active {
+  background: var(--iem-blue-dim);
+  color: var(--iem-blue);
+  box-shadow: 0 1px 3px rgba(76, 141, 255, 0.15);
+}
+
+.ip-method-tab:focus-visible {
+  outline: 2px solid var(--iem-blue);
+  outline-offset: -2px;
+}
+
+.ip-method-tab:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Content Section ── */
+.ip-section {
+  margin-bottom: 16px;
+}
+
+.ip-section-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--iem-text-3);
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* ── File Upload Area ── */
+.ip-upload-area {
+  border: 1.5px dashed var(--iem-border-strong);
+  border-radius: var(--iem-r-lg);
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.18s var(--iem-ease-out);
+  background: var(--iem-bg-2);
+}
+
+.ip-upload-area:hover {
+  border-color: var(--iem-blue-border);
+  background: var(--iem-blue-dim);
+}
+
+.ip-upload-area--active {
+  border-color: var(--iem-blue);
+  background: var(--iem-blue-dim);
+  transform: scale(1.01);
+}
+
+.ip-upload-icon {
+  color: var(--iem-text-2);
+  margin-bottom: 8px;
+}
+
+.ip-upload-text {
+  font-size: 12.5px;
+  color: var(--iem-text-1);
+  margin: 0 0 4px;
+}
+
+.ip-upload-text strong {
+  color: var(--iem-blue);
+  cursor: pointer;
+}
+
+.ip-upload-hint {
+  font-size: 10.5px;
+  color: var(--iem-text-3);
+  margin: 0;
+  font-family: var(--iem-font-mono);
+}
+
+/* ── File Info Card ── */
+.ip-file-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-md);
+  margin-top: 8px;
+}
+
+.ip-file-card-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--iem-r-sm);
+  background: var(--iem-blue-dim);
+  border: 1px solid var(--iem-blue-border);
+  color: var(--iem-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ip-file-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ip-file-card-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--iem-text-0);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ip-file-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  color: var(--iem-text-3);
+  margin-top: 2px;
+  font-family: var(--iem-font-mono);
+}
+
+.ip-file-card-badge {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--iem-blue-dim);
+  color: var(--iem-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ip-file-card-remove {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-sm);
+  color: var(--iem-text-2);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s var(--iem-ease-out);
+}
+
+.ip-file-card-remove:hover {
+  color: var(--iem-red);
+  border-color: var(--iem-red-border);
+  background: var(--iem-red-dim);
+}
+
+/* ── Textarea ── */
+.ip-textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 10px 12px;
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-sm);
+  color: var(--iem-text-0);
+  font: 400 12px/1.6 var(--iem-font-mono);
+  resize: vertical;
+  transition: border-color 0.15s var(--iem-ease-out);
+}
+
+.ip-textarea:focus {
+  outline: none;
+  border-color: var(--iem-blue-border);
+  box-shadow: 0 0 0 3px var(--iem-blue-dim);
+}
+
+.ip-textarea--error {
+  border-color: var(--iem-red-border);
+}
+
+.ip-textarea--error:focus {
+  box-shadow: 0 0 0 3px var(--iem-red-dim);
+}
+
+.ip-textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── URL Input Row ── */
+.ip-url-row {
+  display: flex;
+  gap: 8px;
+}
+
+.ip-url-input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 12px;
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-sm);
+  color: var(--iem-text-0);
+  font: 400 12px/1.5 var(--iem-font-mono);
+  transition: border-color 0.15s var(--iem-ease-out);
+}
+
+.ip-url-input:focus {
+  outline: none;
+  border-color: var(--iem-blue-border);
+  box-shadow: 0 0 0 3px var(--iem-blue-dim);
+}
+
+.ip-url-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ip-url-input::placeholder {
+  color: var(--iem-text-3);
+}
+
+/* ── Status Text ── */
+.ip-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  margin-top: 6px;
+  color: var(--iem-text-2);
+}
+
+.ip-status--success {
+  color: var(--iem-green);
+}
+
+.ip-status--error {
+  color: var(--iem-red);
+}
+
+.ip-status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* ── Progress Bar ── */
+.ip-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.ip-progress-track {
+  flex: 1;
+  height: 5px;
+  background: var(--iem-bg-3);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.ip-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--iem-blue), #60a5fa);
+  border-radius: 999px;
+}
+
+.ip-progress-text {
+  font-family: var(--iem-font-mono);
+  font-size: 10.5px;
+  color: var(--iem-text-2);
+  min-width: 32px;
+  text-align: right;
+  font-weight: 500;
+}
+
+/* ── Validation Errors ── */
+.ip-validation {
+  background: var(--iem-red-dim);
+  border: 1px solid var(--iem-red-border);
+  border-radius: var(--iem-r-md);
+  padding: 10px 14px;
+  margin-bottom: 16px;
+}
+
+.ip-validation-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--iem-red);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ip-validation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ip-validation-item {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  font-size: 11px;
+  color: #f0a3a3;
+  font-family: var(--iem-font-mono);
+}
+
+.ip-validation-item-code {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--iem-red);
+  flex-shrink: 0;
+  min-width: 24px;
+}
+
+/* ── Merge Strategy Select ── */
+.ip-merge-section {
+  margin-bottom: 16px;
+}
+
+/* ── Preview Card ── */
+.ip-preview {
+  background: var(--iem-bg-2);
+  border: 1px solid var(--iem-border);
+  border-radius: var(--iem-r-md);
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.ip-preview-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--iem-text-1);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--iem-border);
+}
+
+.ip-preview-stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.ip-preview-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ip-preview-stat-val {
+  font-family: var(--iem-font-mono);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--iem-text-0);
+  line-height: 1;
+}
+
+.ip-preview-stat-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--iem-text-3);
+  font-weight: 600;
+}
+
+.ip-preview-label {
+  display: block;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--iem-text-3);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.ip-preview-row {
+  display: flex;
+  gap: 10px;
+  font-family: var(--iem-font-mono);
+  font-size: 10.5px;
+  padding: 3px 0;
+  border-top: 1px solid var(--iem-border);
+}
+
+.ip-preview-row:first-child {
+  border-top: none;
+}
+
+.ip-preview-id {
+  color: var(--iem-blue);
+  flex-shrink: 0;
+  min-width: 30px;
+}
+
+.ip-preview-name {
+  color: var(--iem-text-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Action Buttons ── */
+.ip-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--iem-border);
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .ip-method-tabs {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .ip-method-tab {
+    justify-content: flex-start;
+    padding: 8px 12px;
+  }
+
+  .ip-url-row {
+    flex-direction: column;
+  }
+}

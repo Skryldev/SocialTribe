@@ -1,0 +1,17 @@
+{
+  "id": "pagerank",
+  "name": "PageRank",
+  "category": "centrality",
+  "difficulty": "medium",
+
+  "timeComplexity": "O(k * (V + E))",
+  "spaceComplexity": "O(V)",
+  "bestCase": "O(V + E)",
+  "worstCase": "O(k * (V + E))",
+  "averageCase": "O(k * (V + E))",
+
+  "stable": false,
+  "inPlace": false,
+  "recursive": false,
+  "parallelizable": true
+}

@@ -1,0 +1,17 @@
+{
+  "id": "common_neighbors",
+  "name": "Common-Neighbors",
+  "category": "similarity",
+  "difficulty": "easy",
+
+  "timeComplexity": "O(min(deg(u), deg(v)))",
+  "spaceComplexity": "O(1)",
+  "bestCase": "O(1)",
+  "worstCase": "O(deg(u) + deg(v))",
+  "averageCase": "O(min(deg(u), deg(v)))",
+
+  "stable": null,
+  "inPlace": true,
+  "recursive": false,
+  "parallelizable": true
+}

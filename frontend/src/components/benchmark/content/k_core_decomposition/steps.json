@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Compute Initial Degrees",
+    "description": "Calculate the degree (number of neighbors) for each node in the graph. For weighted graphs, use the sum of edge weights as the weighted degree."
+  },
+  {
+    "title": "Create Degree Bins",
+    "description": "Organize nodes into bins (buckets) based on their current degree. Each bin d contains all nodes with exactly degree d. This enables O(1) access to the minimum-degree nodes."
+  },
+  {
+    "title": "Iteratively Remove Minimum-Degree Nodes",
+    "description": "Start from the smallest degree bin. Remove the first available node and assign it the current core number k. The core number of a removed node equals its degree at the moment of removal."
+  },
+  {
+    "title": "Update Neighbor Degrees",
+    "description": "When a node is removed, decrement the degree of each of its neighbors by 1. Move each affected neighbor to the appropriate lower-degree bin. This maintains the invariant that bins reflect current degrees in the remaining subgraph."
+  },
+  {
+    "title": "Continue Until All Nodes Processed",
+    "description": "Continue removing nodes and updating neighbors until all nodes are removed. The resulting core number for each node indicates the innermost k-core it belongs to."
+  }
+]

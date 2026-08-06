@@ -1,0 +1,17 @@
+{
+  "id": "preferential_attachment",
+  "name": "Preferential-Attachment",
+  "category": "similarity",
+  "difficulty": "easy",
+
+  "timeComplexity": "O(V^²)",
+  "spaceComplexity": "O(V + E)",
+  "bestCase": "O(1)",
+  "worstCase": "O(1)",
+  "averageCase": "O(1)",
+
+  "stable": null,
+  "inPlace": true,
+  "recursive": false,
+  "parallelizable": true
+}

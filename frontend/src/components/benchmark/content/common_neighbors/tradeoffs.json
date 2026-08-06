@@ -1,0 +1,22 @@
+{
+  "pros": [
+    "Extremely simple to understand and implement",
+    "Computationally efficient with set intersection operations",
+    "Strong intuitive foundation in social theory (triadic closure)",
+    "No parameters to tune or configure",
+    "Serves as excellent baseline for comparing complex algorithms",
+    "Works well on sparse graphs with clear community structure",
+    "Naturally interpretable results (number of mutual friends)",
+    "Easy to parallelize for large-scale applications"
+  ],
+  "cons": [
+    "Treats all common neighbors equally, ignoring their importance",
+    "Favors high-degree nodes since they have more opportunities for overlap",
+    "Cannot capture higher-order structural patterns (paths > 2)",
+    "Poor performance on dense graphs where many pairs share neighbors",
+    "Zero score for nodes without common neighbors limits coverage",
+    "Does not consider edge weights or connection strengths",
+    "Susceptible to bias towards popular/hub nodes",
+    "Limited discriminative power compared to normalized variants"
+  ]
+}

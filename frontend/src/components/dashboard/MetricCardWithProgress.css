@@ -1,0 +1,853 @@
+/* ============================================
+   MetricCardWithProgress — Complete v4.0
+   Design System: Dark Amber Dashboard
+   Grid: 4-column responsive, container-query aware
+   Architecture: Layered, token-driven, motion-respecting
+   ============================================ */
+
+/* ══════════════════════════════════════════════
+   Design Tokens — Scoped to component namespace
+   ══════════════════════════════════════════════ */
+:root {
+  --mcp-surface: #1e293b;
+  --mcp-surface-raised: rgba(30, 41, 59, 0.85);
+  --mcp-surface-deep: #0f172a;
+  --mcp-text-primary: #e2e8f0;
+  --mcp-text-secondary: #94a3b8;
+  --mcp-text-muted: #64748b;
+  --mcp-accent: #f59e0b;
+  --mcp-accent-strong: #ea580c;
+  --mcp-accent-light: #fbbf24;
+  --mcp-accent-glow: rgba(245, 158, 11, 0.15);
+  --mcp-radius: 16px;
+  --mcp-radius-sm: 10px;
+  --mcp-padding: 20px;
+  --mcp-gap: 14px;
+  --mcp-transition-smooth: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  --mcp-transition-bounce: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --mcp-font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  --mcp-font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ══════════════════════════════════════════════
+   Base Card — The atomic unit
+   ══════════════════════════════════════════════ */
+.mcp-card {
+  background: linear-gradient(
+    165deg,
+    var(--mcp-surface) 0%,
+    rgba(30, 41, 59, 0.92) 55%,
+    rgba(245, 158, 11, 0.03) 100%
+  );
+  border: 1px solid rgba(245, 158, 11, 0.1);
+  border-radius: var(--mcp-radius);
+  padding: var(--mcp-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--mcp-gap);
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color var(--mcp-transition-smooth),
+    box-shadow var(--mcp-transition-smooth),
+    transform var(--mcp-transition-bounce);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  height: 100%;
+  min-height: 180px;
+  isolation: isolate;
+}
+
+/* Hover — luminous, not shadow-heavy */
+.mcp-card:hover {
+  border-color: rgba(245, 158, 11, 0.25);
+  box-shadow:
+    0 0 0 1px rgba(245, 158, 11, 0.06),
+    0 8px 40px rgba(245, 158, 11, 0.05),
+    inset 0 1px 0 rgba(245, 158, 11, 0.03);
+  transform: translateY(-1px);
+}
+
+/* Accent notch — brand system signature */
+.mcp-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--mcp-padding);
+  right: var(--mcp-padding);
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--mcp-accent) 25%,
+    var(--mcp-accent-strong) 50%,
+    var(--mcp-accent) 75%,
+    transparent 100%
+  );
+  opacity: 0.45;
+  border-radius: 0 0 2px 2px;
+  z-index: 1;
+}
+
+/* ══════════════════════════════════════════════
+   Card Variants — Intent-driven
+   ══════════════════════════════════════════════ */
+
+/* Power Law — fully amber, warm depth for statistical emphasis */
+.mcp-card-power {
+  background: linear-gradient(
+    160deg,
+    rgba(30, 41, 59, 0.98) 0%,
+    rgba(30, 41, 59, 0.88) 50%,
+    rgba(245, 158, 11, 0.07) 100%
+  );
+  border-color: rgba(245, 158, 11, 0.22);
+}
+
+.mcp-card-power::before {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #f59e0b 20%,
+    #fbbf24 40%,
+    #ea580c 60%,
+    #f59e0b 80%,
+    transparent 100%
+  );
+  opacity: 0.7;
+}
+
+/* Compact — horizontal layout variant */
+.mcp-card-compact {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  min-height: auto;
+  gap: 12px;
+}
+
+/* Radial — center-aligned for gauge display */
+.mcp-card-radial {
+  align-items: center;
+}
+
+/* ══════════════════════════════════════════════
+   Header — Consistent information architecture
+   ══════════════════════════════════════════════ */
+.mcp-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 1;
+  min-width: 0;
+}
+
+.mcp-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.mcp-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.15),
+    rgba(234, 88, 12, 0.04)
+  );
+  border: 1px solid rgba(245, 158, 11, 0.12);
+  border-radius: var(--mcp-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+
+.mcp-title-wrap {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 1px;
+}
+
+.mcp-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--mcp-text-secondary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.mcp-subtitle {
+  font-size: 10px;
+  color: var(--mcp-text-muted);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════
+   Value Display — Data-forward typography
+   ══════════════════════════════════════════════ */
+.mcp-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  z-index: 1;
+  flex-wrap: wrap;
+}
+
+.mcp-value {
+  font-size: 36px;
+  font-weight: 700;
+  font-family: var(--mcp-font-mono);
+  color: var(--mcp-text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.mcp-value-sm {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--mcp-text-primary);
+  font-family: var(--mcp-font-mono);
+}
+
+.mcp-prefix,
+.mcp-suffix {
+  font-size: 13px;
+  color: var(--mcp-text-muted);
+  font-weight: 500;
+  font-family: var(--mcp-font-ui);
+}
+
+.mcp-max {
+  font-size: 14px;
+  color: var(--mcp-text-muted);
+  font-family: var(--mcp-font-mono);
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════
+   Progress Bar — Dimensional, alive
+   ══════════════════════════════════════════════ */
+.mcp-bar-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(15, 23, 42, 0.7);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.mcp-bar-fill {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  min-width: 0;
+}
+
+/* Shimmer effect — premium, not gaudy */
+.mcp-bar-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(255, 255, 255, 0.03) 65%,
+    transparent 100%
+  );
+  border-radius: inherit;
+}
+
+.mcp-bar-label {
+  position: absolute;
+  right: 0;
+  top: -20px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--mcp-font-mono);
+  color: var(--mcp-accent-light);
+  white-space: nowrap;
+}
+
+.mcp-bar-label-out {
+  font-size: 10px;
+  color: var(--mcp-text-muted);
+  margin-top: 2px;
+  font-family: var(--mcp-font-ui);
+}
+
+/* Strength Variants — All within amber spectrum */
+.mcp-bar-fill.strength-weak {
+  background: linear-gradient(90deg, #92400e, #b45309);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.12);
+}
+
+.mcp-bar-fill.strength-moderate {
+  background: linear-gradient(90deg, #d97706, #ea580c);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.22);
+}
+
+.mcp-bar-fill.strength-strong {
+  background: linear-gradient(90deg, #f59e0b, #ea580c);
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.32);
+}
+
+.mcp-bar-fill.strength-excellent {
+  background: linear-gradient(90deg, #fbbf24, #f59e0b, #ea580c);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+}
+
+.mcp-bar-fill.strength-poor {
+  background: linear-gradient(90deg, #7f1d1d, #b91c1c);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+}
+
+/* ══════════════════════════════════════════════
+   Badge — Semantic pill with breathing room
+   ══════════════════════════════════════════════ */
+.mcp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  align-self: flex-start;
+  border: 1px solid transparent;
+  z-index: 1;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  font-family: var(--mcp-font-ui);
+}
+
+.mcp-badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* Strength mapped to badge colors — amber-anchored */
+.mcp-badge.strength-excellent {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fbbf24;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.mcp-badge.strength-strong {
+  background: rgba(245, 158, 11, 0.09);
+  color: #fcd34d;
+  border-color: rgba(245, 158, 11, 0.22);
+}
+
+.mcp-badge.strength-moderate {
+  background: rgba(245, 158, 11, 0.06);
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.16);
+}
+
+.mcp-badge.strength-weak {
+  background: rgba(180, 83, 9, 0.1);
+  color: #d97706;
+  border-color: rgba(180, 83, 9, 0.25);
+}
+
+.mcp-badge.strength-poor {
+  background: rgba(153, 27, 27, 0.1);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+/* ══════════════════════════════════════════════
+   Trend Indicator
+   ══════════════════════════════════════════════ */
+.mcp-trend {
+  font-size: 16px;
+  font-weight: 700;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mcp-trend-up {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.1);
+}
+
+.mcp-trend-down {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.1);
+}
+
+.mcp-trend-neutral {
+  color: var(--mcp-text-muted);
+  background: rgba(100, 116, 139, 0.1);
+}
+
+/* ══════════════════════════════════════════════
+   Power Law — Brand-aligned statistical emphasis
+   ══════════════════════════════════════════════ */
+.mcp-power-val {
+  font-size: 46px;
+  font-weight: 800;
+  color: #fbbf24;
+  font-family: var(--mcp-font-mono);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  z-index: 1;
+  text-align: center;
+  text-shadow: 0 0 40px rgba(245, 158, 11, 0.3);
+}
+
+.mcp-power-note {
+  font-size: 11px;
+  color: var(--mcp-text-muted);
+  margin: 0;
+  font-family: var(--mcp-font-mono);
+  text-align: center;
+  z-index: 1;
+}
+
+.mcp-scale-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 8px;
+  padding: 6px 14px;
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.15),
+    rgba(234, 88, 12, 0.06)
+  );
+  color: #fbbf24;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  z-index: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  align-self: center;
+}
+
+.mcp-scale-badge::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fbbf24;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
+  flex-shrink: 0;
+}
+
+.mcp-confidence {
+  width: 100%;
+  height: 5px;
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 5px;
+  position: relative;
+  margin-top: 10px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.mcp-confidence-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #d97706, #f59e0b, #fbbf24);
+  border-radius: 5px;
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mcp-confidence span {
+  position: absolute;
+  right: 0;
+  top: -18px;
+  font-size: 10px;
+  font-family: var(--mcp-font-mono);
+  color: var(--mcp-text-muted);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* ══════════════════════════════════════════════
+   Comparison Layout
+   ══════════════════════════════════════════════ */
+.mcp-compare {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 12px;
+  padding: 6px 0;
+  z-index: 1;
+}
+
+.mcp-compare-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.mcp-compare-val {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--mcp-accent-light);
+  font-family: var(--mcp-font-mono);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.mcp-compare-label {
+  font-size: 9px;
+  color: var(--mcp-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 700;
+}
+
+.mcp-compare-divider {
+  font-size: 14px;
+  color: rgba(245, 158, 11, 0.3);
+  font-weight: 600;
+  font-family: var(--mcp-font-mono);
+}
+
+/* ══════════════════════════════════════════════
+   Compact Variant Internals
+   ══════════════════════════════════════════════ */
+.mcp-compact-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mcp-compact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mcp-compact-val {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--mcp-text-primary);
+  font-family: var(--mcp-font-mono);
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.mcp-compact-title {
+  font-size: 10px;
+  color: var(--mcp-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ══════════════════════════════════════════════
+   Radial Gauge — Centered value overlay
+   ══════════════════════════════════════════════ */
+.mcp-radial-wrap {
+  position: relative;
+  height: 120px;
+  min-height: 120px;
+  width: 100%;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.mcp-radial-center {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.mcp-radial-val {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--mcp-text-primary);
+  font-family: var(--mcp-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.mcp-radial-pct {
+  font-size: 10px;
+  color: var(--mcp-text-muted);
+  font-family: var(--mcp-font-mono);
+}
+
+/* ══════════════════════════════════════════════
+   Donut Chart — Center value
+   ══════════════════════════════════════════════ */
+.mcp-donut-wrap {
+  position: relative;
+  height: 110px;
+  min-height: 110px;
+  width: 100%;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.mcp-donut-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--mcp-text-primary);
+  font-family: var(--mcp-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ══════════════════════════════════════════════
+   Mini Chart Wrappers
+   ══════════════════════════════════════════════ */
+.mcp-mini-chart {
+  margin-top: -6px;
+  z-index: 1;
+}
+
+.mcp-bar-chart,
+.mcp-line-chart {
+  margin-top: -2px;
+  z-index: 1;
+}
+
+/* ══════════════════════════════════════════════
+   Heatmap — Interactive density grid
+   ══════════════════════════════════════════════ */
+.mcp-heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
+  gap: 3px;
+  z-index: 1;
+}
+
+.mcp-heatmap-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 2px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.mcp-heatmap-cell:hover {
+  transform: scale(1.1);
+  z-index: 2;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.mcp-heatmap-label {
+  font-size: 8px;
+  color: var(--mcp-text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.mcp-heatmap-val {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--mcp-text-primary);
+  font-family: var(--mcp-font-mono);
+}
+
+/* ══════════════════════════════════════════════
+   Grid System — Responsive, container-aware
+   ══════════════════════════════════════════════ */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.metrics-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+/* ══════════════════════════════════════════════
+   Responsive — Progressive simplification
+   ══════════════════════════════════════════════ */
+@media (max-width: 1400px) {
+  .metrics-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1100px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .metrics-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mcp-value {
+    font-size: 28px;
+  }
+
+  .mcp-power-val {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 768px) {
+  .metrics-grid,
+  .metrics-grid-3 {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .mcp-card {
+    min-height: 140px;
+    padding: 16px;
+    gap: 12px;
+    border-radius: 14px;
+  }
+
+  .mcp-card::before {
+    left: 16px;
+    right: 16px;
+  }
+
+  .mcp-value {
+    font-size: 26px;
+  }
+
+  .mcp-power-val {
+    font-size: 28px;
+  }
+
+  .mcp-compare-val {
+    font-size: 20px;
+  }
+
+  .mcp-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    font-size: 15px;
+  }
+
+  .mcp-title {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mcp-card {
+    padding: 12px;
+    gap: 10px;
+    border-radius: 12px;
+  }
+
+  .mcp-card::before {
+    left: 12px;
+    right: 12px;
+  }
+
+  .mcp-value {
+    font-size: 22px;
+  }
+
+  .mcp-power-val {
+    font-size: 24px;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   Motion: Respect user preferences
+   ══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .mcp-card,
+  .mcp-bar-fill,
+  .mcp-confidence-fill,
+  .mcp-heatmap-cell {
+    transition: none;
+  }
+
+  .mcp-card:hover {
+    transform: none;
+  }
+
+  .mcp-heatmap-cell:hover {
+    transform: none;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   Print — Clean, data-focused
+   ══════════════════════════════════════════════ */
+@media print {
+  .mcp-card {
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  .mcp-card::before {
+    display: none;
+  }
+
+  .mcp-bar-fill::after {
+    display: none;
+  }
+
+  .mcp-value,
+  .mcp-power-val,
+  .mcp-compare-val {
+    color: #1f2937;
+  }
+
+  .mcp-title,
+  .mcp-subtitle {
+    color: #374151;
+  }
+}

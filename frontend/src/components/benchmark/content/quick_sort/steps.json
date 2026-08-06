@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Choose Pivot Element",
+    "description": "Select a pivot element from the array. Common strategies: last element (Lomuto), middle element, median-of-three (first, middle, last), or random index. The pivot choice critically affects performance."
+  },
+  {
+    "title": "Partition the Array",
+    "description": "Rearrange elements so that all elements less than the pivot come before it, and all elements greater than the pivot come after it. The pivot ends up in its final sorted position. Elements equal to pivot can go to either side."
+  },
+  {
+    "title": "Place Pivot in Correct Position",
+    "description": "Move the pivot to the boundary between the 'less than' and 'greater than' partitions. After this step, the pivot is at its correct sorted index and will never move again."
+  },
+  {
+    "title": "Recurse on Left Subarray",
+    "description": "Apply Quick Sort recursively to the subarray containing elements less than the pivot (indices: left to pivot_index - 1). For small subarrays, switch to insertion sort for better performance."
+  },
+  {
+    "title": "Recurse on Right Subarray",
+    "description": "Apply Quick Sort recursively to the subarray containing elements greater than the pivot (indices: pivot_index + 1 to right). Use tail recursion optimization to limit stack depth to O(log n)."
+  }
+]

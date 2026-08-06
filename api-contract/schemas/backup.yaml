@@ -1,0 +1,40 @@
+# Backups List Response
+BackupsListResponse:
+  type: string
+  description: Response containing list of backups (JSON stringified)
+  example: "[{\"id\":\"backup-1\",\"name\":\"Backup 2024-01-01\"}]"
+
+# Create Backup Request
+CreateBackupRequest:
+  type: object
+  required:
+    - name
+  properties:
+    name:
+      type: string
+      description: Name for the backup
+      example: "my-backup-2024"
+
+# Create Backup Response
+CreateBackupResponse:
+  type: string
+  description: Response message or backup identifier
+  example: "Backup created successfully"
+
+# Delete Backup Response
+DeleteBackupResponse:
+  type: string
+  description: Response message confirming backup deletion
+  example: "Backup deleted successfully"
+
+# Restore Backup Response
+RestoreBackupResponse:
+  type: string
+  description: Response message confirming backup restoration
+  example: "Backup restored successfully"
+
+# Download Backup Response
+DownloadBackupResponse:
+  type: string
+  format: binary
+  description: Compressed graph backup file in tar.gz format

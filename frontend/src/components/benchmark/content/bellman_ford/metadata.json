@@ -1,0 +1,17 @@
+{
+  "id": "bellman_ford",
+  "name": "Bellman-Ford",
+  "category": "shortest_path",
+  "difficulty": "medium",
+
+  "timeComplexity": "O(V * E)",
+  "spaceComplexity": "O(V)",
+  "bestCase": "O(E)",
+  "worstCase": "O(V * E)",
+  "averageCase": "O(V * E)",
+
+  "stable": null,
+  "inPlace": false,
+  "recursive": false,
+  "parallelizable": true
+}

@@ -1,0 +1,30 @@
+{
+  "pros": [
+    "Logarithmic time for both range queries and point/range updates O(log n)",
+    "Versatile: supports any associative operation (sum, min, max, gcd, xor, etc.)",
+    "Lazy propagation enables efficient range updates (add, set, multiply)",
+    "Deterministic: height is always ⌈log₂ n⌉ regardless of input",
+    "Array-based representation is cache-friendly (contiguous memory)",
+    "Can be built in O(n) time (bottom-up construction)",
+    "Supports coordinate compression for sparse data",
+    "Foundation for advanced variants (persistent, 2D, segment tree beats)",
+    "Predictable memory usage: at most 4n nodes",
+    "Excellent for static data with frequent queries (RMQ, RSQ)",
+    "Can be augmented with additional information per node",
+    "Iterative version avoids recursion overhead"
+  ],
+  "cons": [
+    "Requires O(n) space — 4× the input array size",
+    "More complex to implement than Fenwick tree for prefix queries",
+    "Range updates require lazy propagation (additional complexity)",
+    "Recursive implementation can cause stack overflow for large n",
+    "Not suitable for dynamic arrays (insertion/deletion in middle)",
+    "Constant factor 4× memory overhead even for small arrays",
+    "Building tree takes O(n) time (unacceptable for rarely-queried data)",
+    "Cannot handle non-associative operations directly",
+    "Coordinate compression needed for large value ranges",
+    "Lazy propagation code is error-prone (multiple lazy types)",
+    "Tree structure depends on fixed n (hard to resize)",
+    "Not cache-optimal for very large trees (height > cache depth)"
+  ]
+}

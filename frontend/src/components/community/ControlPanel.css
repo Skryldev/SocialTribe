@@ -1,0 +1,543 @@
+/* ============================================
+   ControlPanel — Brand Refactor v2.0
+   Design System: Dark Amber Dashboard
+   ============================================ */
+
+/* ══════════════════════════════════════════════
+   Design Tokens — Amber brand system
+   ══════════════════════════════════════════════ */
+:root {
+  --ccp-surface: #1e293b;
+  --ccp-surface-secondary: rgba(30, 41, 59, 0.55);
+  --ccp-surface-tertiary: rgba(30, 41, 59, 0.35);
+  --ccp-surface-deep: #0f172a;
+  --ccp-border: rgba(245, 158, 11, 0.15);
+  --ccp-border-light: rgba(245, 158, 11, 0.08);
+  --ccp-border-strong: rgba(245, 158, 11, 0.25);
+  --ccp-text-primary: #e2e8f0;
+  --ccp-text-secondary: #94a3b8;
+  --ccp-text-tertiary: #64748b;
+  --ccp-accent: #f59e0b;
+  --ccp-accent-hover: #fbbf24;
+  --ccp-accent-light: #fbbf24;
+  --ccp-accent-strong: #ea580c;
+  --ccp-accent-soft: rgba(245, 158, 11, 0.08);
+  --ccp-accent-muted: rgba(245, 158, 11, 0.15);
+  --ccp-accent-glow: rgba(245, 158, 11, 0.2);
+  --ccp-radius-sm: 8px;
+  --ccp-radius-md: 12px;
+  --ccp-radius-lg: 20px;
+  --ccp-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(245, 158, 11, 0.04);
+  --ccp-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(245, 158, 11, 0.06);
+  --ccp-transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ccp-transition-bounce: 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ccp-font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+}
+
+/* ══════════════════════════════════════════════
+   Root Card
+   ══════════════════════════════════════════════ */
+.ccp-root {
+  background: linear-gradient(
+    165deg,
+    var(--ccp-surface) 0%,
+    rgba(30, 41, 59, 0.88) 55%,
+    rgba(245, 158, 11, 0.03) 100%
+  );
+  border-radius: var(--ccp-radius-lg);
+  padding: 1.5rem 1.65rem 1.65rem;
+  box-shadow: var(--ccp-shadow-sm);
+  border: 1px solid rgba(245, 158, 11, 0.1);
+  margin-bottom: 1.75rem;
+  transition:
+    box-shadow var(--ccp-transition),
+    border-color var(--ccp-transition);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+/* Accent notch — brand system signature */
+.ccp-root::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--ccp-accent) 25%,
+    var(--ccp-accent-strong) 50%,
+    var(--ccp-accent) 75%,
+    transparent 100%
+  );
+  opacity: 0.45;
+  border-radius: 0 0 2px 2px;
+  z-index: 1;
+}
+
+.ccp-root:hover {
+  box-shadow: var(--ccp-shadow-md);
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+/* ══════════════════════════════════════════════
+   Header
+   ══════════════════════════════════════════════ */
+.ccp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.4rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(245, 158, 11, 0.1);
+}
+
+.ccp-header-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ccp-header-icon {
+  color: var(--ccp-accent);
+  flex-shrink: 0;
+}
+
+.ccp-header-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ccp-text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* ── Header Action Button ────────────────────── */
+.ccp-header-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  border-radius: var(--ccp-radius-sm);
+  background: rgba(30, 41, 59, 0.5);
+  color: var(--ccp-text-tertiary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--ccp-transition);
+}
+
+.ccp-header-action:hover:not(:disabled) {
+  border-color: var(--ccp-accent);
+  color: var(--ccp-accent-light);
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.ccp-header-action:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.ccp-header-action-text {
+  line-height: 1;
+}
+
+/* ══════════════════════════════════════════════
+   Grid Layout
+   ══════════════════════════════════════════════ */
+.ccp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.35rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ══════════════════════════════════════════════
+   Parameter Card
+   ══════════════════════════════════════════════ */
+.ccp-param {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0.85rem;
+  background: linear-gradient(
+    160deg,
+    rgba(30, 41, 59, 0.55) 0%,
+    rgba(30, 41, 59, 0.35) 100%
+  );
+  border-radius: var(--ccp-radius-md);
+  border: 1px solid rgba(245, 158, 11, 0.08);
+  transition:
+    border-color var(--ccp-transition),
+    background var(--ccp-transition);
+}
+
+.ccp-param:hover {
+  border-color: rgba(245, 158, 11, 0.2);
+  background: linear-gradient(
+    160deg,
+    rgba(245, 158, 11, 0.04) 0%,
+    rgba(30, 41, 59, 0.5) 100%
+  );
+}
+
+.ccp-param-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ccp-param-label-group {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.ccp-param-icon {
+  color: var(--ccp-accent);
+  flex-shrink: 0;
+}
+
+.ccp-param-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ccp-text-primary);
+  cursor: pointer;
+  letter-spacing: -0.01em;
+}
+
+/* ── Parameter Value Badge ───────────────────── */
+.ccp-param-value {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ccp-accent-light);
+  font-variant-numeric: tabular-nums;
+  font-family: var(--ccp-font-mono);
+  background: rgba(245, 158, 11, 0.1);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  letter-spacing: 0.01em;
+  border: 1px solid rgba(245, 158, 11, 0.15);
+}
+
+/* ══════════════════════════════════════════════
+   Slider Group
+   ══════════════════════════════════════════════ */
+.ccp-slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* ── Slider Track ────────────────────────────── */
+.ccp-slider {
+  --ccp-fill-percent: 50%;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(
+    to right,
+    var(--ccp-accent) 0%,
+    var(--ccp-accent-strong) var(--ccp-fill-percent),
+    rgba(15, 23, 42, 0.6) var(--ccp-fill-percent),
+    rgba(15, 23, 42, 0.6) 100%
+  );
+  border-radius: 3px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+  transition: background var(--ccp-transition);
+}
+
+.ccp-slider:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Slider Thumb (WebKit) ───────────────────── */
+.ccp-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: var(--ccp-surface);
+  border: 2px solid var(--ccp-accent);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.3),
+    0 0 0 3px rgba(245, 158, 11, 0.1);
+  transition: all var(--ccp-transition-bounce);
+}
+
+.ccp-slider::-webkit-slider-thumb:hover {
+  border-color: var(--ccp-accent-light);
+  box-shadow:
+    0 2px 10px rgba(245, 158, 11, 0.4),
+    0 0 0 6px rgba(245, 158, 11, 0.12);
+  transform: scale(1.12);
+}
+
+.ccp-slider::-webkit-slider-thumb:active {
+  border-color: var(--ccp-accent-light);
+  box-shadow:
+    0 1px 6px rgba(245, 158, 11, 0.5),
+    0 0 0 8px rgba(245, 158, 11, 0.15);
+}
+
+/* ── Slider Thumb (Firefox) ──────────────────── */
+.ccp-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: var(--ccp-surface);
+  border: 2px solid var(--ccp-accent);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.3),
+    0 0 0 3px rgba(245, 158, 11, 0.1);
+  transition: all var(--ccp-transition-bounce);
+}
+
+.ccp-slider::-moz-range-thumb:hover {
+  border-color: var(--ccp-accent-light);
+  box-shadow:
+    0 2px 10px rgba(245, 158, 11, 0.4),
+    0 0 0 6px rgba(245, 158, 11, 0.12);
+}
+
+/* ── Slider Range Labels ─────────────────────── */
+.ccp-slider-range {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ccp-slider-range-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--ccp-text-tertiary);
+  font-family: var(--ccp-font-mono);
+}
+
+/* ══════════════════════════════════════════════
+   Parameter Description
+   ══════════════════════════════════════════════ */
+.ccp-param-desc {
+  font-size: 0.72rem;
+  color: var(--ccp-text-tertiary);
+  margin: 0;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+/* ══════════════════════════════════════════════
+   Action Area
+   ══════════════════════════════════════════════ */
+.ccp-action-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(245, 158, 11, 0.08);
+}
+
+.ccp-action-hint {
+  font-size: 0.75rem;
+  color: var(--ccp-text-tertiary);
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+/* ══════════════════════════════════════════════
+   Run Button
+   ══════════════════════════════════════════════ */
+.ccp-run-btn {
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(
+    135deg,
+    var(--ccp-accent) 0%,
+    var(--ccp-accent-strong) 100%
+  );
+  color: #0f172a;
+  border: none;
+  border-radius: var(--ccp-radius-md);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background var(--ccp-transition),
+    box-shadow var(--ccp-transition),
+    transform var(--ccp-transition);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.01em;
+  text-shadow: none;
+}
+
+/* Shimmer overlay on hover */
+.ccp-run-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 40%,
+    rgba(255, 255, 255, 0.05) 60%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity var(--ccp-transition);
+}
+
+.ccp-run-btn:hover:not(:disabled) {
+  background: linear-gradient(
+    135deg,
+    var(--ccp-accent-light) 0%,
+    var(--ccp-accent) 100%
+  );
+  box-shadow:
+    0 4px 24px rgba(245, 158, 11, 0.4),
+    0 0 0 4px rgba(245, 158, 11, 0.08);
+  transform: translateY(-1px);
+}
+
+.ccp-run-btn:hover:not(:disabled)::after {
+  opacity: 1;
+}
+
+.ccp-run-btn:active:not(:disabled) {
+  background: linear-gradient(
+    135deg,
+    var(--ccp-accent-strong) 0%,
+    #c2410c 100%
+  );
+  box-shadow:
+    0 2px 8px rgba(245, 158, 11, 0.3),
+    0 0 0 2px rgba(245, 158, 11, 0.1);
+  transform: translateY(0);
+}
+
+/* ── Running State ───────────────────────────── */
+.ccp-run-btn--running {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--ccp-accent-light);
+  cursor: not-allowed;
+  box-shadow: none;
+  border: 1px solid rgba(245, 158, 11, 0.15);
+}
+
+.ccp-run-btn--running::after {
+  display: none;
+}
+
+.ccp-run-btn--running:hover {
+  background: rgba(245, 158, 11, 0.1);
+  box-shadow: none;
+  transform: none;
+}
+
+/* ── Button Content ──────────────────────────── */
+.ccp-run-btn-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  position: relative;
+  z-index: 1;
+}
+
+.ccp-run-btn-icon {
+  flex-shrink: 0;
+}
+
+.ccp-run-btn-spinner {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ccp-run-btn-label {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  line-height: 1;
+}
+
+.ccp-run-btn-progress {
+  color: var(--ccp-accent);
+  font-weight: 500;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════════════════════
+   Responsive
+   ══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .ccp-root {
+    padding: 1.15rem;
+  }
+
+  .ccp-root::before {
+    left: 1.15rem;
+    right: 1.15rem;
+  }
+
+  .ccp-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .ccp-param {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ccp-root {
+    padding: 1rem;
+    border-radius: var(--ccp-radius-md);
+  }
+
+  .ccp-root::before {
+    left: 1rem;
+    right: 1rem;
+  }
+
+  .ccp-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .ccp-run-btn {
+    padding: 0.7rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   Motion: Respect user preferences
+   ══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .ccp-root,
+  .ccp-param,
+  .ccp-header-action,
+  .ccp-run-btn,
+  .ccp-slider::-webkit-slider-thumb,
+  .ccp-slider::-moz-range-thumb {
+    transition: none;
+  }
+
+  .ccp-run-btn:hover:not(:disabled) {
+    transform: none;
+  }
+}

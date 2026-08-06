@@ -1,0 +1,19 @@
+[workspace]
+members = [
+    "crates/lexer",
+    "crates/parser", 
+    "crates/semantic",
+    "crates/planner",
+    "crates/wasm"
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Graph Query Engine Team"]
+license = "MIT"
+
+[profile.release]
+opt-level = "s"
+lto = true

@@ -1,0 +1,11 @@
+# Shutdown Response
+ShutdownResponse:
+  type: string
+  description: Response message confirming shutdown initiation
+  example: "Server shutting down..."
+
+# Health Response
+HealthResponse:
+  type: string
+  description: Response containing health status of the service (JSON stringified)
+  example: "{\"status\":\"healthy\",\"timestamp\":\"2024-01-01T00:00:00Z\"}"

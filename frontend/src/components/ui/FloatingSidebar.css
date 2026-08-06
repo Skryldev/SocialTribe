@@ -1,0 +1,495 @@
+/* ==========================================================================
+   FloatingSidebar.css
+   Cross-platform styles for the FloatingSidebar component.
+
+   Target runtimes: Windows (WebView2 / Chromium) and Linux (WebKitGTK).
+   WebKitGTK lags behind Chromium on several fronts (backdrop-filter support
+   varies by distro/version, scrollbar-* properties are unsupported, :has()
+   and container queries are only in very recent builds), so every
+   "modern" feature below ships with a fallback that keeps the UI usable.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design tokens
+   -------------------------------------------------------------------------- */
+.fsb-root {
+  --fsb-primary: #3b82f6;
+  --fsb-primary-dark: #2563eb;
+  --fsb-primary-light: #60a5fa;
+  --fsb-primary-glow: rgba(59, 130, 246, 0.35);
+
+  --fsb-bg-base: rgba(15, 23, 42, 0.92);
+  --fsb-bg-base-solid: #0f172a; /* solid fallback when backdrop-filter is unavailable */
+  --fsb-bg-hover: rgba(51, 65, 85, 0.6);
+  --fsb-bg-active: rgba(59, 130, 246, 0.15);
+  --fsb-bg-border: rgba(71, 85, 105, 0.4);
+
+  --fsb-text-primary: #f1f5f9;
+  --fsb-text-secondary: #cbd5e1;
+  --fsb-text-tertiary: #94a3b8;
+  --fsb-text-muted: rgba(148, 163, 184, 0.6);
+  --fsb-text-inverse: #0f172a;
+
+  --fsb-icon-default: #64748b;
+  --fsb-icon-active: #60a5fa;
+  --fsb-icon-hover: #94a3b8;
+
+  --fsb-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(59, 130, 246, 0.15) inset;
+  --fsb-glow: 0 0 12px rgba(59, 130, 246, 0.3);
+  --fsb-blur: blur(20px) saturate(180%);
+
+  /* accent-color: used for any native form controls this component renders
+     (currently none — no checkbox/radio/range inputs — but the token is
+     defined so future controls inherit brand color consistently, and so
+     the property has a documented fallback path as required). */
+  accent-color: var(--fsb-primary);
+
+  /* Dynamic, runtime-computed value (vertical position of the edge
+     trigger). This is the one value that legitimately has to travel
+     through the style attribute because it's calculated from a DOM
+     measurement in JS; everything else lives in this stylesheet. */
+  --fsb-trigger-top: 50%;
+}
+
+/* Light color-scheme variant. The component is dark-glass by design, but
+   we still honor the user's OS preference by softening the panel into a
+   light-glass treatment rather than ignoring prefers-color-scheme. */
+@media (prefers-color-scheme: light) {
+  .fsb-root {
+    --fsb-bg-base: rgba(255, 255, 255, 0.86);
+    --fsb-bg-base-solid: #f8fafc;
+    --fsb-bg-hover: rgba(226, 232, 240, 0.8);
+    --fsb-bg-active: rgba(59, 130, 246, 0.12);
+    --fsb-bg-border: rgba(148, 163, 184, 0.35);
+
+    --fsb-text-primary: #0f172a;
+    --fsb-text-secondary: #334155;
+    --fsb-text-tertiary: #64748b;
+    --fsb-text-muted: rgba(100, 116, 139, 0.7);
+    --fsb-text-inverse: #f8fafc;
+
+    --fsb-icon-default: #64748b;
+    --fsb-icon-hover: #475569;
+
+    --fsb-shadow: 0 25px 40px -12px rgba(15, 23, 42, 0.15), 0 0 0 1px rgba(59, 130, 246, 0.1) inset;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Edge trigger (desktop hover strip)
+   -------------------------------------------------------------------------- */
+.fsb-edge-trigger {
+  position: fixed;
+  left: 0;
+  top: var(--fsb-trigger-top);
+  transform: translateY(-50%);
+  width: 24px;
+  height: 80px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.fsb-edge-pill {
+  width: 3px;
+  height: 40px;
+  border-radius: 99px;
+  background: var(--fsb-primary);
+  box-shadow: var(--fsb-glow);
+  will-change: transform, opacity;
+}
+
+/* --------------------------------------------------------------------------
+   3. Sidebar shell
+   -------------------------------------------------------------------------- */
+/* NOTE 1: centering is done with `top/bottom: 20px` + `margin: auto` on
+   purpose, NOT `top: 50%; transform: translateY(-50%)`. The parent
+   <motion.aside> already owns the `transform` CSS property at runtime
+   (Framer Motion writes `x`/`scale` there for the open/close animation
+   defined in `sidebarVariants`), so any centering transform declared here
+   gets silently overwritten the moment the element animates — that was
+   the cause of the sidebar landing low-left instead of centered.
+
+   NOTE 2: if height/position ever looks wrong again, also check for a
+   `transform`, `filter`, `perspective`, or `will-change: transform` on an
+   ANCESTOR element. Any of those creates a new containing block, and this
+   `position: fixed` element will size/position itself relative to that
+   ancestor instead of the viewport. */
+/* Full-viewport fixed layer that centers the sidebar vertically via flex
+   alignment. We center this way (rather than top/bottom + margin:auto
+   directly on .fsb-sidebar) because .fsb-sidebar is itself `display:
+   flex`, and having both `top` and `bottom` set on a flex container is
+   the CSS condition for "stretch to fill the span" in most engines
+   (including WebKitGTK) — margin:auto does not reliably override that
+   for a flex container, which is why the sidebar filled the viewport. */
+.fsb-sidebar-anchor {
+  position: fixed;
+  left: 20px;
+  top: 20px;
+  bottom: 20px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.fsb-sidebar-anchor > * {
+  pointer-events: auto;
+}
+
+.fsb-sidebar {
+  position: relative;
+  left: auto;
+  width: 280px;
+  min-height: 0;
+  max-height: calc(100vh - 40px);
+  max-height: calc(100dvh - 40px);
+  z-index: 50;
+  border-radius: 24px;
+  border: 1px solid var(--fsb-bg-border);
+  box-shadow: var(--fsb-shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  will-change: transform, opacity;
+
+  /* Solid fallback background for engines without backdrop-filter support
+     (older WebKitGTK builds). @supports below layers the frosted-glass
+     treatment on top when it's actually available. */
+  background: var(--fsb-bg-base-solid);
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .fsb-sidebar {
+    background: var(--fsb-bg-base);
+    backdrop-filter: var(--fsb-blur);
+    -webkit-backdrop-filter: var(--fsb-blur);
+  }
+}
+
+.fsb-sidebar--mobile {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
+  border-radius: 0 24px 24px 0;
+  z-index: 51;
+}
+
+/* --------------------------------------------------------------------------
+   4. Sidebar inner scroll area
+   -------------------------------------------------------------------------- */
+.fsb-sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px 14px;
+  gap: 12px;
+  -webkit-overflow-scrolling: touch;
+
+  /* Firefox / Chromium scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(59, 130, 246, 0.25) var(--fsb-bg-border);
+}
+
+/* WebKit fallback (Safari, and older WebKitGTK on Linux that ignores the
+   standard scrollbar-* properties above but understands the ::-webkit-
+   scrollbar pseudo-elements). */
+.fsb-sidebar-inner::-webkit-scrollbar {
+  width: 6px;
+}
+
+.fsb-sidebar-inner::-webkit-scrollbar-track {
+  background: var(--fsb-bg-border);
+  border-radius: 99px;
+}
+
+.fsb-sidebar-inner::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.25);
+  border-radius: 99px;
+}
+
+/* --------------------------------------------------------------------------
+   5. Header / logo
+   -------------------------------------------------------------------------- */
+.fsb-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--fsb-bg-border);
+  margin-bottom: 4px;
+}
+
+.fsb-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fsb-logo-text {
+  font-family: "Inter", "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--fsb-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.fsb-logo-accent {
+  color: var(--fsb-primary);
+}
+
+.fsb-version {
+  font-family: "Inter", sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--fsb-text-muted);
+  padding: 2px 6px;
+  border-radius: 20px;
+  background: var(--fsb-bg-hover);
+}
+
+/* --------------------------------------------------------------------------
+   6. Nav list / nav items
+   -------------------------------------------------------------------------- */
+.fsb-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  /* Establish a query container so nav items can adapt if the sidebar is
+     ever embedded somewhere narrower than its default 280px (e.g. a
+     collapsed rail). Supporting browsers get the finer-grained rule in
+     the @supports block; everything else keeps the default layout. */
+  container-type: inline-size;
+  container-name: fsb-nav-list;
+}
+
+.fsb-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.fsb-nav-item:focus-visible {
+  outline: 2px solid var(--fsb-primary);
+  outline-offset: 2px;
+}
+
+.fsb-nav-item--active {
+  background: var(--fsb-bg-active);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+.fsb-nav-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--fsb-bg-hover);
+  border: 1px solid var(--fsb-bg-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fsb-icon-default);
+  position: relative;
+  flex-shrink: 0;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.fsb-nav-icon--active {
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  color: var(--fsb-icon-active);
+}
+
+.fsb-active-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--fsb-primary);
+  box-shadow: var(--fsb-glow);
+  border: 2px solid var(--fsb-bg-base-solid);
+}
+
+.fsb-nav-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.fsb-nav-label {
+  font-family: "Inter", "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fsb-text-secondary);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fsb-nav-label--active {
+  color: var(--fsb-text-primary);
+  font-weight: 600;
+}
+
+.fsb-nav-desc {
+  font-family: "Inter", "DM Sans", sans-serif;
+  font-size: 10px;
+  color: var(--fsb-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fsb-active-accent {
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  border-radius: 99px;
+  background: var(--fsb-primary);
+  box-shadow: var(--fsb-glow);
+}
+
+/* Container-query enhancement: when the sidebar has real room to breathe,
+   let the description line show; in a narrow container, hide it so the
+   label doesn't get crushed. Guarded by @supports so browsers without
+   container query support (older WebKitGTK) simply keep the default,
+   always-visible description defined above. */
+@supports (container-type: inline-size) {
+  @container fsb-nav-list (max-width: 200px) {
+    .fsb-nav-desc {
+      display: none;
+    }
+  }
+}
+
+/* :has() enhancement: give nav items that contain a badge a touch of extra
+   right padding so the badge never crowds the label. Progressive
+   enhancement only — layout is correct without it because .fsb-nav-meta
+   already has flex: 1 and min-width: 0 to yield space to a badge. */
+@supports selector(:has(*)) {
+  .fsb-nav-item:has(.fsb-badge) .fsb-nav-meta {
+    padding-right: 4px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7. Badges
+   -------------------------------------------------------------------------- */
+.fsb-badge {
+  font-size: 8.5px;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  border-radius: 5px;
+  padding: 2px 5px;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.fsb-badge--blue {
+  background: rgba(59, 130, 246, 0.125);
+  border: 1px solid rgba(59, 130, 246, 0.19);
+  color: var(--fsb-primary-light);
+}
+
+/* --------------------------------------------------------------------------
+   8. Mobile FAB + backdrop
+   -------------------------------------------------------------------------- */
+.fsb-fab {
+  position: fixed;
+  bottom: 24px;
+  left: 20px;
+  z-index: 49;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--fsb-primary), var(--fsb-primary-dark));
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 22px;
+  box-shadow: 0 8px 20px var(--fsb-primary-glow), 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.fsb-fab:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.fsb-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 48;
+  background: rgba(0, 0, 0, 0.5);
+  background: color-mix(in srgb, black 50%, transparent);
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .fsb-backdrop {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. Responsive breakpoints (mobile-first)
+   Tablet: 768px, Desktop: 1024px — matches the JS isMobile check (<768px).
+   -------------------------------------------------------------------------- */
+@media (min-width: 768px) {
+  .fsb-sidebar {
+    width: 280px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .fsb-sidebar {
+    width: 300px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10. Reduced motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .fsb-edge-pill,
+  .fsb-sidebar,
+  .fsb-nav-item,
+  .fsb-fab {
+    will-change: auto;
+  }
+
+  .fsb-nav-item,
+  .fsb-nav-icon,
+  .fsb-sidebar {
+    transition-duration: 0.01ms !important;
+  }
+}

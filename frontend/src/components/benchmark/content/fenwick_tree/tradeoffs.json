@@ -1,0 +1,30 @@
+{
+  "pros": [
+    "Extremely memory-efficient: exactly n+1 elements (vs 4n for segment tree)",
+    "Very fast in practice: simple while loops with bit operations",
+    "Easy to implement: ~10 lines of code for core operations",
+    "Cache-friendly for sequential access patterns",
+    "Can be built in O(n) with a single pass",
+    "Supports point update and prefix query in O(log n)",
+    "Range queries via prefix difference: sum(l,r) = prefix(r) - prefix(l-1)",
+    "Can be extended to 2D and 3D with reasonable overhead",
+    "Works with any invertible operation (sum, xor, multiplication with inverse)",
+    "Binary lifting enables O(log n) k-th element finding",
+    "No recursion eliminates stack overflow risk",
+    "Excellent for offline algorithms (coordinate compression, sweepline)"
+  ],
+  "cons": [
+    "Cannot handle non-invertible operations (min, max, gcd) for range queries",
+    "Range updates require two BITs (more complex than segment tree with lazy)",
+    "Not intuitive: LSB-based indexing is hard to visualize and debug",
+    "Point query requires O(log n) (unless original array is kept separately)",
+    "Only supports prefix-based operations, not arbitrary associative operations",
+    "Array must be 1-indexed (adjustment needed for 0-indexed languages)",
+    "Cannot resize dynamically (must rebuild on size change)",
+    "Not suitable for sparse data without coordinate compression",
+    "Range minimum/maximum queries not possible with standard BIT",
+    "Bit operations may be unfamiliar to beginners",
+    "Non-contiguous memory access pattern (jumping by LSB)",
+    "Limited to operations with inverse (sum↔subtract, xor↔xor)"
+  ]
+}

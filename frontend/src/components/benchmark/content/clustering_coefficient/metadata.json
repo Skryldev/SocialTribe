@@ -1,0 +1,17 @@
+{
+  "id": "clustering_coefficient",
+  "name": "Clustering-Coefficient",
+  "category": "community",
+  "difficulty": "easy",
+
+  "timeComplexity": "O(V * d^²)",
+  "spaceComplexity": "O(1)",
+  "bestCase": "O(V)",
+  "worstCase": "O(V^³)",
+  "averageCase": "O(V * d^²)",
+
+  "stable": null,
+  "inPlace": true,
+  "recursive": false,
+  "parallelizable": true
+}

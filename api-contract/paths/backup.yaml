@@ -1,0 +1,94 @@
+/backups:
+  get:
+    tags:
+      - Backups
+    summary: Get Backups List
+    description: Retrieve list of all available backups
+    operationId: getBackups
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/backup.yaml#/BackupsListResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+  post:
+    tags:
+      - Backups
+    summary: Create Backup
+    description: Create a new backup with a given name
+    operationId: createBackup
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/backup.yaml#/CreateBackupRequest'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/backup.yaml#/CreateBackupResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/backups/{backup_id}:
+  delete:
+    tags:
+      - Backups
+    summary: Delete Backup
+    description: Delete a backup by its ID
+    operationId: deleteBackup
+    parameters:
+      - $ref: '../parameters/backup.yaml#/backup_id'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/backup.yaml#/DeleteBackupResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/backups/{backup_id}/restore:
+  post:
+    tags:
+      - Backups
+    summary: Restore Backup
+    description: Restore a backup by its ID
+    operationId: restoreBackup
+    parameters:
+      - $ref: '../parameters/backup.yaml#/backup_id'
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/backup.yaml#/RestoreBackupResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'
+
+/backups/{backup_id}/download:
+  get:
+    tags:
+      - Backups
+    summary: Download Backup
+    description: Download a backup file by its ID in tar.gz format
+    operationId: downloadBackup
+    parameters:
+      - $ref: '../parameters/backup.yaml#/backup_id'
+    responses:
+      '200':
+        description: Backup file downloaded successfully
+        content:
+          application/octet-stream:
+            schema:
+              $ref: '../schemas/backup.yaml#/DownloadBackupResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'

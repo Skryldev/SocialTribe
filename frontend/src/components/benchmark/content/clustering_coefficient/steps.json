@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Get Node Neighbors",
+    "description": "Extract the set of neighbors for the target node from the graph structure."
+  },
+  {
+    "title": "Count Possible Triangles",
+    "description": "Calculate the maximum number of possible connections among neighbors: deg(v) * (deg(v) - 1) / 2"
+  },
+  {
+    "title": "Count Actual Triangles",
+    "description": "Count how many of those neighbor pairs are actually connected to each other (forming triangles with the target node)."
+  },
+  {
+    "title": "Compute Ratio",
+    "description": "Divide actual triangles by possible triangles to get the local clustering coefficient between 0 and 1."
+  },
+  {
+    "title": "Calculate Global Average (Optional)",
+    "description": "Average all local clustering coefficients or compute the ratio of closed triplets to total triplets for the global measure."
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "id": "avl_tree",
+  "name": "AVL-Tree",
+  "category": "tree",
+  "difficulty": "hard",
+
+  "timeComplexity": "O(log n)",
+  "spaceComplexity": "O(n)",
+  "bestCase": "O(log n)",
+  "worstCase": "O(log n)",
+  "averageCase": "O(log n)",
+
+  "stable": null,
+  "inPlace": false,
+  "recursive": true,
+  "parallelizable": false
+}

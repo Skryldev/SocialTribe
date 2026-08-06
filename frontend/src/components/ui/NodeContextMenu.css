@@ -1,0 +1,410 @@
+/* ============================================
+   NodeContextMenu.css
+   Senior-Level Design System
+   Semantic Color Tokens · Grain Texture · Spring Micro-interactions
+   ============================================ */
+
+/* ──────────────────────────────────────────────
+   1. Design Tokens (Semantic Scale)
+   ────────────────────────────────────────────── */
+:root {
+  /* Surfaces */
+  --ncm-surface-0: hsl(222 47% 8%);
+  --ncm-surface-1: hsl(222 40% 11%);
+  --ncm-surface-2: hsl(222 35% 14%);
+
+  /* Text */
+  --ncm-text-primary: hsl(210 40% 96%);
+  --ncm-text-secondary: hsl(215 20% 68%);
+  --ncm-text-tertiary: hsl(215 16% 47%);
+  --ncm-text-disabled: hsl(215 12% 34%);
+
+  /* Accent */
+  --ncm-accent: hsl(38 92% 52%);
+  --ncm-accent-subtle: hsl(38 92% 52% / 0.08);
+  --ncm-accent-muted: hsl(38 92% 52% / 0.15);
+
+  /* Danger */
+  --ncm-danger: hsl(0 84% 60%);
+  --ncm-danger-subtle: hsl(0 84% 60% / 0.08);
+  --ncm-danger-muted: hsl(0 84% 60% / 0.15);
+
+  /* Borders */
+  --ncm-border-subtle: hsl(222 30% 18%);
+  --ncm-border-default: hsl(222 28% 22%);
+  --ncm-border-strong: hsl(38 92% 52% / 0.25);
+  --ncm-border-accent: hsl(38 92% 52% / 0.4);
+
+  /* Elevation / Shadows */
+  --ncm-shadow-sm: 0 2px 8px rgb(0 0 0 / 0.2);
+  --ncm-shadow-md: 0 8px 24px rgb(0 0 0 / 0.3);
+  --ncm-shadow-lg: 0 16px 48px rgb(0 0 0 / 0.4);
+  --ncm-shadow-glow: 0 0 20px hsl(38 92% 52% / 0.15);
+
+  /* Radii */
+  --ncm-radius-sm: 6px;
+  --ncm-radius-md: 10px;
+  --ncm-radius-lg: 14px;
+  --ncm-radius-xl: 18px;
+
+  /* Typography */
+  --ncm-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --ncm-font-size-xs: 0.6875rem;   /* 11px */
+  --ncm-font-size-sm: 0.75rem;     /* 12px */
+  --ncm-font-size-base: 0.8125rem; /* 13px */
+  --ncm-font-size-lg: 0.875rem;    /* 14px */
+  --ncm-font-weight-normal: 450;
+  --ncm-font-weight-medium: 530;
+  --ncm-font-weight-semibold: 600;
+  --ncm-line-height: 1.5;
+  --ncm-letter-spacing: -0.01em;
+
+  /* Spacing Rhythm (4px base) */
+  --ncm-space-1: 4px;
+  --ncm-space-2: 8px;
+  --ncm-space-3: 12px;
+  --ncm-space-4: 16px;
+  --ncm-space-5: 20px;
+  --ncm-space-6: 24px;
+
+  /* Transitions */
+  --ncm-duration-fast: 120ms;
+  --ncm-duration-normal: 180ms;
+  --ncm-duration-slow: 250ms;
+  --ncm-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ncm-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ──────────────────────────────────────────────
+   2. Grain Texture (Noise Background)
+   Uses SVG filter for performance
+   ────────────────────────────────────────────── */
+.ncm-menu::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ──────────────────────────────────────────────
+   3. Backdrop
+   ────────────────────────────────────────────── */
+.ncm-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: hsl(0 0% 0% / 0.35);
+  backdrop-filter: blur(6px) saturate(120%);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+}
+
+/* ──────────────────────────────────────────────
+   4. Menu Container
+   ────────────────────────────────────────────── */
+.ncm-menu {
+  position: fixed;
+  z-index: 1001;
+  min-width: 280px;
+  max-width: 320px;
+  padding: var(--ncm-space-2);
+  border-radius: var(--ncm-radius-xl);
+  background: hsl(222 47% 8% / 0.88);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--ncm-border-subtle);
+  box-shadow:
+    var(--ncm-shadow-lg),
+    var(--ncm-shadow-glow);
+  font-family: var(--ncm-font-family);
+  font-size: var(--ncm-font-size-base);
+  color: var(--ncm-text-primary);
+  letter-spacing: var(--ncm-letter-spacing);
+  outline: none;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Inner content sits above grain texture */
+.ncm-menu > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ──────────────────────────────────────────────
+   5. Header (Node Identity)
+   ────────────────────────────────────────────── */
+.ncm-header {
+  display: flex;
+  align-items: center;
+  gap: var(--ncm-space-3);
+  padding: var(--ncm-space-3) var(--ncm-space-3) var(--ncm-space-2);
+}
+
+.ncm-header-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ncm-radius-md);
+  background: var(--ncm-accent-subtle);
+  border: 1px solid var(--ncm-border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ncm-accent);
+  flex-shrink: 0;
+}
+
+.ncm-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.ncm-header-name {
+  font-size: var(--ncm-font-size-lg);
+  font-weight: var(--ncm-font-weight-semibold);
+  color: var(--ncm-text-primary);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ncm-header-meta {
+  font-size: var(--ncm-font-size-xs);
+  font-weight: var(--ncm-font-weight-normal);
+  color: var(--ncm-text-tertiary);
+}
+
+/* ──────────────────────────────────────────────
+   6. Separator / Divider
+   ────────────────────────────────────────────── */
+.ncm-separator {
+  height: 1px;
+  margin: var(--ncm-space-1) var(--ncm-space-3);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--ncm-border-default) 20%,
+    var(--ncm-border-default) 80%,
+    transparent
+  );
+  border: none;
+}
+
+/* ──────────────────────────────────────────────
+   7. Menu Group
+   ────────────────────────────────────────────── */
+.ncm-group {
+  padding: var(--ncm-space-1) 0;
+}
+
+/* ──────────────────────────────────────────────
+   8. Menu Item
+   ────────────────────────────────────────────── */
+.ncm-item {
+  display: flex;
+  align-items: center;
+  gap: var(--ncm-space-3);
+  width: 100%;
+  padding: var(--ncm-space-2) var(--ncm-space-3);
+  margin: 1px 0;
+  border-radius: var(--ncm-radius-md);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  text-align: left;
+  color: var(--ncm-text-secondary);
+  font-family: inherit;
+  font-size: var(--ncm-font-size-base);
+  font-weight: var(--ncm-font-weight-medium);
+  line-height: var(--ncm-line-height);
+  transition:
+    background-color var(--ncm-duration-fast) var(--ncm-ease-out),
+    color var(--ncm-duration-fast) var(--ncm-ease-out);
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Hover / Highlighted state */
+.ncm-item:hover,
+.ncm-item--highlighted {
+  background: var(--ncm-accent-subtle);
+  color: var(--ncm-text-primary);
+}
+
+/* Focus ring — visible only on keyboard */
+.ncm-item:focus-visible {
+  outline: 2px solid var(--ncm-accent);
+  outline-offset: -2px;
+}
+
+/* Active / Pressed */
+.ncm-item:active {
+  transform: scale(0.98);
+  transition: transform 60ms ease-out;
+}
+
+/* ── Danger variant ────────────────────────── */
+.ncm-item--danger {
+  color: var(--ncm-danger);
+}
+
+.ncm-item--danger:hover,
+.ncm-item--danger.ncm-item--highlighted {
+  background: var(--ncm-danger-subtle);
+  color: hsl(0 90% 68%);
+}
+
+/* ── Icon ──────────────────────────────────── */
+.ncm-item-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity var(--ncm-duration-fast) var(--ncm-ease-out);
+}
+
+.ncm-item:hover .ncm-item-icon,
+.ncm-item--highlighted .ncm-item-icon {
+  opacity: 1;
+}
+
+.ncm-item:not(.ncm-item--danger):hover .ncm-item-icon,
+.ncm-item:not(.ncm-item--danger).ncm-item--highlighted .ncm-item-icon {
+  color: var(--ncm-accent);
+}
+
+/* ── Label ─────────────────────────────────── */
+.ncm-item-label {
+  flex: 1;
+  white-space: nowrap;
+}
+
+/* ── Keyboard Shortcut ────────────────────── */
+.ncm-item-shortcut {
+  font-size: var(--ncm-font-size-xs);
+  color: var(--ncm-text-tertiary);
+  font-weight: var(--ncm-font-weight-normal);
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity var(--ncm-duration-normal) var(--ncm-ease-out),
+    transform var(--ncm-duration-normal) var(--ncm-ease-out);
+}
+
+.ncm-item:hover .ncm-item-shortcut,
+.ncm-item--highlighted .ncm-item-shortcut {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Chevron ───────────────────────────────── */
+.ncm-item-chevron {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+  transition:
+    opacity var(--ncm-duration-fast) var(--ncm-ease-out),
+    transform var(--ncm-duration-fast) var(--ncm-ease-out);
+}
+
+.ncm-item:hover .ncm-item-chevron,
+.ncm-item--highlighted .ncm-item-chevron {
+  opacity: 0.8;
+  transform: translateX(2px);
+}
+
+/* ──────────────────────────────────────────────
+   9. Screen Reader Only
+   ────────────────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ──────────────────────────────────────────────
+   10. Reduced Motion
+   ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .ncm-item,
+  .ncm-item-icon,
+  .ncm-item-shortcut,
+  .ncm-item-chevron {
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+
+  .ncm-item:hover .ncm-item-shortcut {
+    opacity: 0;
+  }
+
+  .ncm-item:active {
+    transform: none;
+  }
+
+  /* Disable grain animation if any */
+  .ncm-menu::before {
+    animation: none;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   11. Responsive
+   ────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .ncm-menu {
+    min-width: 240px;
+    max-width: calc(100vw - 32px);
+    border-radius: var(--ncm-radius-lg);
+  }
+
+  .ncm-item {
+    padding: var(--ncm-space-3) var(--ncm-space-3);
+  }
+
+  .ncm-item-shortcut {
+    display: none;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   12. High Contrast / Forced Colors
+   ────────────────────────────────────────────── */
+@media (forced-colors: active) {
+  .ncm-menu {
+    border: 2px solid CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .ncm-item--highlighted {
+    outline: 2px solid Highlight;
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .ncm-separator {
+    background: CanvasText;
+  }
+}

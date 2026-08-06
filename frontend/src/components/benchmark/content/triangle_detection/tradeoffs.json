@@ -1,0 +1,22 @@
+{
+  "pros": [
+    "Fundamental graph primitive with many applications",
+    "Reveals clustering and community structure",
+    "Multiple algorithm variants for different graph sizes",
+    "Highly parallelizable (edge-centric approaches)",
+    "Forward algorithm achieves optimal O(E^(3/2)) complexity",
+    "Provides basis for computing clustering coefficients",
+    "Can be computed incrementally for dynamic graphs",
+    "Useful for identifying cohesive subgroups in networks"
+  ],
+  "cons": [
+    "Worst-case O(V³) for dense graphs (near complete graphs)",
+    "Memory intensive for large graphs with high average degree",
+    "Does not capture larger cycles (4-cycles, 5-cycles, etc.)",
+    "Directed triangle detection more complex than undirected",
+    "Exact counting infeasible for very large dense graphs",
+    "Sensitive to graph topology (power-law vs random vs regular)",
+    "Heavy hitters (high-degree nodes) dominate computation",
+    "Approximation may be necessary for billion-scale networks"
+  ]
+}

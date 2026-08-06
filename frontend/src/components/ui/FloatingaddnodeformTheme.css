@@ -1,0 +1,65 @@
+/* components/ui/theme.css
+   ============================================================
+   Shared design tokens — "signal" theme
+   A single restrained accent (signal blue) against a deep ink
+   surface stack, with a muted teal reserved for auxiliary
+   affordances (auto-generated hints, success states). Built for
+   the network/graph canvas these controls float above.
+   ============================================================ */
+
+:root {
+  /* Surfaces */
+  --anb-surface-0: #0b0f17;
+  --anb-surface-1: #141b26;
+  --anb-surface-2: #1c2531;
+  --anb-border-subtle: rgba(255, 255, 255, 0.08);
+  --anb-border-strong: rgba(255, 255, 255, 0.14);
+
+  /* Text */
+  --anb-text-primary: #eaf0fa;
+  --anb-text-secondary: #93a1b7;
+  --anb-text-tertiary: #5b6b84;
+
+  /* Accent — signal blue (primary actions, focus) */
+  --anb-accent: #4c7eff;
+  --anb-accent-strong: #6f97ff;
+  --anb-accent-press: #3a63d6;
+  --anb-accent-soft: rgba(76, 126, 255, 0.14);
+  --anb-accent-border: rgba(76, 126, 255, 0.35);
+
+  /* Accent — signal teal (auxiliary / auto-generated hints) */
+  --anb-teal: #22d3ae;
+  --anb-teal-soft: rgba(34, 211, 174, 0.12);
+  --anb-teal-border: rgba(34, 211, 174, 0.28);
+
+  /* Status */
+  --anb-danger: #f4685c;
+  --anb-danger-soft: rgba(244, 104, 92, 0.12);
+
+  /* Radii */
+  --anb-radius-sm: 8px;
+  --anb-radius-md: 12px;
+  --anb-radius-lg: 18px;
+  --anb-radius-pill: 999px;
+
+  /* Elevation */
+  --anb-shadow-soft: 0 8px 24px rgba(4, 8, 16, 0.35);
+  --anb-shadow-lift: 0 14px 34px rgba(4, 8, 16, 0.45),
+    0 0 0 1px var(--anb-accent-border) inset;
+  --anb-shadow-panel: 0 24px 48px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px var(--anb-border-subtle) inset;
+
+  /* Typography */
+  --anb-font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  --anb-font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  --anb-text-2xs: 10px;
+  --anb-text-xs: 11px;
+  --anb-text-sm: 12.5px;
+  --anb-text-base: 13.5px;
+  --anb-text-md: 15px;
+
+  /* Motion */
+  --anb-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}

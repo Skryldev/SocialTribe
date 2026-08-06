@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Standard BST Insertion",
+    "description": "Insert the new node as in a regular Binary Search Tree: traverse from root, go left if key is smaller, right if larger. Insert as leaf when reaching null position."
+  },
+  {
+    "title": "Update Heights Bottom-Up",
+    "description": "After insertion, traverse back up the path to the root. At each node, update its height as: height = 1 + max(height(left), height(right))."
+  },
+  {
+    "title": "Check Balance Factor",
+    "description": "At each node on the path back to root, compute balance factor: BF = height(left) - height(right). If |BF| > 1, the node is unbalanced and needs rotation."
+  },
+  {
+    "title": "Identify Rotation Type",
+    "description": "Determine which of the four rotation cases applies: Left-Left (BF > 1, key < left.key), Left-Right (BF > 1, key > left.key), Right-Right (BF < -1, key > right.key), Right-Left (BF < -1, key < right.key)."
+  },
+  {
+    "title": "Perform Rotation",
+    "description": "Apply the appropriate rotation: right rotation for LL, left-right rotation for LR, left rotation for RR, right-left rotation for RL. Update heights of affected nodes. The tree is now rebalanced."
+  },
+  {
+    "title": "Search Operation",
+    "description": "To find a key, traverse from root. At each node, compare key: if equal, return node; if less, go left; if greater, go right. Search is O(log n) due to balanced height."
+  }
+]

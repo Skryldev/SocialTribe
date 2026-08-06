@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Find Common Neighbors",
+    "description": "Compute the intersection of neighbor sets for both source and target nodes."
+  },
+  {
+    "title": "Allocate Resources",
+    "description": "For each common neighbor, compute 1/degree as the resource contribution. High-degree neighbors contribute less resource per connection."
+  },
+  {
+    "title": "Aggregate Resources",
+    "description": "Sum all resource contributions from common neighbors to get the final Resource Allocation similarity score."
+  }
+]

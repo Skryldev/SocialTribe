@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Compute Edge Betweenness",
+    "description": "For each edge in the graph, calculate its betweenness centrality: the number of shortest paths between all pairs of nodes that pass through that edge. Use Brandes' algorithm for efficiency."
+  },
+  {
+    "title": "Find Edge with Highest Betweenness",
+    "description": "Identify the edge(s) with the maximum betweenness score. If multiple edges tie for the highest score, select one according to a deterministic or random tie-breaking rule."
+  },
+  {
+    "title": "Remove the Edge",
+    "description": "Remove the selected edge from the graph. This progressively disconnects the graph into smaller components, each representing a community at that stage of the algorithm."
+  },
+  {
+    "title": "Recompute Betweenness",
+    "description": "After each edge removal, recompute the betweenness centrality for all remaining edges. The removal of an edge changes shortest paths, so betweenness scores must be recalculated."
+  },
+  {
+    "title": "Repeat Until Stopping Criterion",
+    "description": "Continue removing edges one at a time until all edges are removed, or stop when a desired number of communities is reached. The algorithm produces a hierarchical dendrogram of community splits."
+  },
+  {
+    "title": "Select Best Partition",
+    "description": "From the dendrogram, choose the partition that maximizes modularity Q. This determines the optimal number of communities automatically."
+  }
+]

@@ -1,0 +1,16 @@
+/datasets:
+  get:
+    tags:
+      - Datasets
+    summary: Get Datasets List
+    description: Retrieve list of all available datasets
+    operationId: getDatasets
+    responses:
+      '200':
+        description: Successful Response
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/dataset.yaml#/DatasetsListResponse'
+      '422':
+        $ref: '../responses/errors.yaml#/ValidationError'

@@ -1,0 +1,65 @@
+# Execute Plan Request
+ExecutePlanRequest:
+  type: object
+  required:
+    - plan
+  properties:
+    plan:
+      type: object
+      additionalProperties: true
+      description: Query execution plan
+      example: {}
+
+# Query Statistics
+QueryStatistics:
+  type: object
+  properties:
+    scanned:
+      type: integer
+      description: Number of elements scanned
+      example: 0
+    traversed:
+      type: integer
+      description: Number of elements traversed
+      example: 0
+    filtered:
+      type: integer
+      description: Number of elements filtered
+      example: 0
+    execution_time_ms:
+      type: number
+      format: float
+      description: Execution time in milliseconds
+      example: 0
+
+# Query Data
+QueryData:
+  type: object
+  properties:
+    rows:
+      type: array
+      items:
+        type: object
+        additionalProperties: true
+      description: Result rows
+    columns:
+      type: array
+      items:
+        type: string
+      description: Column names
+    statistics:
+      $ref: '#/QueryStatistics'
+
+# Execute Plan Response
+ExecutePlanResponse:
+  type: object
+  required:
+    - success
+    - data
+  properties:
+    success:
+      type: boolean
+      description: Whether the query executed successfully
+      example: true
+    data:
+      $ref: '#/QueryData'
