@@ -3,7 +3,7 @@ name: Tag Test
 on:
   push:
     tags:
-      - "*"
+      - "**"
 
 jobs:
   test:
