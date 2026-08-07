@@ -59,7 +59,7 @@ Its internal architecture is intentionally optimized around graph-oriented opera
 
 **Learn More**
 
-- [Graph Storage Engine Documentation](docs/storage-engine/)
+- [Graph Storage Engine Documentation](https://socialtribe-three.vercel.app/docs/category/introduction)
 
 ---
 
@@ -77,7 +77,7 @@ This separation allows computational logic, application workflows, and persisten
 
 **Learn More**
 
-- [Backend Architecture Documentation](docs/backend/)
+- [Backend Architecture Documentation](https://socialtribe-three.vercel.app/docs/backend/backend-overview)
 
 ---
 
@@ -95,7 +95,7 @@ Its modular design allows every stage of query processing to evolve independentl
 
 **Learn More**
 
-- [Query Engine Documentation](docs/query-engine/)
+- [Query Engine Documentation](https://socialtribe-three.vercel.app/docs/category/architecture-overview)
 
 ---
 
@@ -110,10 +110,6 @@ Rather than acting as a simple visualization layer, the frontend is designed as 
 > [!NOTE]
 >
 > The frontend documentation covers the application architecture, UI organization, state management, visualization components, and developer guidelines.
-
-**Learn More**
-
-- [Frontend Architecture Documentation](docs/frontend/)
 
 ---
 
@@ -131,7 +127,7 @@ The analytics architecture is designed so that algorithms remain independent fro
 
 **Learn More**
 
-- [Analytics Documentation](docs/analytics/)
+- [Analytics Documentation](https://socialtribe-three.vercel.app/docs/bench/getting-started/introduction)
 
 
 ## TribeCore
@@ -150,7 +146,7 @@ https://pypi.org/project/tribecore/
 
 **Learn More**
 
-- [TribeCore Documentation](docs/analytics/tribecore/)
+- [TribeCore Documentation](https://socialtribe-three.vercel.app/docs/core/)
 
 ---
 
@@ -168,7 +164,7 @@ This separation between persistent graph data and visualization layouts enables 
 
 **Learn More**
 
-- [Layout System Documentation](docs/layouts/)
+- [Layout System Documentation](https://socialtribe-three.vercel.app/docs/category/layout-engine)
 
 ---
 
@@ -186,7 +182,7 @@ Simulation data remains isolated from persistent graph storage, allowing tempora
 
 **Learn More**
 
-- [Simulation Documentation](docs/simulation/)
+- [Simulation Documentation](https://socialtribe-three.vercel.app/docs/backend/algorithms/rumor-simulation)
 
 ---
 
@@ -214,13 +210,12 @@ If a particular component interests you, continue with its dedicated documentati
 
 | Documentation | Description |
 |--------------|-------------|
-| [Backend](docs/backend/) | Architecture, APIs, and application workflows |
-| [Graph Storage Engine](docs/storage-engine/) | TribeDB architecture and storage concepts |
-| [Query Engine](docs/query-engine/) | Query language, compilation pipeline, and planner |
-| [Frontend](docs/frontend/) | Application architecture and UI organization |
-| [Analytics](docs/analytics/) | Graph analysis capabilities |
-| [Layout System](docs/layouts/) | Graph layout architecture |
-| [Simulation](docs/simulation/) | Graph propagation and simulation |
+| [Backend](https://socialtribe-three.vercel.app/docs/backend/backend-overview) | Architecture, APIs, and application workflows |
+| [Graph Storage Engine](https://socialtribe-three.vercel.app/docs/category/introduction) | TribeDB architecture and storage concepts |
+| [Query Engine](https://socialtribe-three.vercel.app/docs/category/architecture-overview) | Query language, compilation pipeline, and planner |
+| [Analytics](https://socialtribe-three.vercel.app/docs/bench/getting-started/introduction) | Graph analysis capabilities |
+| [Layout System](https://socialtribe-three.vercel.app/docs/category/layout-engine) | Graph layout architecture |
+| [Simulation](https://socialtribe-three.vercel.app/docs/backend/algorithms/rumor-simulation) | Graph propagation and simulation |
 
 
 ## Project Structure
@@ -385,11 +380,10 @@ Whether your goal is running the complete platform, contributing to the backend,
 
 **Start Here**
 
-- [Project Documentation](docs/)
-- [Backend Guide](docs/backend/)
-- [Frontend Guide](docs/frontend/)
-- [Graph Storage Engine](docs/storage-engine/)
-- [Query Engine](docs/query-engine/)
+- [Project Documentation](https://socialtribe-three.vercel.app/)
+- [Backend Guide](https://socialtribe-three.vercel.app/docs/backend/backend-overview)
+- [Graph Storage Engine](https://socialtribe-three.vercel.app/docs/category/introduction)
+- [Query Engine](https://socialtribe-three.vercel.app/docs/category/architecture-overview)
 
 ---
 
